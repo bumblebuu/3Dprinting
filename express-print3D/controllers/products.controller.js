@@ -1,4 +1,4 @@
-const Products = require('./../models/models', ProductShema);
+const Products = require('./../models/models').Product;
 
 exports.createProduct = function (req, res, next) {
   const product = {};

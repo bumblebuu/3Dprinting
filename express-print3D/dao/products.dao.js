@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productsSchema = require('./../models/models', ProductsSchema);
+const productsSchema = require('./../models/models').Product;
 
 productsSchema.statics = {
   create(data, cb) {
