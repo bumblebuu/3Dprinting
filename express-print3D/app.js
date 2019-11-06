@@ -14,7 +14,7 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('localhost:27107/3d-printing');
+mongoose.connect('localhost:27017/3d-printing');
 const options = {
   host: `localhost:${PORT}`,
 };
