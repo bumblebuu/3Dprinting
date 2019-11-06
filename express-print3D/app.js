@@ -14,7 +14,12 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('localhost:27017/3d-printing');
+mongoose.set('useCreateIndex', true);
+
+mongoose.connect('mongodb://localhost:27017/3d-printing', {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 const options = {
   host: `localhost:${PORT}`,
 };
