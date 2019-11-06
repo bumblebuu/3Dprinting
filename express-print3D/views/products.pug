@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col
+        each product in products
+          .card(style='width: 18rem;')
+            img.card-img-top(src=product.img[0], alt='...')
+            .card-body
+              h5.card-title=product.name
+              p.card-text=product.description
+              p.card-text $#{product.price}
+                
+              a.btn.btn-primary(href=`/products/${product.seo}`) More info
+
+                      

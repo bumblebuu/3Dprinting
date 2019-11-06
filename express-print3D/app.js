@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const instantMongoCrud = require('express-mongo-crud');
 const bodyParser = require('body-parser');
 
 const router = express.Router();
@@ -21,10 +20,6 @@ mongoose.connect('mongodb://localhost:27017/3d-printing', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
-const options = {
-  host: `localhost:${PORT}`,
-};
-app.use(instantMongoCrud(options));
 
 app.use(bodyParser.json()); // add body parser
 
