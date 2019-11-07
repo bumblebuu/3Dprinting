@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <a href="/product/add" class="btn btn-info">Add new product</a></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>seo</th>
+            <th>brand</th>
+            <th>description</th>
+            <th>img</th>
+            <th>menu</th>
+            <th>category</th>
+            <th>price</th>
+            <th>isactive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let product of products|async'>
+            <td>{{product.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
