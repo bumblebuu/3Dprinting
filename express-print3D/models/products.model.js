@@ -51,5 +51,5 @@ const productsSchema = new Schema({
   },
 });
 
-
+// productsSchema.set('collection', 'products');
 module.exports = productsSchema;
