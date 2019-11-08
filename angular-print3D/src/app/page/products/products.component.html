@@ -16,12 +16,25 @@
             <th>menu</th>
             <th>category</th>
             <th>price</th>
-            <th>isactive</th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let product of products|async'>
+          <tr *ngFor='let product of products$ | async'>
             <td>{{product.name}}</td>
+            <td>{{product.seo}}</td>
+            <td>{{product.brand}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.img}}</td>
+            <td>{{product.menu}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.price}}</td>
+            <td>
+              <div class="btn-group">
+                <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>
+                <button (click)="onDelete(product.seo)" class="btn btn-danger">Delete</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

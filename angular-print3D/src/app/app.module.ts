@@ -10,6 +10,9 @@ import { UpdateProductComponent } from './page/update-product/update-product.com
 import { IndexComponent } from './page/index/index.component';
 import { NavComponent } from './page/nav/nav.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { UsersComponent } from './page/users/users.component';
+import { UpdateUserComponent } from './page/update-user/update-user.component';
+import { OrdersComponent } from './page/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { SearchPipe } from './pipes/search.pipe';
     UpdateProductComponent,
     IndexComponent,
     NavComponent,
-    SearchPipe
+    SearchPipe,
+    UsersComponent,
+    UpdateUserComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

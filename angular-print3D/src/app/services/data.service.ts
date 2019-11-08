@@ -19,7 +19,7 @@ export class DataService {
   readDocument(collectionName: string, query?: any) {
     if (query) {
       this.http.get(`${this.apiURL}/${collectionName}/${query}`).forEach(
-        data => this.product.next(data[0])
+        data => this.product.next(data)
       )
     }
     this.http.get(`${this.apiURL}/${collectionName}`).forEach(
