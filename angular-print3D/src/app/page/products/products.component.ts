@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-products',
@@ -8,7 +9,9 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: BehaviorSubject<any> = this.ds.productList;
+
+  products$: BehaviorSubject<any> = this.ds.productList;
+
   constructor(private ds: DataService) {
     this.ds.readDocument('products')
   }
@@ -16,5 +19,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDelete(seo: string): void {
+    this.ds.deleteDocument('products', seo)
 
+  }
 }

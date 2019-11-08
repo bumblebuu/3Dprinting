@@ -11,7 +11,8 @@ const PORT = 3000;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/product');
-const apiProductsRoutes = require('./api-routes/products.routes');
+const apiRoutes = require('./routes/api');
+const Product = require('./models/products.model');
 
 const app = express();
 
@@ -46,9 +47,9 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
-app.use('/api', router);
-apiProductsRoutes(router);
+app.use('/api', apiRoutes);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 

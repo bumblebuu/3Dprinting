@@ -1,1 +1,64 @@
-<p>update-product works!</p>
+        <div class="card">
+          <div class="card-header">
+            <h3>Edit this product!</h3>
+          </div>
+          <form action="http://localhost:3000/api/products/update/{{product.seo}}" method="post">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" placeholder="Name" class="form-control" name="product.name" id="name"
+                  [(ngModel)]="product.name" disabled>
+              </div>
+              <div class="form-group">
+                <label for="seo">
+                  Seo
+                </label>
+                <input class="form-control" [(ngModel)]="product.seo" type="text" name="product.seo" id="seo" disabled>
+              </div>
+              <div class="form-group">
+                <label for="brand">
+                  Brand
+                </label>
+                <input class="form-control" [(ngModel)]="product.brand" type="text" name="product.brand" id="brand"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="description">
+                  Description
+                </label>
+                <textarea class="form-control" [(ngModel)]="product.description" name="product.description"
+                  id="description" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="img">
+                  Image
+                </label>
+                <input class="form-control" [(ngModel)]="product.img" type="file" name="product.img" id="img" required>
+              </div>
+              <div class="form-group">
+                <label for="menu">
+                  Menu
+                </label>
+                <input class="form-control" [(ngModel)]="product.menu" type="text" name="product.menu" id="menu"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="category">
+                  Category
+                </label>
+                <input class="form-control" [(ngModel)]="product.category" type="text" name="product.category"
+                  id="category" required>
+              </div>
+              <div class="form-group">
+                <label for="price">
+                  Price
+                </label>
+                <input class="form-control" [(ngModel)]="product.price" type="number" name="product.price" id="price"
+                  required>
+              </div>
+              <div class="card-footer text-center">
+                <button type="submit" class="btn btn-success" (click)="onUpdate()">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
