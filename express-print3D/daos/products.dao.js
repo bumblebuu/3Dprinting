@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const productsSchema = require('../models/products.model');
+const Products = require('../models/products.model');
 
-productsSchema.statics = {
+Products.statics = {
   create(data, cb) {
     const product = new this(data);
     product.save(cb);
@@ -28,5 +28,4 @@ productsSchema.statics = {
   },
 };
 
-const productsModel = mongoose.model('products', productsSchema);
-module.exports = productsModel;
+module.exports = Products;
