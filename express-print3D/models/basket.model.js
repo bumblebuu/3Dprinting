@@ -20,6 +20,4 @@ const basketSchema = new Schema({
   },
 });
 
-const Basket = mongoose.model('basket', basketSchema);
-
-module.exports = Basket;
+module.exports = basketSchema;

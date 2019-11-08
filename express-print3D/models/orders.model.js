@@ -39,5 +39,4 @@ const ordersSchema = new Schema({
   timestamps: true,
 });
 
-const Order = mongoose.model('orders', ordersSchema);
-module.exports = Order;
+module.exports = ordersSchema;
