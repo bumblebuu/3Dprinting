@@ -10,7 +10,7 @@ const router = express.Router();
 const PORT = 3000;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/product');
+const productsRouter = require('./routes/products');
 const apiRoutes = require('./routes/api');
 
 const app = express();
