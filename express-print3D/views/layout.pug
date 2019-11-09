@@ -2,6 +2,30 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    #main
+      .header
+        a(href='#')
+          img.logopic(src="/img/logo-maybe-2.png", alt="logo")
+        button.openbtn(onclick='openNav()') ☰
+        .title
+          h1.beyond beyond
+          h1.paper paper
+      block content
+    #mySidebar.sidebar
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+      a.nav-link.active(href='#') Active
+      a.nav-link(href='#') Link
+      button.dropdown-btn Dropdown
+        i.fa.fa-caret-down
+      .dropdown-container
+        a(href='#') Link 1
+        a(href='#') Link 2
+        a(href='#') Link 3
+
+
+    script(src="/scripts/jquery.min.js")
+    script(src="/scripts/bootstrap.bundle.min.js")
+    script(src="/scripts/navbar.js")
