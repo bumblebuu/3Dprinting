@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+.admin-back {
+  background-image: url('./assets/color9.png');
+  background-attachment: fixed;
+  background-size: cover;
+}

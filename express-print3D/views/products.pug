@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .container
+    .row
+      each product in products
+        .col-4
+          .card
+            img.card-img-top(src=product.img[0] alt='product image')
+            .card-body
+              h5.card-title #{product.name}
+              p.card-text
+                | #{product.description}
+              p.card-text
+                small.text-muted Lalala
+    .row
+      if (pages > 0)
+        ul.pagination.text-center
+          if (current == 1)
+            li.disabled.page-item
+              a.page-link First
+          else
+            li.page-item
+              a.page-link(href='/products/1') First
+          - var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+          if (i !== 1)
+            li.disabled.page-item
+              a.page-link ...
+          - for (; i <= (Number(current) + 4) && i <= pages; i++)
+              if (i == current)
+                li.active.page-item
+                  a.page-link=`${i}`
+              else
+                li.page-item
+                  a.page-link(href=`/products/${i}`)=`${i}`
+              if (i == Number(current) + 4 && i < pages)
+                li.disabled.page-item
+                  a.page-link ...
+          if (current == pages)
+            li.disabled.page-item
+              a.page-link Last
+          else
+            li.page-item
+              a.page-link(href=`/products/${pages}`) Last
