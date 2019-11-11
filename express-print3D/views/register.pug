@@ -1,4 +1,45 @@
 extends layout
 
 block content
-  h1 register
+  .register.container-fluid
+    .container.register-container
+      .d-flex.justify-content-center.h-100
+        .card.register-card
+          .card-header
+            h3 Registration
+            .d-flex.justify-content-end.social_icon
+              span
+                i.fab.fa-facebook-square
+              span
+                i.fab.fa-google-plus-square
+              span
+                i.fab.fa-twitter-square
+          .card-body
+            form(method='POST' action='/register' role='form')
+              .input-group.form-group
+                input#firstName.form-control(type='text', name='firstName', placeholder='Firstname**')
+              .input-group.form-group
+                input#lastName.form-control(type='text', name='lastName',placeholder='Lastname**')
+              .input-group.form-group
+                input#userName.form-control(type='text', name='userName',placeholder='Username**')
+              .input-group.form-group
+                input#email.form-control(type='email', name='email',placeholder='Email**')
+              .input-group.form-group
+                input#password.form-control(type='password', name='password',placeholder='Password**')
+              .input-group.form-group
+                input#passwordAgain.form-control(type='password', name='passwordAgain',placeholder='Password again**')
+              .form-check.form-check-inline.mb-2
+                input#male.form-check-input.ml-2(type='radio', name='gender' value='male')
+                label.form-check-label(for='male') Male
+                input#female.form-check-input.ml-2(type='radio', name='gender', value='female')
+                label.form-check-label(for='female') Female
+              .input-group.form-group
+                input#address.form-control(type='text', name='address',placeholder='Address')
+              .input-group.form-group
+                input#pictureUrl.form-control(type='text', name='pictureUrl',placeholder='Picture')
+              .form-group
+                input.btn.float-right.login_btn(type='submit', value='Register')
+          .card-footer
+            .d-flex.justify-content-center.links
+              | Already have an account?
+              a(href='/login') Login

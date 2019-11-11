@@ -37,7 +37,7 @@ const usersSchema = new Schema({
   address: {
     type: String,
     unique: false,
-    required: true,
+    required: false,
   },
   pictureurl: {
     type: String,
@@ -58,4 +58,5 @@ const usersSchema = new Schema({
 
 });
 
-module.exports = usersSchema;
+const User = mongoose.model('users', usersSchema);
+module.exports = User;

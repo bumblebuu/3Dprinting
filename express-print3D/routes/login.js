@@ -9,4 +9,13 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/', (req, res, next) => {
+  if (req.body.userName && req.body.password) {
+    const userData = {
+      username: req.body.username,
+      password: req.body.password,
+    };
+  }
+});
+
 module.exports = router;
