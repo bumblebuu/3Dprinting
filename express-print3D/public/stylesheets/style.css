@@ -29,6 +29,10 @@
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+.login-card {
+  margin-top: auto;
+}
+
 .social_icon span {
   font-size: 60px;
   margin-left: 10px;
