@@ -13,6 +13,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { UsersComponent } from './page/users/users.component';
 import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { OrdersComponent } from './page/orders/orders.component';
     SearchPipe,
     UsersComponent,
     UpdateUserComponent,
-    OrdersComponent
+    OrdersComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

@@ -31,10 +31,13 @@
           required></textarea>
       </div>
       <div class="form-group">
-        <label for="img">
-          Image
-        </label>
-        <input class="form-control" [(ngModel)]="newProduct.img" type="file" name="product.img" id="img" required>
+
+        <input type="file" [(ngModel)]="newProduct.img" name="photo" ng2FileSelect [uploader]="uploader" />
+
+        <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
+          [disabled]="!uploader.getNotUploadedItems().length">
+          Upload
+        </button>
       </div>
       <div class="form-group">
         <label for="menu">
