@@ -1,11 +1,18 @@
 .login,
 .register {
-  background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   font-family: 'Numans', sans-serif;
   margin: 0;
+}
+
+.login {
+  background-image: url('./../img/cryptocalibur-foot-bg-2.jpg');
+}
+
+.register {
+  background-image: url('./../img/maxresdefault.jpg');
 }
 
 .login-container,
@@ -25,7 +32,7 @@
 .social_icon span {
   font-size: 60px;
   margin-left: 10px;
-  color: #FFC312;
+  color: rgb(21, 231, 179);
 }
 
 .social_icon span:hover {
@@ -45,7 +52,7 @@
 
 .input-group-prepend span {
   width: 50px;
-  background-color: #FFC312;
+  background-color: rgb(21, 231, 179);
   color: black;
   border: 0 !important;
 }
@@ -69,7 +76,7 @@ input:focus {
 
 .login_btn {
   color: black;
-  background-color: #FFC312;
+  background-color: rgb(21, 231, 179);
   width: 100px;
 }
 
