@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 
 const router = express.Router();
 const PORT = 3000;
@@ -24,6 +25,9 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', '*');
   next();
 });
+
+// favicon
+// app.use(favicon(path.join(__dirname, '..', 'webshop-express', 'public', 'favicon.ico')));
 
 mongoose.set('useCreateIndex', true);
 

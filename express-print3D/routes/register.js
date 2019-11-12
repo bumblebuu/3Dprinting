@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+const sha1 = require('sha1');
 
 const User = require('../models/users.model');
 
@@ -27,7 +28,7 @@ router.post('/', (req, res, next) => {
     // create the object we're going to send the mongoose
     const userData = {
       username: req.body.userName,
-      password: req.body.password,
+      password: sha1(req.body.password),
       firstname: req.body.firstName,
       lastname: req.body.lastName,
       email: req.body.email,
@@ -45,11 +46,10 @@ router.post('/', (req, res, next) => {
       user.save(data);
       return res.redirect('/login');
     });
-  } else {
-    const err = new Error('All fields required');
-    err.status = 400;
-    return next(err);
   }
+  const err = new Error('All fields required');
+  err.status = 400;
+  return next(err);
 });
 
 module.exports = router;

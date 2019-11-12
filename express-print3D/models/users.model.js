@@ -52,10 +52,11 @@ const usersSchema = new Schema({
   },
   cookie: {
     type: String,
-    unique: true,
+    unique: false,
     required: false,
   },
-
+}, {
+  versionKey: false, // You should be aware of the outcome after set to false
 });
 
 const User = mongoose.model('users', usersSchema);
