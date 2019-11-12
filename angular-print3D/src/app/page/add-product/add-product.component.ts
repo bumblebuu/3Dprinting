@@ -27,6 +27,8 @@ export class AddProductComponent implements OnInit {
   }
 
   onCreate() {
+    this.newProduct.img = this.newProduct.img.slice(11)
+    this.newProduct.img = '\\uploads' + this.newProduct.img
     this.ds.createDocument('products', this.newProduct).subscribe(
       () => this.router.navigate(['/products'])
     )

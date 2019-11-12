@@ -3,7 +3,7 @@ export class Product {
   seo: string;
   brand: string;
   description: string;
-  image: [string];
+  img: any;
   menu: string;
   category: string;
   price: number

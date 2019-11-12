@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
     cob(null, DIR);
   },
   filename: (req, file, cb) => {
-    cb(null, `${file.originalname}${path.extname(file.originalname)}`);
+    cb(null, `${file.originalname}`);
   },
 });
 const upload = multer({
