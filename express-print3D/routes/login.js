@@ -36,16 +36,14 @@ router.post('/', (req, res, next) => {
       console.log(obj);
 
       const token = tokgen.generate();
-      // User.update(obj, {
-      //   cookie: token,
-      // });
+      User.update(obj, {
+        cookie: token,
+      });
 
       return res.redirect('/products');
     });
   }
-  const err = new Error('All fields required');
-  err.status = 400;
-  return next(err);
+  console.log('all fields are required');
 });
 
 module.exports = router;

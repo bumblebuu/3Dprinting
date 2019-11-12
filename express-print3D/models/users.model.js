@@ -50,11 +50,12 @@ const usersSchema = new Schema({
     required: false,
     default: 'user',
   },
-  cookie: {
-    type: String,
-    unique: false,
-    required: false,
-  },
+  // cookie: {
+  //   type: String,
+  //   unique: false,
+  //   required: false,
+  //   default: null,
+  // },
 }, {
   versionKey: false, // You should be aware of the outcome after set to false
 });

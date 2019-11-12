@@ -12,17 +12,26 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   if (req.body.userName
     && req.body.password
     && req.body.passwordAgain
     && req.body.firstName
     && req.body.lastName
     && req.body.email) {
+    // Check if passwords match
     if (req.body.password !== req.body.passwordAgain) {
       const err = new Error('passwords do not match');
       err.status = 400;
       return next(err);
+    }
+
+    // Check if this user already exisits
+    const user = await User.findOne({
+      email: req.body.email,
+    });
+    if (user) {
+      return res.status(400).send('That user already exisits!');
     }
 
     // create the object we're going to send the mongoose
@@ -42,14 +51,11 @@ router.post('/', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      const user = new this(userData);
-      user.save(data);
       return res.redirect('/login');
     });
   }
-  const err = new Error('All fields required');
-  err.status = 400;
-  return next(err);
+
+  console.log('all fields are required');
 });
 
 module.exports = router;
