@@ -5,12 +5,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 
 const router = express.Router();
 const PORT = 3000;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const apiRoutes = require('./routes/api');
 const uploadRoutes = require('./routes/upload');
 
@@ -23,6 +26,9 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', '*');
   next();
 });
+
+// favicon
+// app.use(favicon(path.join(__dirname, '..', 'webshop-express', 'public', 'favicon.ico')));
 
 mongoose.set('useCreateIndex', true);
 
@@ -53,6 +59,8 @@ app.use('/api', apiRoutes);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/upload', uploadRoutes);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

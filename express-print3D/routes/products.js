@@ -14,7 +14,6 @@ router.get('/', (req, res, next) => {
 router.get('/:page', async (req, res, next) => {
   const perPage = 6;
   const page = req.params.page || 1;
-  // const skipMethod = ((perPage * page) - perPage);
 
   Product
     .find({})
