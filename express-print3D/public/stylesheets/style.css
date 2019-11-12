@@ -3,27 +3,41 @@
   src: url("Cubic.ttf");
 }
 
+@font-face {
+  font-family: "rm-squarial";
+  src: url("./../fonts/rm-squarial-3d.regular.ttf");
+}
+
 body {
-margin: 0;
+  margin: 0;
 }
 
 
 /* The sidebar menu */
 .sidebar {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  height: 100%;
+  /* 100% Full-height */
+  width: 0;
+  /* 0 width - change this with JavaScript */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Stay on top */
   top: 0;
   right: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: margin-left, 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  background-color: #111;
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 60px;
+  /* Place content 60px from the top */
+  transition: margin-left, 0.5s;
+  /* 0.5 second transition effect to slide in the sidebar */
 }
 
 /* The sidebar links */
-.sidebar a, .dropdown-btn {
+.sidebar a,
+.dropdown-btn {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -35,7 +49,8 @@ margin: 0;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidebar a:hover, .dropdown-btn:hover {
+.sidebar a:hover,
+.dropdown-btn:hover {
   color: #f1f1f1;
 }
 
@@ -75,21 +90,26 @@ margin: 0;
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  transition: margin-right, .5s; /* If you want a transition effect */
+  transition: margin-right, .5s;
+  /* If you want a transition effect */
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .sidebar {
+    padding-top: 15px;
+  }
+
+  .sidebar a {
+    font-size: 18px;
+  }
 }
 
 .header {
-  background-image: url("./../img/20593-eps.jpg");
+  background-image: url("./../img/8647.jpg");
   background-size: cover;
   height: 500px;
-  font-family: "Cubic";
-  background-blend-mode: lighten;
+  background-position: center;
 }
 
 .logopic {
@@ -102,18 +122,20 @@ margin: 0;
 .title {
   position: relative;
   width: 50%;
-  top: 30%;
-  left: 22%;
+  top: 60%;
+  left: 55%;
 }
 
-.beyond, .paper {
+.beyond,
+.paper {
+  font-family: "Cubic";
   color: transparent;
   font-size: 50pt;
-  -webkit-text-stroke: 2px rgb(43, 187, 231);
-  text-shadow: 1px 1px 2px black, 0 0 25px #2fcef9, 0 0 5px #0e3742;
+  -webkit-text-stroke: 2px rgb(58, 58, 58);
+  /* text-shadow: 1px 1px 2px black, 0 0 25px #2fcef9, 0 0 5px #0e3742; */
 }
 
 .paper {
   position: relative;
-  left: 10%;
+  left: 20%;
 }
