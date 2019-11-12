@@ -7,6 +7,8 @@ import { UpdateProductComponent } from './page/update-product/update-product.com
 import { UsersComponent } from './page/users/users.component';
 import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
+import { LinechartComponent } from './page/charts/linechart/linechart.component';
+import { PiechartComponent } from './page/charts/piechart/piechart.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: "product/update/:seo", component: UpdateProductComponent },
   { path: "users", component: UsersComponent },
   { path: "user/update/:id", component: UpdateUserComponent },
-  { path: "orders", component: OrdersComponent }
+  { path: "orders", component: OrdersComponent },
+  { path: "linechart", component: LinechartComponent },
+  { path: "piechart", component: PiechartComponent }
 ];
 
 @NgModule({
