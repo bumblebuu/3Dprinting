@@ -13,6 +13,9 @@ import { SearchPipe } from './pipes/search.pipe';
 import { UsersComponent } from './page/users/users.component';
 import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
+import { ChartsModule } from 'ng2-charts';
+import { PiechartComponent } from './page/charts/piechart/piechart.component';
+import { LinechartComponent } from './page/charts/linechart/linechart.component'
 
 @NgModule({
   declarations: [
@@ -25,13 +28,16 @@ import { OrdersComponent } from './page/orders/orders.component';
     SearchPipe,
     UsersComponent,
     UpdateUserComponent,
-    OrdersComponent
+    OrdersComponent,
+    PiechartComponent,
+    LinechartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
