@@ -1,4 +1,90 @@
 extends layout
 
 block content
-  h1 Yo
+  link(rel='stylesheet', href='/stylesheets/productinfo.css')
+  script
+    include ../public/js/productinfo.js
+  .container
+    .row
+      .col-4
+        each img,index in product.img
+          .mySlides
+            .numbertext=index+1
+            img.img-fluid.img-top(src=img, style='width:90%')
+          a.prev(onclick='plusSlides(-1)') &#x276E;
+          a.next(onclick='plusSlides(1)') &#x276F;
+        .row
+          each img,index in product.img
+            .column
+              img.demo.cursor(src=img, style='width:100%', onclick=`currentSlide(${index+1})`)
+      .col-4.mt-5
+        p.mt-5=product.brand
+        h3=product.name
+        ul
+          each description in (product.description).split('.')
+            li=description
+      .col-4.mt-5
+        h3.mt-5 $#{product.price}
+        small Price shown includes 27% VAT. 
+        u Excludes delivery costs
+        p.text-success Dispatch in 6-8 days
+        form(action=`/baskets/${product._id}`, method="post")
+          .form-group
+            label Quantity :
+            input.form-control(type='number', name='productQuantity', value=1 , min=1, style="width:100px") 
+            button.btn.btn-primary Add to basket
+      hr
+      .row
+        .col-6.mt-5
+          table.table.table-responsive
+            tbody
+              tr
+                td Name: 
+                td #{product.name}
+              tr
+                td Brand:
+                td #{product.brand}
+              tr
+                td Category:
+                td #{product.category}
+              tr
+                td Details:
+                td #{product.description}
+      .col-12
+        .product-background.card.card-outline-secondary.mt-5.mb-5
+          .card-header
+            | Product Reviews
+          if reviews
+            each review in reviews
+              .card-body
+                p=review.text
+                .row
+                  .col-2
+                    small.text-muted Posted by: #{ review.from }
+                  .col-1
+                    small.text-muted #{ review.rate }&starf;
+                hr
+        .card-footer.col-12.text-center
+          button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
+        #review.col-6.offset-3.mt-5.mb-5.none
+          form.form(action='/products/reviews' method='post')
+            .card
+              .card-header Rate Us
+              .card-body
+                input.form-control(name='productid' type='text' value=`${product._id}`)
+                textarea.form-control(name='text', placeholder='Write something...')
+                fieldset.rating
+                .rating
+                  input#rating-5(type='radio',value='5', name='rate')
+                  label(for='rating-5',title='Rocks!')
+                  input#rating-4(type='radio', value='4', name='rate')
+                  label(title='Pretty good', for='rating-4')
+                  input#rating-3(type='radio', value='3', name='rate')
+                  label(title='Meh', for='rating-3')
+                  input#rating-2(type='radio', value='2', name='rate')
+                  label(title='Kinda bad',for='rating-2')
+                  input#rating-1(type='radio', value='1', name='rate')
+                  label(title='Sucks big time', for='rating-1')
+              .card-footer
+                button.btn.btn-info(type='submit') SEND
+                button.btn.btn-secondary( onClick='onCancel()') CANCEL

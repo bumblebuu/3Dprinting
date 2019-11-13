@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 
 const reviewsSchema = new Schema({
+  _id: {
+    type: Schema.ObjectId,
+    auto: true,
+  },
   insdate: {
     type: Date,
     unique: false,
@@ -11,7 +15,7 @@ const reviewsSchema = new Schema({
     default: Date.now(),
   },
   productid: {
-    type: Number,
+    type: String,
     unique: false,
     required: true,
   },
@@ -33,5 +37,6 @@ const reviewsSchema = new Schema({
 }, {
   timestamps: true,
 });
+const Review = mongoose.model('reviews', reviewsSchema);
 
-module.exports = reviewsSchema;
+module.exports = Review;
