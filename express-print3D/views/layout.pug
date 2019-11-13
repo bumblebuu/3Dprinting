@@ -2,17 +2,22 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='./stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     #main
       .header
         a(href='#')
           //- img.logopic(src="/img/sphere-blue.png", alt="logo")
+          h1.logo o
         button.openbtn(onclick='openNav()') ☰
-        .title
-          h1.beyond beyond
-          h1.paper paper
+        #dark-page.flex-row.d-flex
+          .title
+            h1.beyond beyond
+            h1.paper paper
+          #picture.flex-row.d-flex
+            .hole-1
+            .hole-2
       block content
     #mySidebar.sidebar
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
@@ -27,5 +32,5 @@ html
 
 
     script(src="/scripts/jquery.min.js")
-    script(src="/scripts/bootstrap.bundle.min.js")
+    script(src="./scripts/bootstrap.bundle.min.js")
     script(src="/scripts/navbar.js")
