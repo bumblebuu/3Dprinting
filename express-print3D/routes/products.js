@@ -75,7 +75,7 @@ router.post('/reviews', (req, res) => {
       productid: req.body.productid,
       userid: 1,
     });
-    res.redirect('/products');
+    res.redirect(`/products/product/${req.body.seo}`);
   }
 });
 

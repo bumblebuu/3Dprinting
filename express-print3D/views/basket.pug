@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-10.offset-1
+        table.table
+          thead 
+            tr
+              th productname
+              th quantity
+              th price
+              //- th username
+          tbody
+            each basketItem in basket
+              tr
+                td=basketItem.product.name
+                td=basketItem.quantity
+                td=basketItem.product.price
+                //- td=`${basketItem.user.firstname} ${basketItem.user.lastname}`

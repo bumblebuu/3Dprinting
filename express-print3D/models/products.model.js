@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const productsSchema = new Schema({
   _id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     auto: true,
   },
   name: {
@@ -60,5 +60,5 @@ const productsSchema = new Schema({
   },
 });
 
-const Product = mongoose.model('products', productsSchema);
+const Product = mongoose.model('Products', productsSchema);
 module.exports = Product;

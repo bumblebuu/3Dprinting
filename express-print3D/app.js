@@ -11,6 +11,7 @@ const PORT = 3000;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const basketRouter = require('./routes/basket');
 const apiRoutes = require('./routes/api');
 const uploadRoutes = require('./routes/upload');
 
@@ -52,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/api', apiRoutes);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/basket', basketRouter);
 app.use('/upload', uploadRoutes);
 
 // catch 404 and forward to error handler

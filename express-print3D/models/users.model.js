@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 
 const usersSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   firstname: {
     type: String,
     unique: false,
@@ -55,7 +59,12 @@ const usersSchema = new Schema({
     unique: true,
     required: false,
   },
-
+  basket: {
+    type: Schema.Types.ObjectId,
+    ref: 'Baskets',
+  },
 });
 
-module.exports = usersSchema;
+const Users = mongoose.model('Users', usersSchema);
+
+module.exports = Users;
