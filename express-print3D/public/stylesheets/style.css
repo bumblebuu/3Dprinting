@@ -44,7 +44,8 @@
   cursor: pointer;
 }
 
-.card-header h3, label {
+.card-header h3,
+label {
   color: white;
 }
 
@@ -95,4 +96,27 @@ input:focus {
 
 .links a {
   margin-left: 4px;
+}
+
+.product-card {
+  height: 450px;
+  max-width: 300px;
+}
+
+.card-img-top {
+  height: 100%;
+  width: auto;
+  margin: auto;
+}
+
+.image-div {
+  height: 200px;
+  overflow: hidden;
+}
+
+.filter-block {
+  height: 90%;
+  border: 1px solid rgb(167, 166, 166);
+  padding: 10px;
+  border-radius: 5px;
 }

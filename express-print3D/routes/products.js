@@ -12,19 +12,31 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:page', async (req, res, next) => {
-  const perPage = 6;
+  const perPage = 8;
   const page = req.params.page || 1;
+  let brands;
+  let categories;
+
+  Product.find().distinct('brand', (error, brandList) => {
+    brands = brandList;
+  });
+  Product.find().distinct('category', (error, categoryList) => {
+    categories = categoryList;
+  });
+
 
   Product
     .find({})
     .skip((perPage * page) - perPage)
     .limit(perPage)
     .exec((err, products) => {
-      Product.count().exec((err, count) => {
+      Product.countDocuments().exec((err, count) => {
         if (err) return next(err);
         res.render('products', {
           products,
           current: page,
+          brands,
+          categories,
           pages: Math.ceil(count / perPage),
         });
       });
