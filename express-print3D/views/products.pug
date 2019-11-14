@@ -10,7 +10,7 @@ block content
             .card-body
               h5.card-title #{product.name}
               p.card-text
-                | #{product.description}
+                | #{product.description.split('.',2)}
               p.card-text
                 small.text-muted Lalala
               a.btn.btn-secondary(href=`product/${product.seo}`) Show more

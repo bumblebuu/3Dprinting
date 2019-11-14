@@ -39,7 +39,6 @@ router.get('/product/:seo', (req, res) => {
     Product.findOne({
       seo: req.params.seo,
     }, (err, product) => {
-      console.log(product._id);
       Review.find({
         productid: product._id,
       }, (error, reviews) => {

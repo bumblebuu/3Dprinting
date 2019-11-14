@@ -21,7 +21,7 @@ block content
         p.mt-5=product.brand
         h3=product.name
         ul
-          each description in (product.description).split('.')
+          each description in (product.description).split('.',3)
             li=description
       .col-4.mt-5
         h3.mt-5 $#{product.price}
@@ -34,44 +34,50 @@ block content
             input.form-control(type='number', name='productQuantity', value=1 , min=1, style="width:100px") 
             button.btn.btn-primary Add to basket
       hr
-      .row
-        .col-6.mt-5
-          table.table.table-responsive
-            tbody
-              tr
-                td Name: 
-                td #{product.name}
-              tr
-                td Brand:
-                td #{product.brand}
-              tr
-                td Category:
-                td #{product.category}
-              tr
-                td Details:
-                td #{product.description}
+    .row
+      .col-3.mt-5.ml-3
+        table.table.table-borderless
+          tbody
+            tr
+              td Name: 
+              td #{product.name}
+            tr
+              td Brand:
+              td #{product.brand}
+            tr
+              td Category:
+              td #{product.category}
+     
+    .row          
+      .col-5.mt-5.ml-3
+        h3 Description
+        each detail in product.description.split('.')
+          h6.description=detail
+      if product.video        
+        .col-5.mb-5
+          iframe(width='600', height='400', src=product.video, frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+    hr
+    .row
       .col-12
-        .product-background.card.card-outline-secondary.mt-5.mb-5
-          .card-header
-            | Product Reviews
+        .product-background.mt-3.mb-3
+          h3.mb-5 Product Reviews
           if reviews
             each review in reviews
-              .card-body
-                p=review.text
-                .row
-                  .col-2
-                    small.text-muted Posted by: #{ review.from }
-                  .col-1
-                    small.text-muted #{ review.rate }&starf;
-                hr
-        .card-footer.col-12.text-center
-          button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
+              h5=review.text
+              .row
+                .col-2
+                  small.text-muted Posted by: #{ review.from }
+                .col-1
+                  small.text-muted #{ review.rate }&starf;
+              hr
+          .col-12.text-center
+            button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
         #review.col-6.offset-3.mt-5.mb-5.none
           form.form(action='/products/reviews' method='post')
             .card
-              .card-header Rate Us
+              h5.card-header Rate This Product
               .card-body
-                input.form-control(name='productid' type='text' value=`${product._id}`)
+                input.none.form-control(name='productid' type='text' value=`${product._id}`)
                 textarea.form-control(name='text', placeholder='Write something...')
                 fieldset.rating
                 .rating
@@ -85,6 +91,6 @@ block content
                   label(title='Kinda bad',for='rating-2')
                   input#rating-1(type='radio', value='1', name='rate')
                   label(title='Sucks big time', for='rating-1')
-              .card-footer
+              .card-footer.text-center
                 button.btn.btn-info(type='submit') SEND
                 button.btn.btn-secondary( onClick='onCancel()') CANCEL

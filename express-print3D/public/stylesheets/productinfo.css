@@ -16,7 +16,7 @@
   justify-content: center;
   overflow: hidden;
   flex-direction: row-reverse;
-  height: 50px;
+  height: 40px;
   position: relative;
 }
 
@@ -137,4 +137,10 @@
 .active,
 .demo:hover {
   opacity: 1;
+}
+
+iframe{
+position: relative;
+left:80px;
+bottom:100px;
 }

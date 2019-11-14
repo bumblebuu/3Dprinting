@@ -37,6 +37,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   onUpdate() {
+    this.product.video=this.product.video+'?autoplay=1'
     this.product.img = this.product.img.slice(11);
     this.product.img = '\\uploads' + this.product.img;
     this.ds.updateDocument('products', this.product.seo, this.product).subscribe(

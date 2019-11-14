@@ -53,6 +53,11 @@ const productsSchema = new Schema({
     unique: false,
     required: false,
   },
+  video: {
+    type: String,
+    unique: false,
+    required: false,
+  },
 });
 
 const Product = mongoose.model('products', productsSchema);
