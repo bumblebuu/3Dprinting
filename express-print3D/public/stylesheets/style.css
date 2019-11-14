@@ -17,14 +17,14 @@ body {
 .sidebar {
   height: 100%;
   /* 100% Full-height */
-  width: 0;
+  width: 300px;
   /* 0 width - change this with JavaScript */
   position: fixed;
   /* Stay in place */
   z-index: 1;
   /* Stay on top */
   top: 0;
-  right: 0;
+  right: -300px;
   background-color: #111;
   /* Black*/
   overflow-x: hidden;
@@ -89,7 +89,9 @@ body {
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main, #dark-page, #picture {
+#main,
+#dark-page,
+#picture {
   transition: margin-right, .5s;
   /* If you want a transition effect */
 }
@@ -113,14 +115,25 @@ body {
 
 .logo {
   font-size: 40pt;
-  position: absolute;
-  left: 25px;
+  position: relative;
+  left: 20px;
   top: 15px;
   font-family: "Cubic";
   background: -webkit-linear-gradient(-86deg, rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 91%);
   -webkit-background-clip: text;
   -webkit-text-stroke: 4px transparent;
   color: #232d2d;
+  width: 50vw;
+}
+
+navbar {
+  height: 150px;
+  width: 100%;
+}
+
+#dark-page {
+  position: relative;
+  top: -150px;
 }
 
 .title {
@@ -128,7 +141,7 @@ body {
   width: 25%;
   left: 10%;
   top: 25vh;
-  margin-right: 15%;
+  margin-right: 250px;
 }
 
 .beyond,
@@ -156,9 +169,10 @@ body {
   background-position: center;
 }
 
-.hole-1, .hole-2 {
+.hole-1,
+.hole-2 {
   height: 100%;
-  width: 4vw;
+  width: 11%;
   background-color: #212224;
-  margin-left: 14vw;
+  margin-left: 26%;
 }

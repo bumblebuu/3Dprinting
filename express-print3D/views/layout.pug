@@ -7,10 +7,17 @@ html
   body
     #main
       .header
-        a(href='#')
-          //- img.logopic(src="/img/sphere-blue.png", alt="logo")
-          h1.logo o
-        button.openbtn(onclick='openNav()') ☰
+        navbar.d-inline-flex
+          a.navbar-brand.logo o
+          //- a(href="")
+          //-   h4 Printers and Scanners
+          //- a(href="")
+          //-   h4 Science
+          //- a(href="")
+          //-   h4 Magic
+          //- a(href="")
+          //-   h4 Print your own idea
+          button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title
             h1.beyond beyond
@@ -21,8 +28,10 @@ html
       block content
     #mySidebar.sidebar
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-      a.nav-link.active(href='#') Active
-      a.nav-link(href='#') Link
+      a.nav-link(href='#') Printers and Scanners
+      a.nav-link(href='#') Science
+      a.nav-link(href='#') Magic
+      a.nav-link(href='#') Print your own idea
       button.dropdown-btn Dropdown
         i.fa.fa-caret-down
       .dropdown-container
