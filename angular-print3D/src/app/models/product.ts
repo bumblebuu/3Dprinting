@@ -7,5 +7,6 @@ export class Product {
   video: string;
   menu: string;
   category: string;
+  subcategory: string;
   price: number
 }

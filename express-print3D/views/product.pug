@@ -47,8 +47,11 @@ block content
               td #{product.brand}
             tr
               td Category:
-              td #{product.category}
-     
+              if product.subcategory
+                td #{product.menu}- #{product.category}- #{product.subcategory}
+              else
+                td #{product.menu}- #{product.category}
+
     .row          
       .col-5.mt-5.ml-3
         h3 Description
