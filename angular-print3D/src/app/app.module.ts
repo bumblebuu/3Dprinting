@@ -13,7 +13,10 @@ import { SearchPipe } from './pipes/search.pipe';
 import { UsersComponent } from './page/users/users.component';
 import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+//- import { FileSelectDirective } from 'ng2-file-upload';
+//- import { ChartsModule } from 'ng2-charts';
+import { PiechartComponent } from './page/charts/piechart/piechart.component';
+import { LinechartComponent } from './page/charts/linechart/linechart.component'
 
 @NgModule({
   declarations: [
@@ -27,13 +30,16 @@ import { FileSelectDirective } from 'ng2-file-upload';
     UsersComponent,
     UpdateUserComponent,
     OrdersComponent,
-    FileSelectDirective
+    //- FileSelectDirective,
+    PiechartComponent,
+    LinechartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    //- ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
