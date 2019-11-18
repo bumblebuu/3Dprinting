@@ -7,17 +7,8 @@ html
   body
     #main
       .header
-        navbar.d-inline-flex
-          a.navbar-brand.logo o
-          //- a(href="")
-          //-   h4 Printers and Scanners
-          //- a(href="")
-          //-   h4 Science
-          //- a(href="")
-          //-   h4 Magic
-          //- a(href="")
-          //-   h4 Print your own idea
-          button.openbtn(onclick='openNav()') ☰
+        a.logo(href='#') o
+        button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title
             h1.beyond beyond
@@ -27,17 +18,68 @@ html
             .hole-2
       block content
     #mySidebar.sidebar
+      ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu', style='display: block; position: static; margin-bottom: 5px; *width: 180px;')
+        li
+          a.nav-link(href='#') Home
+        li
+          a.nav-link(href='#') Contacts
+        li
+          a.nav-link.dropdown-btn(href='#') Products
+          .dropdown-container
+            ul
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Printers and Scanners
+                ul.dropdown-menu
+                  li
+                    a(href='#') Printers
+                  li
+                    a.nav-link(href='#') Scanners
+                  li
+                    a.nav-link(href='#') Filaments
+                  li
+                    a.nav-link(href='#') Tools
+  
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Science
+                ul.dropdown-menu
+                  li
+                    a(href='#') Health
+                  li
+                    a.nav-link(href='#') Electronics
+                  li
+                    a.nav-link(href='#') Mechanics
+                  li
+                    a.nav-link(href='#') Architecture
+
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Magic
+                ul.dropdown-menu
+                  li.dropdown-submenu
+                    a(href='#') Kids
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Lego
+                  li.dropdown-submenu
+                    a.nav-link(href='#') Practical
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Inside
+                      li
+                        a(href='#') Outside
+                  li.dropdown-submenu
+                    a.nav-link(href='#') Accessories
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Jewellery
+                      li
+                        a(href='#') Phone cases
+                      li
+                        a(href='#') Other
+
+              li.without-arrow
+                a.nav-link(href='#') Print your own idea
+
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
-      a.nav-link(href='#') Printers and Scanners
-      a.nav-link(href='#') Science
-      a.nav-link(href='#') Magic
-      a.nav-link(href='#') Print your own idea
-      button.dropdown-btn Dropdown
-        i.fa.fa-caret-down
-      .dropdown-container
-        a(href='#') Link 1
-        a(href='#') Link 2
-        a(href='#') Link 3
 
 
     script(src="/scripts/jquery.min.js")

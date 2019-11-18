@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Staatliches|Tomorrow&display=swap');
 @font-face {
   font-family: "Cubic";
   src: url("Cubic.ttf");
 }
 
-@font-face {
-  font-family: "rm-squarial";
-  src: url("./../fonts/rm-squarial-3d.regular.ttf");
-}
+/* 
+font-family: 'Tomorrow', sans-serif;
+font-family: 'Bebas Neue', cursive;
+font-family: 'Staatliches', cursive;
+ */
 
 body {
   margin: 0;
@@ -16,23 +18,15 @@ body {
 /* The sidebar menu */
 .sidebar {
   height: 100%;
-  /* 100% Full-height */
   width: 300px;
-  /* 0 width - change this with JavaScript */
   position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Stay on top */
   top: 0;
   right: -300px;
   background-color: #111;
-  /* Black*/
-  overflow-x: hidden;
-  /* Disable horizontal scroll */
+  overflow-x: visible;
   padding-top: 60px;
-  /* Place content 60px from the top */
   transition: margin-left, 0.5s;
-  /* 0.5 second transition effect to slide in the sidebar */
+  font-family: 'Tomorrow', sans-serif;
 }
 
 /* The sidebar links */
@@ -40,7 +34,7 @@ body {
 .dropdown-btn {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 15pt;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -81,12 +75,6 @@ body {
   color: whitesmoke;
 }
 
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #262626;
-  padding-left: 8px;
-}
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main,
@@ -115,8 +103,8 @@ body {
 
 .logo {
   font-size: 40pt;
-  position: relative;
-  left: 20px;
+  position: absolute;
+  left: 25px;
   top: 15px;
   font-family: "Cubic";
   background: -webkit-linear-gradient(-86deg, rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 91%);
@@ -126,15 +114,13 @@ body {
   width: 50vw;
 }
 
-navbar {
-  height: 150px;
-  width: 100%;
+.logo:hover {
+  color: #111;
+  background: -webkit-linear-gradient(-86deg, rgb(47, 148, 139) 5%, rgb(5, 76, 88) 53%, rgb(3, 63, 73) 91%);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 4px transparent;
 }
 
-#dark-page {
-  position: relative;
-  top: -150px;
-}
 
 .title {
   position: relative;
@@ -175,4 +161,71 @@ navbar {
   width: 11%;
   background-color: #212224;
   margin-left: 26%;
+}
+
+.dropdown-container {
+  display: none;
+  background-color: #111;
+}
+
+.dropdown-container ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li .without-arrow > a {
+  margin-left: 20px;
+}
+
+.dropdown-menu {
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+  width: 200px;
+  top: 0;
+  left: -200px;
+  margin-top: -6px;
+  background-color: #111;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu>a:after {
+  display: block;
+  content: "\23F4";
+  float: left;
+  left: 0;
+  border-left-color: #cccccc;
+}
+
+.caret-off::before {
+  display: none;
+}
+
+.caret-off::after {
+  display: none;
+}
+
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+
+.dropdown-submenu {
+  float: none;
+}
+
+.dropdown-submenu>.dropdown-menu {
+  right: -100%;
+  margin-right: 10px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+  -moz-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6 6px 6px;
 }
