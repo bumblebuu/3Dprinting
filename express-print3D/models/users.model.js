@@ -37,7 +37,7 @@ const usersSchema = new Schema({
   address: {
     type: String,
     unique: false,
-    required: true,
+    required: false,
   },
   pictureurl: {
     type: String,
@@ -52,10 +52,13 @@ const usersSchema = new Schema({
   },
   cookie: {
     type: String,
-    unique: true,
+    unique: false,
     required: false,
+    default: null,
   },
-
+}, {
+  versionKey: false, // You should be aware of the outcome after set to false
 });
 
-module.exports = usersSchema;
+const User = mongoose.model('users', usersSchema);
+module.exports = User;

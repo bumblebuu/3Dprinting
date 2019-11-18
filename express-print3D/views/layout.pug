@@ -2,7 +2,90 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
     link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
+    #main
+      .header
+        a.logo(href='#') o
+        button.openbtn(onclick='openNav()') ☰
+        #dark-page.flex-row.d-flex
+          .title
+            h1.beyond beyond
+            h1.paper paper
+          #picture.flex-row.d-flex
+            .hole-1
+            .hole-2
+
+    #mySidebar.sidebar
+      ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu', style='display: block; position: static; margin-bottom: 5px; *width: 180px;')
+        li
+          a.nav-link(href='#') Home
+        li
+          a.nav-link(href='#') Contacts
+        li
+          a.nav-link.dropdown-btn(href='#') Products
+          .dropdown-container
+            ul
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Printers and Scanners
+                ul.dropdown-menu
+                  li
+                    a(href='#') Printers
+                  li
+                    a.nav-link(href='#') Scanners
+                  li
+                    a.nav-link(href='#') Filaments
+                  li
+                    a.nav-link(href='#') Tools
+  
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Science
+                ul.dropdown-menu
+                  li
+                    a(href='#') Health
+                  li
+                    a.nav-link(href='#') Electronics
+                  li
+                    a.nav-link(href='#') Mechanics
+                  li
+                    a.nav-link(href='#') Architecture
+
+              li.dropdown-submenu.caret-off
+                a.nav-link(href='#') Magic
+                ul.dropdown-menu
+                  li.dropdown-submenu
+                    a(href='#') Kids
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Lego
+                  li.dropdown-submenu
+                    a.nav-link(href='#') Practical
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Inside
+                      li
+                        a(href='#') Outside
+                  li.dropdown-submenu
+                    a.nav-link(href='#') Accessories
+                    ul.dropdown-menu
+                      li
+                        a(href='#') Jewellery
+                      li
+                        a(href='#') Phone cases
+                      li
+                        a(href='#') Other
+
+              li.without-arrow
+                a.nav-link(href='#') Print your own idea
+
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+
+
     block content
+
+    script(src='/jquery/dist/jquery.min.js')
+    script(src='/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/scripts/navbar.js')
