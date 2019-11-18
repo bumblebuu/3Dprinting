@@ -13,8 +13,8 @@ import { SearchPipe } from './pipes/search.pipe';
 import { UsersComponent } from './page/users/users.component';
 import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
-//- import { FileSelectDirective } from 'ng2-file-upload';
-//- import { ChartsModule } from 'ng2-charts';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { ChartsModule } from 'ng2-charts';
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
 import { LinechartComponent } from './page/charts/linechart/linechart.component'
 
@@ -30,7 +30,7 @@ import { LinechartComponent } from './page/charts/linechart/linechart.component'
     UsersComponent,
     UpdateUserComponent,
     OrdersComponent,
-    //- FileSelectDirective,
+    FileSelectDirective,
     PiechartComponent,
     LinechartComponent
   ],
@@ -39,7 +39,7 @@ import { LinechartComponent } from './page/charts/linechart/linechart.component'
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    //- ChartsModule
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
