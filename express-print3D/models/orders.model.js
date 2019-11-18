@@ -4,21 +4,23 @@ const Schema = mongoose.Schema;
 
 
 const ordersSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   insdate: {
     type: Date,
     unique: false,
     required: true,
     default: Date.now(),
   },
-  userid: {
-    type: Number,
-    unique: false,
-    required: true,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
   },
-  productid: {
-    type: Number,
-    unique: false,
-    required: true,
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: 'Products',
   },
   quantity: {
     type: Number,
@@ -39,4 +41,5 @@ const ordersSchema = new Schema({
   timestamps: true,
 });
 
-module.exports = ordersSchema;
+const Order = mongoose.model('Orders', ordersSchema);
+module.exports = Order;

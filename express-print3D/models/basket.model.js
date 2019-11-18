@@ -7,13 +7,8 @@ const basketSchema = new Schema({
     type: Schema.Types.ObjectId,
     auto: true,
   },
-  productid: {
-    type: Schema.Types.ObjectId,
-    unique: false,
-    required: true,
-  },
-  userid: {
-    type: Schema.Types.ObjectId,
+  price: {
+    type: Number,
     unique: false,
     required: true,
   },

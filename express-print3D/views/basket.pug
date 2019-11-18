@@ -3,6 +3,8 @@ extends layout
 block content
   .container
     .row
+      h1.mb-5 Basket
+    .row
       .col-10.offset-1
         table.table
           thead 
@@ -10,11 +12,18 @@ block content
               th productname
               th quantity
               th price
-              //- th username
+              th &nbsp;
           tbody
             each basketItem in basket
               tr
                 td=basketItem.product.name
                 td=basketItem.quantity
-                td=basketItem.product.price*basketItem.quantity
-                //- td=`${basketItem.user.firstname} ${basketItem.user.lastname}`
+                td=basketItem.price*basketItem.quantity
+                td
+                  form(action=`/basket/remove/${basketItem._id}` method='post')
+                    button.btn.btn-sm.btn-danger(type='submit') 	&#128465;
+        hr
+        strong.total Total: 
+        | $ #{total}
+        br
+        a.mt-3.btn.btn-success(href='/pay/checkout') Pay     
