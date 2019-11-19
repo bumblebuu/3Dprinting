@@ -18,10 +18,10 @@ const ordersSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Users',
   },
-  product: {
+  product: [{
     type: Schema.Types.ObjectId,
     ref: 'Products',
-  },
+  }],
   quantity: {
     type: Number,
     unique: false,

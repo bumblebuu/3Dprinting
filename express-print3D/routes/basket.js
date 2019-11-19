@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 const Basket = require('../models/basket.model');
-const Order = require('../models/orders.model');
 
 let newQuantity = 0;
 router.get('/', (req, res) => {
@@ -28,7 +27,7 @@ router.post('/:id', (req, res) => {
   }).select('quantity -_id');
 
   query.exec((err, quantity) => {
-    if (quantity === undefined) {
+    if (quantity[0] === undefined) {
       Basket.create({
         quantity: req.body.quantity,
         user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
