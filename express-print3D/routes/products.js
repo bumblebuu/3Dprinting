@@ -32,17 +32,99 @@ router.get('/:page', async (req, res, next) => {
 });
 
 
-// // get single article
-// router.get('/:seo', (req, res) => {
-//   if (req.params.seo === String) {
-//     Product.findOne({
-//       seo: req.params.seo,
-//     }, (err, product) => {
-//       res.render('product', {
-//         product,
-//       });
-//     });
-//   }
-// });
+// get single product
+router.get('/product/:seo', (req, res) => {
+  if (typeof req.params.seo === 'string') {
+    Product.findOne({
+      seo: req.params.seo,
+    }, (err, product) => {
+      Review.find({
+        productid: product._id,
+      }, (error, reviews) => {
+        res.render('product', {
+          product,
+          reviews,
+        });
+      });
+    });
+  }
+});
+
+router.post('/reviews', (req, res) => {
+  const review = Review.find({
+    productid: req.body.productid,
+  });
+  if (req.body.text === '' || req.body.rate === undefined) {
+    Review.find({
+      productid: req.body.productid,
+    }, (err, review) => {
+      if (err) throw err;
+      res.render('product', {
+        title: 'Product',
+        reviews: review,
+        // user: req.user || {},
+        wrong: 'Please write a review and rate us :)',
+      });
+    });
+  } else {
+    Review.create({
+      text: req.body.text,
+      rate: req.body.rate,
+      productid: req.body.productid,
+      userid: 1,
+    });
+    res.redirect(`/products/product/${req.body.seo}`);
+  }
+});
+
+
+// by menu
+router.get('/menu/:menu/:page', (req, res, next) => {
+  const menu = req.params.menu.replace(/-/g, ' ');
+  const page = req.params.page || 1;
+  const perPage = 6;
+
+  Product
+    .find({
+      menu: `${menu}`,
+    })
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec((err, products) => {
+      Product.count().exec((err, count) => {
+        if (err) return next(err);
+        res.render('products', {
+          products,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
+});
+
+
+// by category
+router.get('/category/:category/:page', (req, res, next) => {
+  const category = req.params.category.replace(/-/g, ' ');
+  const page = req.params.page || 1;
+  const perPage = 6;
+
+  Product
+    .find({
+      category: `${category}`,
+    })
+    .skip((perPage * page) - perPage)
+    .limit(perPage)
+    .exec((err, products) => {
+      Product.count().exec((err, count) => {
+        if (err) return next(err);
+        res.render('products', {
+          products,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
+});
 
 module.exports = router;
