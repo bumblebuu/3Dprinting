@@ -365,7 +365,7 @@ block content
                 label(for='cc-number') Credit card number
                 input#cc-number.form-control(type='number', name='card.number' placeholder='', required='')
                 .invalid-feedback
-                  | Credit card number is required 4000000000009995
+                  | Credit card number is required
             .row
               .col-md-3.mb-3
                 label(for='cc-exp-month') Expiration Month
@@ -377,17 +377,18 @@ block content
                 input#cc-exp-year.form-control(type='text', name='card.exp-year' placeholder='', required='')
                 .invalid-feedback
                   | Expiration year required
-              .col-md-2.mb-3
+              .col-md-3.mb-3
                 label(for='cc-cvc') CVC
                 input#cc-cvc.form-control(type='number', placeholder='', name='card.cvc' required='')
                 .invalid-feedback
                   | Security code required
             hr.mb-4
-            button.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
-        button#subbtn.btn.btn-primary.btn-lg.btn-block(type='submit') PAAY
+            button#checkbtn.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
+        .col-md-8.order-md-3
+          button#subbtn.d-none.btn.btn-primary.btn-lg.btn-block(type='submit') PAAY
       .payment-errors.d-none.alert.alert-danger
       footer.my-5.pt-5.text-muted.text-center.text-small
-        p.mb-1 &copy; 2017-2018 Company Name
+        p.mb-1 &copy; 2019-2020 Beyond Paper
         ul.list-inline
           li.list-inline-item
             a(href='#') Privacy

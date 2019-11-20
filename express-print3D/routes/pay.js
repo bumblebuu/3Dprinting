@@ -38,19 +38,22 @@ router.post('/', (req, res) => {
       amount: parseInt(totalPrice * 100, 10),
       currency: 'usd',
       source: req.body.stripeToken,
-      description: 'First charge',
+      description: 'Beyond Paper shopping',
     }, (err, charge) => {
       if (err) throw err;
       Basket.remove({
         user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
       }, (err, removed) => {
         if (err) throw err;
-        console.log(`removed ${removed.deletedCount}`);
       });
       const productArray = [];
-      for (let i = 0; i < req.body.id.length; i++) {
-        const productid = mongoose.Types.ObjectId(req.body.id[i]);
-        productArray.push(productid);
+      if (typeof req.body.id === 'object') {
+        for (let i = 0; i < req.body.id.length; i++) {
+          const productid = req.body.id[i];
+          productArray.push(productid);
+        }
+      } else {
+        productArray.push(req.body.id);
       }
       Order.create({
         user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),

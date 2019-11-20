@@ -17,6 +17,10 @@ const error = false;
           event.preventDefault();
           event.stopPropagation();
         }
+        if (form.checkValidity() === true) {
+          $form.find('#subbtn').removeClass('d-none');
+          $form.find('#checkbtn').addClass('d-none');
+        }
         form.classList.add('was-validated');
       }, false);
     });
