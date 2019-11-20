@@ -70,7 +70,7 @@ block content
               h5=review.text
               .row
                 .col-2
-                  small.text-muted Posted by: #{ review.from }
+                  small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
                 .col-1
                   small.text-muted #{ review.rate }&starf;
               hr
@@ -81,7 +81,7 @@ block content
             .card
               h5.card-header Rate This Product
               .card-body
-                input.none.form-control(name='productid' type='text' value=`${product._id}`)
+                input.none.form-control(name='product' type='text' value=`${product._id}`)
                 input.none.form-control(name='seo' type='text' value=`${product.seo}`)
                 textarea.form-control(name='text', placeholder='Write something...')
                 fieldset.rating

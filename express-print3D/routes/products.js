@@ -1,7 +1,7 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const router = express.Router();
-
 // Product model
 const Product = require('../models/products.model');
 const Review = require('../models/reviews.model');
@@ -32,7 +32,6 @@ router.get('/:page', async (req, res, next) => {
     });
 });
 
-
 // get single product
 router.get('/product/:seo', (req, res) => {
   if (typeof req.params.seo === 'string') {
@@ -40,8 +39,8 @@ router.get('/product/:seo', (req, res) => {
       seo: req.params.seo,
     }, (err, product) => {
       Review.find({
-        productid: product._id,
-      }, (error, reviews) => {
+        product: product._id,
+      }).populate('user').exec((error, reviews) => {
         res.render('product', {
           product,
           reviews,
@@ -53,27 +52,14 @@ router.get('/product/:seo', (req, res) => {
 });
 
 router.post('/reviews', (req, res) => {
-  const review = Review.find({
-    productid: req.body.productid,
-  });
   if (req.body.text === '' || req.body.rate === undefined) {
-    Review.find({
-      productid: req.body.productid,
-    }, (err, review) => {
-      if (err) throw err;
-      res.render('product', {
-        title: 'Product',
-        reviews: review,
-        // user: req.user || {},
-        wrong: 'Please write a review and rate us :)',
-      });
-    });
+    res.redirect(`/products/product/${req.body.seo}`);
   } else {
     Review.create({
       text: req.body.text,
       rate: req.body.rate,
-      productid: req.body.productid,
-      userid: 1,
+      product: req.body.product,
+      user: '5dce9353a0568e256042f69c',
     });
     res.redirect(`/products/product/${req.body.seo}`);
   }

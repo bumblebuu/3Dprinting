@@ -14,15 +14,13 @@ const reviewsSchema = new Schema({
     required: true,
     default: Date.now(),
   },
-  productid: {
-    type: String,
-    unique: false,
-    required: true,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
   },
-  userid: {
-    type: Number,
-    unique: false,
-    required: true,
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: 'Products',
   },
   text: {
     type: String,
