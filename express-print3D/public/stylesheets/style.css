@@ -12,6 +12,7 @@ font-family: 'Staatliches', cursive;
 
 body {
   margin: 0;
+  font-family: 'Staatliches', cursive;
 }
 
 .login,
@@ -21,13 +22,6 @@ body {
   height: 100vh;
   font-family: 'Numans', sans-serif;
   margin: 0;
-}
-
-.login {
-  background-image: url('./../img/cryptocalibur-foot-bg-2.jpg');
-}
-
-.register {
   background-image: url('./../img/maxresdefault.jpg');
 }
 
@@ -60,7 +54,8 @@ body {
   cursor: pointer;
 }
 
-.card-header h3, label {
+.card-header h3,
+label {
   color: white;
 }
 
@@ -326,4 +321,27 @@ li .without-arrow > a {
   -webkit-border-radius: 6px 6px 6px 6px;
   -moz-border-radius: 6px 6px 6px 6px;
   border-radius: 6px 6 6px 6px;
+}
+
+.product-card {
+  height: 450px;
+  max-width: 300px;
+}
+
+.card-img-top {
+  height: 100%;
+  width: auto;
+  margin: auto;
+}
+
+.image-div {
+  height: 200px;
+  overflow: hidden;
+}
+
+.filter-block {
+  height: 90%;
+  /* border: 1px solid rgb(167, 166, 166); */
+  padding: 10px;
+  border-radius: 5px;
 }

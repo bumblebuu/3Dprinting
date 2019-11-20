@@ -5,6 +5,17 @@ const router = express.Router();
 // Product model
 const Product = require('../models/products.model');
 
+// Categories and brands
+let brands;
+let categories;
+
+Product.find().distinct('brand', (error, brandList) => {
+  brands = brandList;
+});
+Product.find().distinct('category', (error, categoryList) => {
+  categories = categoryList;
+});
+
 // get products
 
 router.get('/', (req, res, next) => {
@@ -12,7 +23,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:page', async (req, res, next) => {
-  const perPage = 6;
+  const perPage = 8;
   const page = req.params.page || 1;
 
   Product
@@ -20,11 +31,13 @@ router.get('/:page', async (req, res, next) => {
     .skip((perPage * page) - perPage)
     .limit(perPage)
     .exec((err, products) => {
-      Product.count().exec((err, count) => {
+      Product.countDocuments().exec((err, count) => {
         if (err) return next(err);
         res.render('products', {
           products,
           current: page,
+          brands,
+          categories,
           pages: Math.ceil(count / perPage),
         });
       });
@@ -96,6 +109,8 @@ router.get('/menu/:menu/:page', (req, res, next) => {
         res.render('products', {
           products,
           current: page,
+          brands,
+          categories,
           pages: Math.ceil(count / perPage),
         });
       });
@@ -121,6 +136,8 @@ router.get('/category/:category/:page', (req, res, next) => {
         res.render('products', {
           products,
           current: page,
+          brands,
+          categories,
           pages: Math.ceil(count / perPage),
         });
       });
