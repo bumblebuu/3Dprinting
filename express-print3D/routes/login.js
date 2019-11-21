@@ -33,17 +33,22 @@ router.post('/', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(obj);
 
       const token = tokgen.generate();
-      User.update(obj, {
-        cookie: token,
+      console.log(token);
+
+      User.where(obj).update({
+        $set: {
+          cookie: token,
+        },
       });
+      console.log(obj);
 
       return res.redirect('/products');
     });
-  }
+  } else {
   console.log('all fields are required');
+  }
 });
 
 module.exports = router;

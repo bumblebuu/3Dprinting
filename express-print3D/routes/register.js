@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
       email: req.body.email,
       gender: req.body.gender || 'none',
       address: req.body.address || 'none',
-      pictureurl: req.body.pictureUrl || 'none',
+      pictureurl: 'default-man.png',
     };
 
     // insert into mongo with Schema's create method from mongoose

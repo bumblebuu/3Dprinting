@@ -78,6 +78,17 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+// app.use(async (req, res, next) => {
+//   const user = await userDb.checkLogin(req);
+//   if (user) {
+//     req.user = user;
+//     console.log('Req.user:', req.user);
+//     req.body.counter = await userDb.checkBasket(req.user.userId) || 0;
+//   }
+
+//   next();
+// });
+
 app.listen(PORT, () => {
   console.log(`started at ${PORT}`);
 });

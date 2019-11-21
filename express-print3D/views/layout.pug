@@ -9,7 +9,9 @@ html
   body
     #main
       .header
-        a.logo(href='#') o
+        a.logo(href='/') o
+        if user
+          img(src=`/img/${user.pictureUrl}`)
         button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title
@@ -30,16 +32,16 @@ html
           .dropdown-container
             ul
               li.dropdown-submenu.caret-off
-                a.nav-link(href='/products/menu/printers-and-scanners/1') Printers and Scanners
+                a.nav-link(href='/products/1?c=printers&scanners&tools&filaments') Printers and Scanners
                 ul.dropdown-menu
                   li
-                    a(href='/products/category/printers/1') Printers
+                    a(href='/products/1?c=printers') Printers
                   li
-                    a.nav-link(href='/products/category/scanners/1') Scanners
+                    a.nav-link(href='/products/1?c=scanners') Scanners
                   li
-                    a.nav-link(href='/products/category/filaments/1') Filaments
+                    a.nav-link(href='/products/1?c=filaments') Filaments
                   li
-                    a.nav-link(href='/products/category/tools/1') Tools
+                    a.nav-link(href='/products/1?c=tools') Tools
   
               li.dropdown-submenu.caret-off
                 a.nav-link(href='#') Science
@@ -89,3 +91,4 @@ html
     script(src='/jquery/dist/jquery.min.js')
     script(src='/bootstrap/dist/js/bootstrap.min.js')
     script(src='/scripts/navbar.js')
+    script(src='/scripts/filter.js')

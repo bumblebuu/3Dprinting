@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-
+const url = require('url');
 // Product model
 const Product = require('../models/products.model');
 
@@ -26,22 +26,138 @@ router.get('/:page', async (req, res, next) => {
   const perPage = 8;
   const page = req.params.page || 1;
 
-  Product
-    .find({})
-    .skip((perPage * page) - perPage)
-    .limit(perPage)
-    .exec((err, products) => {
-      Product.countDocuments().exec((err, count) => {
-        if (err) return next(err);
-        res.render('products', {
-          products,
-          current: page,
-          brands,
-          categories,
-          pages: Math.ceil(count / perPage),
+  if (url.parse(req.url).query) {
+    const search = url.parse(req.url).query;
+    const text = search.slice(2).replace('-', ' ');
+    if (search.startsWith('c')) {
+
+      if (text.includes('=')) {
+
+        const index = (text.indexOf('=')) - 1;
+        const categoriesString = text.slice(0, index);
+        const brandsString = text.slice(index + 2);
+        const categoriesArr = categoriesString.split('&');
+        const brandsArr = brandsString.split('&');
+
+        Product.find({
+          $or: [{
+            category: {
+              $in: categoriesArr,
+            },
+          },
+          {
+            brand: {
+              $in: brandsArr,
+            },
+          },
+          ],
+        })
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, products) => {
+            Product.countDocuments({
+              $or: [{
+                category: {
+                  $in: categoriesArr,
+                },
+              },
+              {
+                brand: {
+                  $in: brandsArr,
+                },
+              },
+              ],
+            }).exec((err, count) => {
+              if (err) return next(err);
+              res.render('products', {
+                products,
+                current: page,
+                brands,
+                categories,
+                categoriesArr,
+                brandsArr,
+                pages: Math.ceil(count / perPage),
+              });
+            });
+          });
+      } else {
+        const categoriesArr = text.split('&');
+
+        Product.find({
+          category: {
+            $in: categoriesArr,
+          },
+        })
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, products) => {
+            Product.countDocuments({
+              category: {
+                $in: categoriesArr,
+              },
+            }).exec((err, count) => {
+              if (err) return next(err);
+              res.render('products', {
+                products,
+                current: page,
+                brands,
+                categories,
+                categoriesArr,
+                brandsArr: [],
+                pages: Math.ceil(count / perPage),
+              });
+            });
+          });
+      }
+    } else {
+      const brandsArr = text.split('&');
+
+      Product.find({
+        brand: {
+          $in: brandsArr,
+        },
+      })
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, products) => {
+          Product.countDocuments({
+            brand: {
+              $in: brandsArr,
+            },
+          }).exec((err, count) => {
+            if (err) return next(err);
+            res.render('products', {
+              products,
+              current: page,
+              brands,
+              categories,
+              brandsArr,
+              categoriesArr: [],
+              pages: Math.ceil(count / perPage),
+            });
+          });
+        });
+    }
+  } else {
+    Product
+      .find({})
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec((err, products) => {
+        Product.countDocuments().exec((err, count) => {
+          if (err) return next(err);
+          res.render('products', {
+            products,
+            current: page,
+            brands,
+            categories,
+            categoriesArr: [],
+            brandsArr: [],
+            pages: Math.ceil(count / perPage),
+          });
         });
       });
-    });
+  }
 });
 
 
@@ -88,60 +204,6 @@ router.post('/reviews', (req, res) => {
     });
     res.redirect(`/products/product/${req.body.seo}`);
   }
-});
-
-
-// by menu
-router.get('/menu/:menu/:page', (req, res, next) => {
-  const menu = req.params.menu.replace(/-/g, ' ');
-  const page = req.params.page || 1;
-  const perPage = 6;
-
-  Product
-    .find({
-      menu: `${menu}`,
-    })
-    .skip((perPage * page) - perPage)
-    .limit(perPage)
-    .exec((err, products) => {
-      Product.count().exec((err, count) => {
-        if (err) return next(err);
-        res.render('products', {
-          products,
-          current: page,
-          brands,
-          categories,
-          pages: Math.ceil(count / perPage),
-        });
-      });
-    });
-});
-
-
-// by category
-router.get('/category/:category/:page', (req, res, next) => {
-  const category = req.params.category.replace(/-/g, ' ');
-  const page = req.params.page || 1;
-  const perPage = 6;
-
-  Product
-    .find({
-      category: `${category}`,
-    })
-    .skip((perPage * page) - perPage)
-    .limit(perPage)
-    .exec((err, products) => {
-      Product.count().exec((err, count) => {
-        if (err) return next(err);
-        res.render('products', {
-          products,
-          current: page,
-          brands,
-          categories,
-          pages: Math.ceil(count / perPage),
-        });
-      });
-    });
 });
 
 module.exports = router;

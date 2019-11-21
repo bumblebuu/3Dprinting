@@ -240,10 +240,11 @@ input:focus {
 
 #picture {
   background-image: url('./../img/8647.jpg');
-  width: 50%;
+  width: 50vw;
   height: 50vh;
-  position: relative;
+  position: absolute;
   top: 15vh;
+  left: 600px;
   background-size: cover;
   background-position: center;
 }
@@ -251,9 +252,9 @@ input:focus {
 .hole-1,
 .hole-2 {
   height: 100%;
-  width: 11%;
+  width: 4vw;
   background-color: #212224;
-  margin-left: 26%;
+  margin-left: 14vw;
 }
 
 .dropdown-container {
@@ -329,8 +330,9 @@ li .without-arrow > a {
 }
 
 .card-img-top {
-  height: 100%;
+  max-height: 100%;
   width: auto;
+  max-width: 100%;
   margin: auto;
 }
 

@@ -6,45 +6,22 @@ block content
       .col-12.col-md-6.col-lg-2
         .filter-block.sticky-top
           h3 Filtering
-          form(method='GET' action='/products' role='form')
-            //- h4.filter-heading.mb-3.mt-3 Products per page
-            //- -let num = ['4','8','12'];
-            //- div.customized-select(style='width: 150px')
-            //-   select.form-control(name='prodsPerPage' style='width: 150px')
-            //-     each perPage in num
-            //-       if limit==perPage
-            //-         option(value=perPage selected) #{perPage}
-            //-       else 
-            //-         option(value=perPage) #{perPage}
-
-            //- input(type="hidden", name="filter", value="1")
-            //- input(type="hidden", name="page", value="0")
-            //- .form-group.form-check
-
+          form(role='form')
             h4.filter-heading.mb-3.mt-3 Brands
             .checkbox-container.row
               each brand in brands
                 .col-6
-                  input.form-check-input(id=`${brand}` type="checkbox" name=`${brand}` value=`${brand}` checked=checked )
-                  label.form-check-label.pr-5(for=`${brand}`)=brand
-
-            //- div.customized-select(style='width: 150px')
-            //-   select.form-control(name='brands' style='width: 150px')
-            //-     each brand in brands
-            //-       option(value=`${brand}` selected) #{brand}
+                  input.form-check-input.brands(id=`${brand}` type="checkbox" name=`${brand}` value=`${brand}` checked=(brandsArr.includes(brand) ? "checked" : undefined))
+                  | #{brand}
             
             h4.filter-heading.mb-3.mt-3 Categories
             .checkbox-container.row
               each category in categories
                 .col-6
-                  input.form-check-input(id=`${category}` type="checkbox" name=`${category}` value=`${category}` checked=checked )
-                  label.form-check-label.pr-5(for=`${category}`)=category
+                  input.form-check-input.categories(id=`${category}` type="checkbox" name=`${category}` value=`${category}` checked=(categoriesArr.includes(category) ? "checked" : undefined))
+                  | #{category}
 
-            //- div.customized-select(style='width: 150px')
-            //-   select.form-control(name='categories' style='width: 150px')
-            //-     each category in categories
-            //-       option(value=`${category}` selected) #{category}
-            button.btn.btn-primary.mt-3(type='submit') Filter
+            button.btn.btn-primary.mt-3(type='button', onclick='createFetch()') Filter
 
 
 
@@ -72,7 +49,7 @@ block content
                   a.page-link First
               else
                 li.page-item
-                  a.page-link(href='/products/1') First
+                  a.page-link(href=`1`) First
               - var i = (Number(current) > 5 ? Number(current) - 4 : 1)
               if (i !== 1)
                 li.disabled.page-item
@@ -83,7 +60,7 @@ block content
                       a.page-link=`${i}`
                   else
                     li.page-item
-                      a.page-link(href=`/products/${i}`)=`${i}`
+                      a.page-link(href=`${i}`)=`${i}`
                   if (i == Number(current) + 4 && i < pages)
                     li.disabled.page-item
                       a.page-link ...
@@ -92,4 +69,4 @@ block content
                   a.page-link Last
               else
                 li.page-item
-                  a.page-link(href=`/products/${pages}`) Last
+                  a.page-link(href=`${pages}`) Last
