@@ -11,7 +11,7 @@ const User = require('./models/users.model');
 const router = express.Router();
 const PORT = 3000;
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 const productsRouter = require('./routes/products');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
@@ -58,7 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api', apiRoutes);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/products', productsRouter);
 app.use('/upload', uploadRouter);
 app.use('/login', loginRouter);

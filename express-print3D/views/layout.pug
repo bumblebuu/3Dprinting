@@ -10,7 +10,14 @@ html
     #main
       .header
         a.logo(href='/') o
-        a.userLink(href='/user')
+        a.dropdown-btn(href='#')
+          #user-pic-div
+            img.user-pic(src='/img/default-man.png')
+          .dropdown-container.dropdown-user
+            a.nav-link(href='/users') Profile
+            a.nav-link(href='/basket') Basket
+            a.nav-link(href='/orders') Orders
+            a.nav-link(href='/logout') Logout
         button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title
@@ -91,3 +98,4 @@ html
     script(src='/bootstrap/dist/js/bootstrap.min.js')
     script(src='/scripts/navbar.js')
     script(src='/scripts/filter.js')
+    script(src='/scripts/user-page.js')

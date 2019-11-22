@@ -1,12 +1,15 @@
 /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
 function openNav() {
   document.getElementById('mySidebar').style.right = '0';
+  document.getElementById('user-pic-div').style.left = '75%';
   document.getElementById('picture').style.width = '35vw';
+  document.querySelector('.dropdown-user').style.display = 'none';
 }
 
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
 function closeNav() {
   document.getElementById('mySidebar').style.right = '-300px';
+  document.getElementById('user-pic-div').style.left = '92%';
   document.getElementById('picture').style.width = '50vw';
 }
 
@@ -22,8 +25,6 @@ for (i = 0; i < dropdown.length; i++) {
       dropdownContent.style.display = 'none';
     } else {
       dropdownContent.style.display = 'block';
-      // dropdownContent.style.position = 'absolute';
-      // dropdownContent.style.right = '250px';
     }
   });
 }

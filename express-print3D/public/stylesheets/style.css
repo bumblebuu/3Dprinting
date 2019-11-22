@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Staatliches|Tomorrow&display=swap');
+
 @font-face {
   font-family: "Cubic";
-  src: url("Cubic.ttf");
+  src: url("./../fonts/cubic.ttf");
 }
 
 /* 
@@ -108,7 +109,7 @@ input:focus {
 .sidebar {
   height: 500px;
   width: 300px;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: -300px;
   background-color: #111;
@@ -124,7 +125,7 @@ input:focus {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 15pt;
-  color: #818181;
+  color: #2c2c2c;
   display: block;
   transition: 0.3s;
   border: none;
@@ -167,7 +168,9 @@ input:focus {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #dark-page,
-#picture {
+#picture,
+#user-pic-div,
+.dropdown-user {
   transition: margin-right, .5s;
   /* If you want a transition effect */
 }
@@ -199,7 +202,6 @@ input:focus {
   -webkit-background-clip: text;
   -webkit-text-stroke: 4px transparent;
   color: #232d2d;
-  width: 50vw;
 }
 
 .logo:hover {
@@ -211,7 +213,7 @@ input:focus {
 
 
 .title {
-  position: relative;
+  position: absolute;
   width: 25%;
   left: 10%;
   top: 25vh;
@@ -262,7 +264,7 @@ input:focus {
   padding-left: 0;
 }
 
-li .without-arrow > a {
+li .without-arrow>a {
   margin-left: 20px;
 }
 
@@ -341,4 +343,93 @@ li .without-arrow > a {
   padding: 10px;
   border-radius: 5px;
   scroll-behavior: auto;
+}
+
+#user-pic-div {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
+  border-radius: 20px;
+  position: relative;
+  left: 92%;
+  top: 3vh;
+}
+
+.user-pic {
+  width: 30px;
+  height: 30px;
+}
+
+.dropdown-user {
+  width: 100px;
+  position: relative;
+  top: 5vh;
+  left: 90%;
+  background-color: #232d2d;
+  border-radius: 5px;
+}
+
+.dropdown-user a {
+  color: #898f91;
+}
+
+.dropdown-user a:hover {
+  color: #f1f1f1;
+}
+
+.user-img-div {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
+  margin: auto;
+  margin-top: 100px;
+}
+
+.user-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.oneRow {
+  background-color: #eee;
+  width: 300px;
+  height: 40px;
+  margin: auto;
+  margin-top: 3px;
+  padding: 10px;
+}
+
+.oneRow p {
+  color: #626f79;
+  /* text-align: end; */
+}
+
+.oneRow:hover {
+  background-color: #aeb4b6;
+  cursor: pointer;
+}
+
+.oneRow:hover .icon,
+.oneRow:hover p {
+  color: #212224;
+}
+
+.icon {
+  color: #626f79;
+}
+
+.user-form {
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 100px;
+}
+
+.user-form input {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }

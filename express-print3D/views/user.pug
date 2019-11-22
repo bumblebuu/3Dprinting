@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  .container-fluid.user-page
+    .row
+      .col-4.user-left-div
+        .user-img-div
+          img.user-img(src='/img/default-man.png')
+        .user-name.mt-4
+          h4 User's name
+        .user-link-div.mt-5.mb-5
+          .oneRow.flex-row.d-flex(onclick='fetchData("account")')
+            a.col-3.flex-row.d-flex(href='#')
+              i.fas.fa-user.icon(aria-hidden='true')
+            p.col-7 Account
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='fetchData("changePassword")')
+            a.col-3(href='#')
+              i.fas.fa-key.icon(aria-hidden='true')
+            p.col-7 Change password
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='fetchData("billing")')
+            a.col-3(href='#')
+              i.fas.fa-credit-card.icon(aria-hidden='true')
+            p.col-7 Billing address
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='fetchData("address")')
+            a.col-3(href='#')
+              i.fas.fa-map-marker-alt.icon(aria-hidden='true')
+            p.col-7 Shipping address
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='fetchData("orders")')
+            a.col-3(href='#')
+              i.fas.fa-truck.icon(aria-hidden='true')
+            p.col-7 Orders
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='fetchData("delete")')
+            a.col-3(href='#')
+              i.far.fa-trash-alt.icon(aria-hidden='true')
+            p.col-7 Delete account
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+
+      .col-8.user-right-div
+        .conatiner-fluid
+          .row
+            .col-6.offset-1
+              form.user-form
+                block form
+

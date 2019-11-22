@@ -70,6 +70,7 @@ router.get('/:page', async (req, res, next) => {
             }).exec((err, count) => {
               if (err) return next(err);
               res.render('products', {
+                title: 'Products',
                 products,
                 current: page,
                 brands,
@@ -98,6 +99,7 @@ router.get('/:page', async (req, res, next) => {
             }).exec((err, count) => {
               if (err) return next(err);
               res.render('products', {
+                title: 'Products',
                 products,
                 current: page,
                 brands,
@@ -127,6 +129,7 @@ router.get('/:page', async (req, res, next) => {
           }).exec((err, count) => {
             if (err) return next(err);
             res.render('products', {
+              title: 'Products',
               products,
               current: page,
               brands,
@@ -147,6 +150,7 @@ router.get('/:page', async (req, res, next) => {
         Product.countDocuments().exec((err, count) => {
           if (err) return next(err);
           res.render('products', {
+            title: 'Products',
             products,
             current: page,
             brands,
