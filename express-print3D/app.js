@@ -56,20 +56,6 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  if (!req.cookies.uuid) {
-    return false;
-  }
-  User.find({
-    cookie: req.cookies.uuid,
-  }, (err, user) => {
-    if (user) {
-      req.user = user;
-      next();
-    }
-  });
-});
-
 app.use('/', indexRouter);
 app.use('/api', apiRoutes);
 app.use('/users', usersRouter);

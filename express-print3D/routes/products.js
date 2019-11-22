@@ -25,8 +25,6 @@ router.get('/', (req, res, next) => {
 router.get('/:page', async (req, res, next) => {
   const perPage = 8;
   const page = req.params.page || 1;
-  const cookie = req.body.cookie;
-  console.log(cookie);
 
   if (url.parse(req.url).query) {
     const search = url.parse(req.url).query;
