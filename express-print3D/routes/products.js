@@ -25,6 +25,8 @@ router.get('/', (req, res, next) => {
 router.get('/:page', async (req, res, next) => {
   const perPage = 8;
   const page = req.params.page || 1;
+  const cookie = req.body.cookie;
+  console.log(cookie);
 
   if (url.parse(req.url).query) {
     const search = url.parse(req.url).query;
@@ -40,23 +42,7 @@ router.get('/:page', async (req, res, next) => {
         const brandsArr = brandsString.split('&');
 
         Product.find({
-          $or: [{
-            category: {
-              $in: categoriesArr,
-            },
-          },
-          {
-            brand: {
-              $in: brandsArr,
-            },
-          },
-          ],
-        })
-          .skip((perPage * page) - perPage)
-          .limit(perPage)
-          .exec((err, products) => {
-            Product.countDocuments({
-              $or: [{
+            $or: [{
                 category: {
                   $in: categoriesArr,
                 },
@@ -66,6 +52,22 @@ router.get('/:page', async (req, res, next) => {
                   $in: brandsArr,
                 },
               },
+            ],
+          })
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, products) => {
+            Product.countDocuments({
+              $or: [{
+                  category: {
+                    $in: categoriesArr,
+                  },
+                },
+                {
+                  brand: {
+                    $in: brandsArr,
+                  },
+                },
               ],
             }).exec((err, count) => {
               if (err) return next(err);
@@ -84,10 +86,10 @@ router.get('/:page', async (req, res, next) => {
         const categoriesArr = text.split('&');
 
         Product.find({
-          category: {
-            $in: categoriesArr,
-          },
-        })
+            category: {
+              $in: categoriesArr,
+            },
+          })
           .skip((perPage * page) - perPage)
           .limit(perPage)
           .exec((err, products) => {
@@ -113,10 +115,10 @@ router.get('/:page', async (req, res, next) => {
       const brandsArr = text.split('&');
 
       Product.find({
-        brand: {
-          $in: brandsArr,
-        },
-      })
+          brand: {
+            $in: brandsArr,
+          },
+        })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, products) => {

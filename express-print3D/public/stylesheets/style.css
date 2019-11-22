@@ -33,14 +33,10 @@ body {
 
 .login-card,
 .register-card {
-  margin-top: 40px;
-  margin-bottom: auto;
+  position: absolute;
+  top: 100px;
   width: 400px;
   background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.login-card {
-  margin-top: auto;
 }
 
 .social_icon span {
@@ -112,7 +108,7 @@ input:focus {
 .sidebar {
   height: 500px;
   width: 300px;
-  position: fixed;
+  position: absolute;
   top: 0;
   right: -300px;
   background-color: #111;
@@ -170,7 +166,6 @@ input:focus {
 
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main,
 #dark-page,
 #picture {
   transition: margin-right, .5s;
@@ -342,8 +337,8 @@ li .without-arrow > a {
 }
 
 .filter-block {
-  height: 90%;
-  /* border: 1px solid rgb(167, 166, 166); */
+  height: 30%;
   padding: 10px;
   border-radius: 5px;
+  scroll-behavior: auto;
 }

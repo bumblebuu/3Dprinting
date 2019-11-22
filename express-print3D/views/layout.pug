@@ -10,8 +10,7 @@ html
     #main
       .header
         a.logo(href='/') o
-        if user
-          img(src=`/img/${user.pictureUrl}`)
+        a.userLink(href='/user')
         button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title

@@ -10,6 +10,8 @@ const tokgen = new TokenGenerator(256, TokenGenerator.BASE62);
 
 const User = require('../models/users.model');
 
+const regAlerts = require('./../public/scripts/register-alerts');
+
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -20,6 +22,7 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
+  
   if (req.body.userName && req.body.password) {
     const userData = {
       username: req.body.userName,
@@ -42,12 +45,12 @@ router.post('/', (req, res, next) => {
           cookie: token,
         },
       });
-      console.log(obj);
 
+      // res.cookie(token);
       return res.redirect('/products');
     });
   } else {
-  console.log('all fields are required');
+    console.log('All fields are required!');
   }
 });
 

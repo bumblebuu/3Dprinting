@@ -9,7 +9,13 @@ html
   body
     .login.container-fluid
       .container.login-container
-        .d-flex.justify-content-center.h-100
+
+        .alert.alert-info.col-4.offset-4.alert-dismissible.fade(role='alert')
+          |  All fields are required!
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+
+        .d-flex.justify-content-center
           .card.login-card
             .card-header
               h3 Sign In

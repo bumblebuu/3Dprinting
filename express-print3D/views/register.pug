@@ -8,15 +8,15 @@ html
 
   body
     .register.container-fluid
-      //- .alert.alert-warning.alert-dismissible.fade.show(role='alert')
-        strong Holy guacamole!
-        p=message
-        button.close(type='button', data-dismiss='alert', aria-label='Close')
-          span(aria-hidden='true') ×
-
       .container.register-container
-        .d-flex.justify-content-center.h-100
-          .card.register-card.mt-5
+
+        .alert.alert-info.col-4.offset-4.alert-dismissible.fade(role='alert')
+          |  All fields are required!
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+
+        .d-flex.justify-content-center
+          .card.register-card
             .card-header
               h3 Registration
               .d-flex.justify-content-end.social_icon

@@ -132,3 +132,7 @@ function passAgainCheck() {
 function addressCheck() {
   const address = document.querySelector('#address');
 }
+
+function makeAlert(){
+  $('.alert').addClass('show');
+}
