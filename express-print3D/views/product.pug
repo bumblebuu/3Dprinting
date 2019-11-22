@@ -6,9 +6,9 @@ block content
     include ../public/js/productinfo.js
   .container
     .row
-      .col-4
+      .col-4.mt-5
         each img,index in product.img
-          .mySlides
+          .mySlides.mt-5
             .numbertext=index+1
             img.img-fluid.img-top(src=img, style='width:90%')
           a.prev(onclick='plusSlides(-1)') &#x276E;
