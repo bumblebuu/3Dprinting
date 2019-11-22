@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 
 const productsSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: {
     type: String,
     unique: true,
@@ -39,6 +43,11 @@ const productsSchema = new Schema({
     unique: false,
     required: true,
   },
+  subcategory: {
+    type: String,
+    unique: false,
+    required: true,
+  },
   price: {
     type: Number,
     unique: false,
@@ -49,7 +58,12 @@ const productsSchema = new Schema({
     unique: false,
     required: false,
   },
+  video: {
+    type: String,
+    unique: false,
+    required: false,
+  },
 });
 
-const Product = mongoose.model('products', productsSchema);
+const Product = mongoose.model('Products', productsSchema);
 module.exports = Product;

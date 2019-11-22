@@ -27,6 +27,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onCreate() {
+    this.newProduct.video=this.newProduct.video+'?autoplay=1'
     this.newProduct.img = this.newProduct.img.slice(11)
     this.newProduct.img = '\\uploads' + this.newProduct.img
     this.ds.createDocument('products', this.newProduct).subscribe(

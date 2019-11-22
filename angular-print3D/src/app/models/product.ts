@@ -4,7 +4,9 @@ export class Product {
   brand: string;
   description: string;
   img: any;
+  video: string;
   menu: string;
   category: string;
+  subcategory: string;
   price: number
 }

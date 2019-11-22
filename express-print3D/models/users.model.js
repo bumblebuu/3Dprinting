@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 
 const usersSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   firstname: {
     type: String,
     unique: false,
@@ -56,9 +60,14 @@ const usersSchema = new Schema({
     required: false,
     default: null,
   },
+  basket: {
+    type: Schema.Types.ObjectId,
+    ref: 'Baskets',
+  },
 }, {
   versionKey: false, // You should be aware of the outcome after set to false
 });
 
-const User = mongoose.model('users', usersSchema);
-module.exports = User;
+const Users = mongoose.model('Users', usersSchema);
+
+module.exports = Users;

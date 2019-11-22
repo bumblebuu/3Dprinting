@@ -42,18 +42,63 @@
                 </button>
               </div>
               <div class="form-group">
-                <label for="menu">
-                  Menu
+                <label for="video">
+                  Video
                 </label>
-                <input class="form-control" [(ngModel)]="product.menu" type="text" name="product.menu" id="menu"
+                <input class="form-control" [(ngModel)]="product.video" type="text" name="product.video" id="video"
                   required>
               </div>
               <div class="form-group">
-                <label for="category">
-                  Category
-                </label>
-                <input class="form-control" [(ngModel)]="product.category" type="text" name="product.category"
-                  id="category" required>
+                <div class="form-group">
+                  <label for="menu">Menu</label>
+                  <select name="menu" id="menu" class="form-control" [(ngModel)]="product.menu">
+                    <option [value]="'Printers and Scanners'">Printers and Scanners</option>
+                    <option [value]="'Science'">Science</option>
+                    <option [value]="'Magic'">Magic</option>
+                    <option [value]="'Print your own idea'">Print your own idea</option>
+                  </select>
+                </div>
+                <div *ngIf="product.menu" class="form-group">
+                  <label for="category">
+                    Category
+                  </label>
+                  <div [ngSwitch]="product.menu">
+                    <!-- the same view can be shown in more than one case -->
+                    <select name="category" class="form-control" [(ngModel)]="product.category"
+                      *ngSwitchCase="'Printers and Scanners'">
+                      <option [value]="Printers">Printers</option>
+                      <option [value]="Scanners">Scanners</option>
+                      <option [value]="Filaments">Filaments</option>
+                      <option [value]="Tools">Tools</option>
+                    </select>
+
+                    <select *ngSwitchCase="'Science'" name="category" class="form-control"
+                      [(ngModel)]="product.category">
+                      <option [value]="Health">Health</option>
+                      <option [value]="Electronics">Electronics</option>
+                      <option [value]="Mechanics">Mechanics</option>
+                      <option [value]="Architecture">Architecture</option>
+                    </select>
+
+                    <select *ngSwitchCase="'Magic'" name="category" class="form-control" [(ngModel)]="product.category">
+                      <option [value]="'Kids'">Kids</option>
+                      <option [value]="'Practical'">Practical</option>
+                      <option [value]="'Accessories'">Accessories</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="product.menu==='Magic'">
+                <label for="subcategory">Subcategory</label>
+                <select name="subcategory" id="subcategory" class="form-control" [ngSwitch]="product.category"
+                  [(ngModel)]="product.subcategory">
+                  <option *ngSwitchCase="'Kids'" [value]="Lego">Lego</option>
+                  <option *ngSwitchCase="'Practical'" [value]="Inside">Inside</option>
+                  <option *ngSwitchCase="'Practical'" [value]="Outside">Outside</option>
+                  <option *ngSwitchCase="'Accessories'" [value]="Jewellery">Jewellery</option>
+                  <option *ngSwitchCase="'Accessories'" [value]="'Phone cases'">Phone cases</option>
+                  <option *ngSwitchCase="'Accessories'" [value]="Other">Other</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="price">

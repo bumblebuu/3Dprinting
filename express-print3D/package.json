@@ -24,6 +24,7 @@
     "pug": "2.0.0-beta11",
     "serve-favicon": "^2.5.0",
     "sha1": "^1.1.1",
-    "uuid-token-generator": "^1.0.0"
+    "uuid-token-generator": "^1.0.0",
+    "stripe": "^7.13.0"
   }
 }

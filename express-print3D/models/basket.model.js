@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const basketSchema = new Schema({
-  productid: {
-    type: Number,
-    unique: false,
-    required: true,
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
   },
-  userid: {
+  price: {
     type: Number,
     unique: false,
     required: true,
@@ -18,6 +17,16 @@ const basketSchema = new Schema({
     unique: false,
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+  },
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: 'Products',
+  },
 });
 
-module.exports = basketSchema;
+
+const Basket = mongoose.model('Baskets', basketSchema);
+module.exports = Basket;
