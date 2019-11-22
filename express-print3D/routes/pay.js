@@ -10,7 +10,7 @@ const Order = require('../models/orders.model');
 router.get('/checkout', (req, res) => {
   let totalPrice = 0;
   Basket.find({
-    user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+    user: req.user._id,
   }).populate('product').exec((err, found) => {
     found.forEach((element) => {
       totalPrice += element.price * element.quantity;
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
   let totalPrice = 0;
   let totalquantity = 0;
   Basket.find({
-    user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+    user: req.user._id,
   }).populate('product').exec((err, found) => {
     found.forEach((element) => {
       totalPrice += element.price * element.quantity;
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
     }, (err, charge) => {
       if (err) throw err;
       Basket.remove({
-        user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+        user: req.user._id,
       }, (err, removed) => {
         if (err) throw err;
       });
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
         productArray.push(req.body.id);
       }
       Order.create({
-        user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+        user: req.user._id,
         product: productArray,
         quantity: totalquantity,
         unitprice: totalPrice,

@@ -8,7 +8,7 @@ let newQuantity = 0;
 router.get('/', (req, res) => {
   let totalPrice = 0;
   Basket.find({
-    user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+    user: req.user._id,
   }).populate('product').exec((err, basket) => {
     basket.forEach((element) => {
       totalPrice += element.price * element.quantity;
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 
 router.post('/:id', (req, res) => {
   const query = Basket.find({
-    user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+    user: req.user._id,
     product: req.params.id,
   }).select('quantity -_id');
 
@@ -30,7 +30,7 @@ router.post('/:id', (req, res) => {
     if (quantity[0] === undefined) {
       Basket.create({
         quantity: req.body.quantity,
-        user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+        user: req.user._id,
         product: req.params.id,
         price: req.body.price,
       }, (err, basket) => {
@@ -40,7 +40,7 @@ router.post('/:id', (req, res) => {
       newQuantity = quantity[0].quantity + parseInt(req.body.quantity, 10);
       Basket.update({
         product: req.params.id,
-        user: mongoose.Types.ObjectId('5dce9353a0568e256042f69c'),
+        user: req.user._id,
         price: req.body.price,
       }, {
         quantity: newQuantity,

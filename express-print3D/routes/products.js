@@ -59,7 +59,7 @@ router.post('/reviews', (req, res) => {
       text: req.body.text,
       rate: req.body.rate,
       product: req.body.product,
-      user: '5dce9353a0568e256042f69c',
+      user: req.user._id,
     });
     res.redirect(`/products/product/${req.body.seo}`);
   }
