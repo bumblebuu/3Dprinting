@@ -42,7 +42,23 @@ router.get('/:page', async (req, res, next) => {
         const brandsArr = brandsString.split('&');
 
         Product.find({
-            $or: [{
+          $or: [{
+            category: {
+              $in: categoriesArr,
+            },
+          },
+          {
+            brand: {
+              $in: brandsArr,
+            },
+          },
+          ],
+        })
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, products) => {
+            Product.countDocuments({
+              $or: [{
                 category: {
                   $in: categoriesArr,
                 },
@@ -52,22 +68,6 @@ router.get('/:page', async (req, res, next) => {
                   $in: brandsArr,
                 },
               },
-            ],
-          })
-          .skip((perPage * page) - perPage)
-          .limit(perPage)
-          .exec((err, products) => {
-            Product.countDocuments({
-              $or: [{
-                  category: {
-                    $in: categoriesArr,
-                  },
-                },
-                {
-                  brand: {
-                    $in: brandsArr,
-                  },
-                },
               ],
             }).exec((err, count) => {
               if (err) return next(err);
@@ -86,10 +86,10 @@ router.get('/:page', async (req, res, next) => {
         const categoriesArr = text.split('&');
 
         Product.find({
-            category: {
-              $in: categoriesArr,
-            },
-          })
+          category: {
+            $in: categoriesArr,
+          },
+        })
           .skip((perPage * page) - perPage)
           .limit(perPage)
           .exec((err, products) => {
@@ -115,10 +115,10 @@ router.get('/:page', async (req, res, next) => {
       const brandsArr = text.split('&');
 
       Product.find({
-          brand: {
-            $in: brandsArr,
-          },
-        })
+        brand: {
+          $in: brandsArr,
+        },
+      })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, products) => {
@@ -162,34 +162,16 @@ router.get('/:page', async (req, res, next) => {
   }
 });
 
-
 // get single product
 router.get('/product/:seo', (req, res) => {
   if (typeof req.params.seo === 'string') {
     Product.findOne({
       seo: req.params.seo,
-    }, (err, product) => {
-      Review.find({
-        productid: product._id,
-      }, (error, reviews) => {
-        res.render('product', {
-          product,
-          reviews,
-        });
-      });
-    });
-  }
-});
-
-// get single product
-router.get('/product/:seo', (req, res) => {
-  if (typeof req.params.seo === 'string') {
-    Product.findOne({
-      seo: req.params.seo,
-    }, (err, product) => {
-      Review.find({
+    }, async (err, product) => {
+      await Review.find({
         product: product._id,
       }).populate('user').exec((error, reviews) => {
+        console.log(reviews[0].user);
         res.render('product', {
           product,
           reviews,
@@ -208,7 +190,7 @@ router.post('/reviews', (req, res) => {
       text: req.body.text,
       rate: req.body.rate,
       product: req.body.product,
-      user: req.user._id,
+      user: mongoose.Types.ObjectId(req.user._id),
     });
     res.redirect(`/products/product/${req.body.seo}`);
   }

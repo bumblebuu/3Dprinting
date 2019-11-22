@@ -38,13 +38,12 @@ block content
             .row
               .col-md-6.mb-3
                 label(for='firstName') First name
-                input#firstName.form-control(type='text', placeholder='', value='', required='')
- 
+                input#firstName.form-control(type='text', placeholder='', value=user[0].firstname, required='')
                 .invalid-feedback
                   | Valid first name is required.
               .col-md-6.mb-3
                 label(for='lastName') Last name
-                input#lastName.form-control(type='text', placeholder='', value='', required='')
+                input#lastName.form-control(type='text', placeholder='', value=user[0].lastname, required='')
                 .invalid-feedback
                   | Valid last name is required.
             .mb-3
@@ -52,18 +51,18 @@ block content
               .input-group
                 .input-group-prepend
                   span.input-group-text @
-                input#username.form-control(type='text', placeholder='Username', required='')
+                input#username.form-control(type='text', value=user[0].username placeholder='Username', required='')
                 .invalid-feedback(style='width: 100%;')
                   | Your username is required.
             .mb-3
               label(for='email')
                 | Email 
-              input#email.form-control(type='email', placeholder='you@example.com', required='')
+              input#email.form-control(type='email', placeholder='you@example.com',value=user[0].email required='')
               .invalid-feedback
                 | Please enter a valid email address for shipping updates.
             .mb-3
               label(for='address') Address
-              input#address.form-control(type='text', placeholder='1234 Main St', required='')
+              input#address.form-control(type='text', placeholder='1234 Main St', value=user[0].address required='')
               .invalid-feedback
                 | Please enter your shipping address.
             .mb-3

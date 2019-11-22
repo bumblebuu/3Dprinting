@@ -28,13 +28,12 @@ block content
         small Price shown includes 27% VAT. 
         u Excludes delivery costs
         p.text-success Dispatch in 6-8 days
-        if req.user
-          form(action=`/basket/${product._id}`, method="post")
-            .form-group
-              label Quantity :
-              input.form-control(type='number', name='quantity', value=1 , min=1, style="width:100px") 
-              input.none.form-control(type='number', name='price', value=product.price) 
-              button.btn.btn-primary Add to basket
+        form(action=`/basket/${product._id}`, method="post")
+          .form-group
+            label Quantity :
+            input.form-control(type='number', name='quantity', value=1 , min=1, style="width:100px") 
+            input.none.form-control(type='number', name='price', value=product.price) 
+            button.btn.btn-primary Add to basket
       hr
     .row
       .col-3.mt-5.ml-3
@@ -71,7 +70,7 @@ block content
               h5=review.text
               .row
                 .col-2
-                  small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
+                  small.text-muted Posted by: #{ review.firstname } #{review.lastname}
                 .col-1
                   small.text-muted #{ review.rate }&starf;
               hr

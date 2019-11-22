@@ -19,6 +19,7 @@ router.get('/checkout', (req, res) => {
     res.render('checkout', {
       basket: found,
       total: totalPrice,
+      user: req.user,
     });
   });
 });

@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  
+
   if (req.body.userName && req.body.password) {
     const userData = {
       username: req.body.userName,
@@ -39,14 +39,16 @@ router.post('/', (req, res, next) => {
 
       const token = tokgen.generate();
       console.log(token);
-
-      User.where(obj).update({
-        $set: {
-          cookie: token,
-        },
+      console.log(obj.username);
+      res.cookie('uuid', token);
+      User.findOneAndUpdate({
+        username: obj.username,
+      }, {
+        cookie: token,
+      }, (err, result) => {
+        if (err) next(err);
       });
-
-      // res.cookie(token);
+      
       return res.redirect('/products');
     });
   } else {

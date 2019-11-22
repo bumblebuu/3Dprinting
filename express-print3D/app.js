@@ -6,7 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-
+const User = require('./models/users.model');
 
 const router = express.Router();
 const PORT = 3000;
@@ -56,12 +56,25 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  if (!req.cookies.uuid) {
+    return false;
+  }
+  User.find({
+    cookie: req.cookies.uuid,
+  }, (err, user) => {
+    if (user) {
+      req.user = user;
+      next();
+    }
+  });
+});
 
 app.use('/', indexRouter);
 app.use('/api', apiRoutes);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-app.use('/upload', uploadRoutes);
+app.use('/upload', uploadRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/basket', basketRouter);
@@ -84,16 +97,6 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-// app.use(async (req, res, next) => {
-//   const user = await userDb.checkLogin(req);
-//   if (user) {
-//     req.user = user;
-//     console.log('Req.user:', req.user);
-//     req.body.counter = await userDb.checkBasket(req.user.userId) || 0;
-//   }
-
-//   next();
-// });
 
 app.listen(PORT, () => {
   console.log(`started at ${PORT}`);
