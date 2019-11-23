@@ -4,25 +4,37 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-  res.redirect('/user/account');
+  res.redirect('/user/user-form');
 });
 
-router.get('/account', (req, res, next) => {
-  res.render('account', {
+router.get('/user-form', (req, res, next) => {
+  res.render('user-form', {
     title: 'User account',
   });
 });
 
-router.get('/address', (req, res, next) => {
-  res.render('address', {
-    title: 'User address',
-  });
+router.post('/user-form/account', (req, res, next) => {
+  
 });
 
-router.get('/changePassword', (req, res, next) => {
-  res.render('changePassword', {
-    title: 'User password',
-  });
+router.post('/user-form/address', (req, res, next) => {
+
+});
+
+router.post('/user-form/password', (req, res, next) => {
+
+});
+
+router.post('/user-form/billing', (req, res, next) => {
+  
+});
+
+router.delete('/orders', (req, res, next) => {
+
+});
+
+router.delete('/delete', (req, res, next) => {
+
 });
 
 module.exports = router;

@@ -7,6 +7,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const User = require('./models/users.model');
+const UserModul = require('./moduls/user.modul');
+
+const userModul = new UserModul();
 
 const router = express.Router();
 const PORT = 3000;
@@ -48,6 +51,7 @@ app.use(router);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -55,6 +59,19 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(async (req, res, next) => {
+  const user = await userModul.checkLogin(req);
+  if (user) {
+    req.user = user;
+  }
+  next();
+});
+
+app.use('/logout', (req, res, next) => {
+  res.clearCookie('uuid');
+  res.redirect('/products');
+});
 
 app.use('/', indexRouter);
 app.use('/api', apiRoutes);

@@ -38,10 +38,10 @@ router.post('/', (req, res, next) => {
       }
 
       const token = tokgen.generate();
-      console.log(token);
-      console.log(obj.username);
+
       res.cookie('uuid', token);
-      User.findOneAndUpdate({
+
+      User.updateOne({
         username: obj.username,
       }, {
         cookie: token,

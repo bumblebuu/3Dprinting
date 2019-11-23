@@ -1,0 +1,60 @@
+extends user
+
+block form
+  form.user-form#account(method='POST', action='/user/user-form/account' role='form')
+    .form-group
+      h6 Firstname
+      input.form-control(type='text', placeholder='Enter firstname')
+    .form-group
+      h6 Lasttname
+      input.form-control(type='text', placeholder='Enter lastname')
+    .form-group
+      h6 Username
+      input.form-control(type='text', placeholder='Enter username')
+    .form-group
+      h6 Email address
+      input.form-control(type='email', placeholder='Enter email')
+      small.form-text.text-muted We'll never share your email with anyone else.
+  form.user-form#password(method='POST', action='/user/user-form/password' role='form')
+    .form-group
+      h6 Current password
+      input.form-control(type='password', placeholder='Enter password')
+    .form-group
+      h6 New password
+      input.form-control(type='password', placeholder='Enter password')
+    .form-group
+      h6 New password again
+      input.form-control(type='password', placeholder='Enter password')
+  form.user-form#address(method='POST', action='/user/user-form/address' role='form')
+    .form-group
+      h6 Country
+      input.form-control(type='text', placeholder='Enter country')
+    .form-group
+      h6 City
+      input.form-control(type='text', placeholder='Enter city')
+    .form-group
+      h6 Postal code
+      input.form-control(type='number', placeholder='Enter postal code')
+    .form-group
+      h6 Street
+      input.form-control(type='text', placeholder='Enter street')
+    .form-group
+      h6 Number
+      input.form-control(type='number', placeholder='Enter door number')
+  form.user-form#billing(method='POST', action='/user/user-form/billing' role='form')
+    .form-group
+      h6 Bank of your card
+      input.form-control(type='text', placeholder='Enter bank name')
+  form.user-form#orders(method='DELETE', action='/user/orders' role='form')
+    table.table
+      thead
+        tr
+          th Product
+          th Orderdate
+          th
+      tbody
+        tr
+          td product
+          td orderdate
+          td
+            button.btn.btn-danger(type='submit') Delete order

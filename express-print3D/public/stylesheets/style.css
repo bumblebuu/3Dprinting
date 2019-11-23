@@ -170,7 +170,8 @@ input:focus {
 #dark-page,
 #picture,
 #user-pic-div,
-.dropdown-user {
+.dropdown-user,
+#login-btn {
   transition: margin-right, .5s;
   /* If you want a transition effect */
 }
@@ -428,8 +429,15 @@ li .without-arrow>a {
 .user-form {
   font-family: 'Bebas Neue', cursive;
   margin-top: 100px;
+  display: none;
 }
 
 .user-form input {
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#login-btn {
+  position: relative;
+  left: 90%;
+  top: 3vh;
 }

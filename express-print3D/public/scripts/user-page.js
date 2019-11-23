@@ -1,20 +1,13 @@
-function fetchData(id) {
-  const url = `http://localhost:3000/user/${id.toString()}`;
-
-  const form = document.querySelector('.user-form');
-
-  const myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'text/html');
-
-  fetch(url, {
-    mode: 'no-cors',
-    method: 'get',
-    headers: myHeaders,
-  }).then((response) => {
-    response.text().then((text) => {
-      form.innerHTML = text;
-    });
-  }).catch((err) => {
-    console.log(err);
+function toggleForm(id) {
+  const nodes = document.querySelectorAll('.user-form');
+  
+  nodes.forEach((node) => {
+    node.style.display = 'none';
   });
+
+  document.getElementById(`${id}`).style.display = 'block';
+}
+
+function deleteUser() {
+
 }

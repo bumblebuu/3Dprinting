@@ -2,6 +2,7 @@
 function openNav() {
   document.getElementById('mySidebar').style.right = '0';
   document.getElementById('user-pic-div').style.left = '75%';
+  document.getElementById('login-btn').style.left = '73%';
   document.getElementById('picture').style.width = '35vw';
   document.querySelector('.dropdown-user').style.display = 'none';
 }
@@ -10,6 +11,7 @@ function openNav() {
 function closeNav() {
   document.getElementById('mySidebar').style.right = '-300px';
   document.getElementById('user-pic-div').style.left = '92%';
+  document.getElementById('login-btn').style.left = '90%';
   document.getElementById('picture').style.width = '50vw';
 }
 

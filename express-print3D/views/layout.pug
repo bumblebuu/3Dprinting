@@ -10,14 +10,19 @@ html
     #main
       .header
         a.logo(href='/') o
-        a.dropdown-btn(href='#')
-          #user-pic-div
-            img.user-pic(src='/img/default-man.png')
-          .dropdown-container.dropdown-user
-            a.nav-link(href='/users') Profile
-            a.nav-link(href='/basket') Basket
-            a.nav-link(href='/orders') Orders
-            a.nav-link(href='/logout') Logout
+        if user
+          if user.role == 'user'
+            a.dropdown-btn(href='#')
+              #user-pic-div
+                img.user-pic(src='/img/default-man.png')
+              .dropdown-container.dropdown-user
+                a.nav-link(href='/user') Profile
+                a.nav-link(href='/basket') Basket
+                a.nav-link(href='/orders') Orders
+                a.nav-link(href='/logout') Logout
+        else
+          #login-btn
+            a.btn.btn-info(href='/login') Login
         button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title

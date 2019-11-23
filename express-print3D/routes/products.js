@@ -25,6 +25,7 @@ router.get('/', (req, res, next) => {
 router.get('/:page', async (req, res, next) => {
   const perPage = 8;
   const page = req.params.page || 1;
+  
 
   if (url.parse(req.url).query) {
     const search = url.parse(req.url).query;
@@ -78,6 +79,7 @@ router.get('/:page', async (req, res, next) => {
                 categoriesArr,
                 brandsArr,
                 pages: Math.ceil(count / perPage),
+                user: req.user,
               });
             });
           });
@@ -107,6 +109,7 @@ router.get('/:page', async (req, res, next) => {
                 categoriesArr,
                 brandsArr: [],
                 pages: Math.ceil(count / perPage),
+                user: req.user,
               });
             });
           });
@@ -137,6 +140,7 @@ router.get('/:page', async (req, res, next) => {
               brandsArr,
               categoriesArr: [],
               pages: Math.ceil(count / perPage),
+              user: req.user,
             });
           });
         });
@@ -158,6 +162,7 @@ router.get('/:page', async (req, res, next) => {
             categoriesArr: [],
             brandsArr: [],
             pages: Math.ceil(count / perPage),
+            user: req.user,
           });
         });
       });
@@ -177,6 +182,7 @@ router.get('/product/:seo', (req, res) => {
         res.render('product', {
           product,
           reviews,
+          user: req.user,
         });
 
       });
