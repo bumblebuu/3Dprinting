@@ -39,7 +39,7 @@ const usersSchema = new Schema({
     required: false,
   },
   address: {
-    type: String,
+    type: Array,
     unique: false,
     required: false,
   },

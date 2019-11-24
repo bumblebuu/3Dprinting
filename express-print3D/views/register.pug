@@ -29,25 +29,34 @@ html
             .card-body
               form(method='POST' action='/register' role='form')
                 .input-group.form-group
-                  input#firstName.form-control(type='text', name='firstName', placeholder='Firstname**', onfocus="clearInput('#firstName')", onblur="firstNameCheck()")
+                  input#firstName.form-control.required(type='text', name='firstName', placeholder='Firstname**', onfocus="clearInput('#firstName')", onblur="firstNameCheck()")
                 .input-group.form-group
-                  input#lastName.form-control(type='text', name='lastName', placeholder='Lastname**', onfocus="clearInput('#lastName')", onblur="lastNameCheck()")
+                  input#lastName.form-control.required(type='text', name='lastName', placeholder='Lastname**', onfocus="clearInput('#lastName')", onblur="lastNameCheck()")
                 .input-group.form-group
-                  input#userName.form-control(type='text', name='userName', placeholder='Username**', onfocus="clearInput('#userName')", onblur="userNameCheck()")
+                  input#userName.form-control.required(type='text', name='userName', placeholder='Username**', onfocus="clearInput('#userName')", onblur="userNameCheck()")
                 .input-group.form-group
-                  input#email.form-control(type='email', name='email', placeholder='Email**  eg.: abcd@abc.ab', onfocus="clearInput('#email')", onblur="emailCheck()")
+                  input#email.form-control.required(type='email', name='email', placeholder='Email**  eg.: abcd@abc.ab', onfocus="clearInput('#email')", onblur="emailCheck()")
                 .input-group.form-group
-                  input#password.form-control(type='password', name='password', placeholder='Password**', onfocus="clearInput('#password')", onblur="passwordCheck()")
+                  input#password.form-control.required(type='password', name='password', placeholder='Password**', onfocus="clearInput('#password')", onblur="passwordCheck()")
                 .input-group.form-group
-                  input#passwordAgain.form-control(type='password', name='passwordAgain', placeholder='Password again**', onfocus="clearInput('#passwordAgain')", onblur="passAgainCheck()")
+                  input#passwordAgain.form-control.required(type='password', name='passwordAgain', placeholder='Password again**', onfocus="clearInput('#passwordAgain')", onblur="passAgainCheck()")
                 .form-check.form-check-inline.mb-2
                   input#male.form-check-input.ml-2(type='radio', name='gender' value='male')
                   label.form-check-label(for='male') Male
                   input#female.form-check-input.ml-2(type='radio', name='gender', value='female')
                   label.form-check-label(for='female') Female
-                .input-group.form-group
-                  input#address.form-control(type='text', name='address', placeholder='Address  eg.: Country, Postcode, City, Street', onfocus="clearInput('#address')", onblur="addressCheck()")
-                .form-group
+                .form-inline.mr-4
+                  .form-group.col-2
+                    input#address0.form-control(type='text', name='address', placeholder='Country', onfocus="clearInput('#address0')", onblur="addressCheck()")
+                  .form-group.col-2
+                    input#address1.form-control(type='text', name='address', placeholder='City', onfocus="clearInput('#address1')", onblur="addressCheck()")
+                  .form-group.col-2
+                    input#address2.form-control(type='number', name='address', placeholder='ZIP', onfocus="clearInput('#address2')", onblur="addressCheck()")
+                  .form-group.col-2
+                    input#address3.form-control(type='text', name='address', placeholder='Street', onfocus="clearInput('#address3')", onblur="addressCheck()")
+                  .form-group.col-2
+                    input#address4.form-control(type='number', name='address', placeholder='Door', onfocus="clearInput('#address4')", onblur="addressCheck()")
+                .form-group.mt-4
                   input.btn.float-right.login_btn(type='submit', value='Register')
             .card-footer
               .d-flex.justify-content-center.links

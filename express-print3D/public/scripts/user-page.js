@@ -10,4 +10,16 @@ function toggleForm(id) {
 
 function deleteUser() {
 
+  const url = 'http://localhost:3000/user';
+
+  fetch(url, {
+  method: 'DELETE',
+  user: req.user,
+})
+.then(() => {
+  console.log('removed');
+}).catch(err => {
+ console.error(err)
+});
+
 }

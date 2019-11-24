@@ -30,21 +30,6 @@ const createFetch = function () {
   const url = `http://localhost:3000/products/1?${categories}${brands}`;
   console.log(url);
 
-
-  // const Http = new XMLHttpRequest();
-  // Http.open('GET', url);
-  // Http.send();
-
   window.location = url;
-
-  // Http.onreadystatechange = (e) => {
-  //   console.log(Http.responseText);
-  //   res.redirect(url);
-  // };
-
-  // // Fetch http req
-  // fetch(url, {
-  //   method: 'GET',
-  // }).then();
 
 };

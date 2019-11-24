@@ -98,7 +98,7 @@ function emailCheck() {
 function passwordCheck() {
   const password = document.querySelector('#password');
   const reg1 = /\w{8,}/;
-  const reg2 = /[0-9]/g
+  const reg2 = /[0-9]/g;
   if (password.value == '') {
     isInvalid(password, 'empty');
     return;
@@ -133,6 +133,6 @@ function addressCheck() {
   const address = document.querySelector('#address');
 }
 
-function makeAlert(){
+function makeAlert() {
   $('.alert').addClass('show');
 }

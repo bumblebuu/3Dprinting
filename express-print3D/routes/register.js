@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
       email: req.body.email,
     });
     if (user) {
-      return res.status(400).send('That user already exisits!');
+      return res.status(400).send('That user already exists!');
     }
 
     // create the object we're going to send the mongoose
@@ -54,8 +54,11 @@ router.post('/', async (req, res, next) => {
       return res.redirect('/login');
     });
   }
+  else {
 
   console.log('all fields are required');
+  
+  }
 });
 
 module.exports = router;

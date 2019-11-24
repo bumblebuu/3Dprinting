@@ -21,16 +21,16 @@ block content
             p.col-7 Change password
             a.col-2(href="#")
               i.fas.fa-chevron-right.icon(aria-hidden='true')
-          .oneRow.flex-row.d-flex(onclick='toggleForm("billing")')
-            a.col-3(href='#')
-              i.fas.fa-credit-card.icon(aria-hidden='true')
-            p.col-7 Billing address
-            a.col-2(href="#")
-              i.fas.fa-chevron-right.icon(aria-hidden='true')
           .oneRow.flex-row.d-flex(onclick='toggleForm("address")')
             a.col-3(href='#')
               i.fas.fa-map-marker-alt.icon(aria-hidden='true')
             p.col-7 Shipping address
+            a.col-2(href="#")
+              i.fas.fa-chevron-right.icon(aria-hidden='true')
+          .oneRow.flex-row.d-flex(onclick='toggleForm("billing")')
+            a.col-3(href='#')
+              i.fas.fa-credit-card.icon(aria-hidden='true')
+            p.col-7 Billing address
             a.col-2(href="#")
               i.fas.fa-chevron-right.icon(aria-hidden='true')
           .oneRow.flex-row.d-flex(onclick='toggleForm("orders")')
@@ -39,7 +39,7 @@ block content
             p.col-7 Orders
             a.col-2(href="#")
               i.fas.fa-chevron-right.icon(aria-hidden='true')
-          .oneRow.flex-row.d-flex(onclick='deleteUser()')
+          .oneRow.flex-row.d-flex
             a.col-3(href='#')
               i.far.fa-trash-alt.icon(aria-hidden='true')
             p.col-7 Delete account
