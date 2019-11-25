@@ -1,7 +1,7 @@
 extends user
 
 block form
-  form.user-form#account(method='POST' action='/user/user-form/account' role='form' style='display: block')
+  form.user-form#account(method='POST' action='/user/account' role='form' style='display: block')
     .form-group
       h6 Firstname
       input.form-control(type='text' name='firstname' placeholder=`${user.firstname}` value=`${user.firstname}`)
@@ -17,7 +17,18 @@ block form
       small.form-text.text-muted We'll never share your email with anyone else.
     .col-3.offset-9
       button.btn.btn-dark.btn-block(type='submit') Save
-  form.user-form#password(method='POST', action='/user/user-form/password' role='form')
+  form.user-form#upload(method='POST' action='/user/upload' role='form' enctype='multipart/form-data')
+    .form-group
+      .input-group
+        .custom-file
+          input.custom-file-input(type='file', name='upload')
+          label.custom-file-label Choose a file
+        .input-group-append
+          button.btn.btn-outline-secondary(type='sumbit') Upload
+
+
+
+  form.user-form#password(method='POST', action='/user/password' role='form')
     .form-group
       h6 Current password
       input.form-control(type='password' name='oldPassword' placeholder='Enter password' value='')
@@ -29,7 +40,7 @@ block form
       input.form-control(type='password' name='newPasswordConf' placeholder='Enter password' value='')
     .col-3.offset-9
       button.btn.btn-dark.btn-block(type='submit') Save
-  form.user-form#address(method='POST', action='/user/user-form/address' role='form')
+  form.user-form#address(method='POST', action='/user/address' role='form')
     .form-group
       h6 Country
       input.form-control(type='text' name='address' placeholder=`${user.address[0]}` value=`${user.address[0]}`)
@@ -47,7 +58,7 @@ block form
       input.form-control(type='number' name='address' placeholder=`${user.address[4]}` value=`${user.address[4]}`)
     .col-3.offset-9
       button.btn.btn-dark.btn-block(type='submit') Save
-  form.user-form#billing(method='POST', action='/user/user-form/billing' role='form')
+  form.user-form#billing(method='POST', action='/user/billing' role='form')
     .form-group
       h6 Bank of your card
       input.form-control(type='text', placeholder='Enter bank name')
@@ -66,3 +77,5 @@ block form
           td orderdate
           td
             button.btn.btn-danger(type='submit') Delete order
+  form.user-form#delete(method='DELETE', action='/user' role='form')
+

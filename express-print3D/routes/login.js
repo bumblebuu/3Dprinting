@@ -29,31 +29,21 @@ router.post('/', (req, res, next) => {
       password: sha1(req.body.password),
     };
 
-    User.findOne({
-      username: userData.username,
-      password: userData.password,
-    }, (err, obj) => {
-      if (err) {
-        return next(err);
-      }
+    const token = tokgen.generate();
 
-      const token = tokgen.generate();
+    res.cookie('uuid', token);
 
-      res.cookie('uuid', token);
-
-      User.updateOne({
-        username: obj.username,
-      }, {
-        cookie: token,
-      }, (err, result) => {
-        if (err) next(err);
-      });
-      
-      return res.redirect('/products');
+    User.updateOne(
+      userData, {
+      cookie: token,
+    }, (err, result) => {
+      if (err) next(err);
     });
-  } else {
+
+    return res.redirect('/products');
+  } 
     console.log('All fields are required!');
-  }
+  
 });
 
 module.exports = router;

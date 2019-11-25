@@ -84,16 +84,6 @@ input:focus {
 
 }
 
-.remember {
-  color: white;
-}
-
-.remember input {
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
-}
 
 .login_btn {
   color: black;
@@ -358,17 +348,18 @@ li .without-arrow>a {
 #user-pic-div {
   width: 40px;
   height: 40px;
-  padding: 5px;
   background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
   border-radius: 20px;
   position: relative;
   left: 92%;
   top: 3vh;
+  overflow: hidden;
 }
 
 .user-pic {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 }
 
 .dropdown-user {
@@ -395,6 +386,10 @@ li .without-arrow>a {
   background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
   margin: auto;
   margin-top: 100px;
+}
+
+.user-img-div:hover {
+  cursor: pointer;
 }
 
 .user-img {

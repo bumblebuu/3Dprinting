@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
+  let picUrl = 'default-man.png';
   if (req.body.userName
     && req.body.password
     && req.body.passwordAgain
@@ -24,6 +25,11 @@ router.post('/', async (req, res, next) => {
       const err = new Error('passwords do not match');
       err.status = 400;
       return next(err);
+    }
+
+    // Check sex
+    if (req.body.gender == 'female') {
+      picUrl = 'default-woman.png';
     }
 
     // Check if this user already exisits
@@ -43,7 +49,7 @@ router.post('/', async (req, res, next) => {
       email: req.body.email,
       gender: req.body.gender || 'none',
       address: req.body.address || 'none',
-      pictureurl: 'default-man.png',
+      pictureurl: picUrl,
     };
 
     // insert into mongo with Schema's create method from mongoose
@@ -53,11 +59,8 @@ router.post('/', async (req, res, next) => {
       }
       return res.redirect('/login');
     });
-  }
-  else {
-
-  console.log('all fields are required');
-  
+  } else {
+    console.log('all fields are required');
   }
 });
 

@@ -14,7 +14,7 @@ html
           if user.role == 'user'
             a.dropdown-btn(href='#')
               #user-pic-div
-                img.user-pic(src='/img/default-man.png')
+                img.user-pic(src=`/img/users/${user.pictureurl}`)
               .dropdown-container.dropdown-user
                 a.nav-link(href='/user') Profile
                 a.nav-link(href='/basket') Basket
