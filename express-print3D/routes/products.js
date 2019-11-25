@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
 router.get('/:page', async (req, res, next) => {
   const perPage = 8;
   const page = req.params.page || 1;
-  
+
 
   if (url.parse(req.url).query) {
     const search = url.parse(req.url).query;
@@ -170,15 +170,15 @@ router.get('/:page', async (req, res, next) => {
 });
 
 // get single product
-router.get('/product/:seo', (req, res) => {
+router.get('/product/:seo', (req, res, next) => {
   if (typeof req.params.seo === 'string') {
     Product.findOne({
       seo: req.params.seo,
     }, async (err, product) => {
       await Review.find({
         product: product._id,
-      }).populate('user').exec((error, reviews) => {
-        console.log(reviews[0].user);
+      }).populate('user').exec((err, reviews) => {
+        if (err) return next(err);
         res.render('product', {
           product,
           reviews,
@@ -190,7 +190,7 @@ router.get('/product/:seo', (req, res) => {
   }
 });
 
-router.post('/reviews', (req, res) => {
+router.post('/reviews', (req, res, next) => {
   if (req.body.text === '' || req.body.rate === undefined) {
     res.redirect(`/products/product/${req.body.seo}`);
   } else {
@@ -198,7 +198,9 @@ router.post('/reviews', (req, res) => {
       text: req.body.text,
       rate: req.body.rate,
       product: req.body.product,
-      user: mongoose.Types.ObjectId(req.user._id),
+      user: req.user._id,
+    }, (err, result) => {
+      if (err) return next(err);
     });
     res.redirect(`/products/product/${req.body.seo}`);
   }

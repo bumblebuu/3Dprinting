@@ -37,47 +37,47 @@ block content
           form.needs-validation(novalidate='')
             .row
               .col-md-6.mb-3
-                label(for='firstName') First name
-                input#firstName.form-control(type='text', placeholder='', value=user[0].firstname, required='')
+                label.text-secondary(for='firstName') First name
+                input#firstName.form-control(type='text', placeholder='', value=user.firstname, required='')
                 .invalid-feedback
                   | Valid first name is required.
               .col-md-6.mb-3
-                label(for='lastName') Last name
-                input#lastName.form-control(type='text', placeholder='', value=user[0].lastname, required='')
+                label.text-secondary(for='lastName') Last name
+                input#lastName.form-control(type='text', placeholder='', value=user.lastname, required='')
                 .invalid-feedback
                   | Valid last name is required.
             .mb-3
-              label(for='username') Username
+              label.text-secondary(for='username') Username
               .input-group
                 .input-group-prepend
                   span.input-group-text @
-                input#username.form-control(type='text', value=user[0].username placeholder='Username', required='')
+                input#username.form-control(type='text', value=user.username placeholder='Username', required='')
                 .invalid-feedback(style='width: 100%;')
                   | Your username is required.
             .mb-3
-              label(for='email')
+              label(for='email').text-secondary
                 | Email 
-              input#email.form-control(type='email', placeholder='you@example.com',value=user[0].email required='')
+              input#email.form-control(type='email', placeholder='you@example.com',value=user.email required='')
               .invalid-feedback
                 | Please enter a valid email address for shipping updates.
             .mb-3
-              label(for='address') Address
-              input#address.form-control(type='text', placeholder='1234 Main St', value=user[0].address required='')
+              label.text-secondary(for='address') Address
+              input#address.form-control(type='text', placeholder='1234 Main St', value=user.address[0] required='')
               .invalid-feedback
                 | Please enter your shipping address.
             .mb-3
-              label(for='address2')
+              label.text-secondary(for='address2')
                 | Address 2 
                 span.text-muted (Optional)
               input#address2.form-control(type='text', placeholder='Apartment or suite')
             .row
               .col-md-4.mb-3
-                label(for='city') City
+                label.text-secondary(for='city') City
                 input#city.form-control(type='text', placeholder='', required='')
                 .invalid-feedback
                   | Please provide a valid city.
               .col-md-5.mb-3
-                label(for='country') Country
+                label.text-secondary(for='country') Country
                 select#country.custom-select.d-block.w-100(required='')
                   option(value='') Country...
                   option(value='AF') Afghanistan
@@ -330,54 +330,54 @@ block content
                 .invalid-feedback
                   | Please select a valid country.
               .col-md-3.mb-3
-                label(for='zip') Zip
+                label.text-secondary(for='zip') Zip
                 input#zip.form-control(type='text', placeholder='', required='')
                 .invalid-feedback
                   | Zip code required.
             hr.mb-4
             .custom-control.custom-checkbox
               input#same-address.custom-control-input(type='checkbox')
-              label.custom-control-label(for='same-address') Shipping address is the same as my billing address
+              label.text-secondary.custom-control-label(for='same-address') Shipping address is the same as my billing address
             .custom-control.custom-checkbox
               input#save-info.custom-control-input(type='checkbox')
-              label.custom-control-label(for='save-info') Save this information for next time
+              label.text-secondary.custom-control-label(for='save-info') Save this information for next time
             hr.mb-4
             h4.mb-3 Payment
             .d-block.my-3
               .custom-control.custom-radio
                 input#credit.custom-control-input(name='paymentMethod', type='radio', checked='', required='')
-                label.custom-control-label(for='credit') Credit card
+                label.text-secondary.custom-control-label(for='credit') Credit card
               .custom-control.custom-radio
                 input#debit.custom-control-input(name='paymentMethod', type='radio', required='')
-                label.custom-control-label(for='debit') Debit card
+                label.text-secondary.custom-control-label(for='debit') Debit card
               .custom-control.custom-radio
                 input#paypal.custom-control-input(name='paymentMethod', type='radio', required='')
-                label.custom-control-label(for='paypal') Paypal
+                label.text-secondary.custom-control-label(for='paypal') Paypal
             .row
               .col-md-6.mb-3
-                label(for='cc-name') Name on card
+                label.text-secondary(for='cc-name') Name on card
                 input#cc-name.form-control(type='text', name='card.name' placeholder='', required='')
                 small.text-muted Full name as displayed on card
                 .invalid-feedback
                   | Name on card is required
               .col-md-6.mb-3
-                label(for='cc-number') Credit card number
+                label.text-secondary(for='cc-number') Credit card number
                 input#cc-number.form-control(type='number', name='card.number' placeholder='', required='')
                 .invalid-feedback
                   | Credit card number is required
             .row
               .col-md-3.mb-3
-                label(for='cc-exp-month') Expiration Month
+                label.text-secondary(for='cc-exp-month') Expiration Month
                 input#cc-exp-month.form-control(type='text', name='card.exp-month' placeholder='', required='')
                 .invalid-feedback
                   | Expiration month required
               .col-md-3.mb-3
-                label(for='cc-exp-year') Expiration Year
+                label.text-secondary(for='cc-exp-year') Expiration Year
                 input#cc-exp-year.form-control(type='text', name='card.exp-year' placeholder='', required='')
                 .invalid-feedback
                   | Expiration year required
               .col-md-3.mb-3
-                label(for='cc-cvc') CVC
+                label.text-secondary(for='cc-cvc') CVC
                 input#cc-cvc.form-control(type='number', placeholder='', name='card.cvc' required='')
                 .invalid-feedback
                   | Security code required

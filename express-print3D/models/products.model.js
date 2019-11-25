@@ -46,7 +46,7 @@ const productsSchema = new Schema({
   subcategory: {
     type: String,
     unique: false,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,

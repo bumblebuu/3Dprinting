@@ -34,8 +34,7 @@
                   Image
                 </label>
                 <br>
-                <input type="file" [(ngModel)]="product.img" name="photo" ng2FileSelect [uploader]="uploader" />
-
+                <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple />
                 <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
                   [disabled]="!uploader.getNotUploadedItems().length">
                   Upload
@@ -66,18 +65,18 @@
                     <!-- the same view can be shown in more than one case -->
                     <select name="category" class="form-control" [(ngModel)]="product.category"
                       *ngSwitchCase="'Printers and Scanners'">
-                      <option [value]="printers">Printers</option>
-                      <option [value]="scanners">Scanners</option>
-                      <option [value]="filaments">Filaments</option>
-                      <option [value]="tools">Tools</option>
+                      <option [value]="'printers'">Printers</option>
+                      <option [value]="'scanners'">Scanners</option>
+                      <option [value]="'filaments'">Filaments</option>
+                      <option [value]="'tools'">Tools</option>
                     </select>
 
                     <select *ngSwitchCase="'Science'" name="category" class="form-control"
                       [(ngModel)]="product.category">
-                      <option [value]="health">Health</option>
-                      <option [value]="electronics">Electronics</option>
-                      <option [value]="mechanics">Mechanics</option>
-                      <option [value]="architecture">Architecture</option>
+                      <option [value]="'health'">Health</option>
+                      <option [value]="'electronics'">Electronics</option>
+                      <option [value]="'mechanics'">Mechanics</option>
+                      <option [value]="'architecture'">Architecture</option>
                     </select>
 
                     <select *ngSwitchCase="'Magic'" name="category" class="form-control" [(ngModel)]="product.category">
@@ -93,11 +92,11 @@
                 <select name="subcategory" id="subcategory" class="form-control" [ngSwitch]="product.category"
                   [(ngModel)]="product.subcategory">
                   <option *ngSwitchCase="'kids'" [value]="lego">Lego</option>
-                  <option *ngSwitchCase="'practical'" [value]="inside">Inside</option>
-                  <option *ngSwitchCase="'practical'" [value]="outside">Outside</option>
-                  <option *ngSwitchCase="'accessories'" [value]="jewellery">Jewellery</option>
+                  <option *ngSwitchCase="'practical'" [value]="'inside'">Inside</option>
+                  <option *ngSwitchCase="'practical'" [value]="'outside'">Outside</option>
+                  <option *ngSwitchCase="'accessories'" [value]="'jewellery'">Jewellery</option>
                   <option *ngSwitchCase="'accessories'" [value]="'phone cases'">Phone cases</option>
-                  <option *ngSwitchCase="'accessories'" [value]="other">Other</option>
+                  <option *ngSwitchCase="'accessories'" [value]="'other'">Other</option>
                 </select>
               </div>
               <div class="form-group">

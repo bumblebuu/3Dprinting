@@ -7,15 +7,15 @@ const Basket = require('../models/basket.model');
 const Order = require('../models/orders.model');
 
 
-router.get('/checkout', (req, res) => {
+router.get('/checkout', (req, res, next) => {
   let totalPrice = 0;
   Basket.find({
     user: req.user._id,
   }).populate('product').exec((err, found) => {
+    if (err) return next(err);
     found.forEach((element) => {
       totalPrice += element.price * element.quantity;
     });
-    if (err) throw err;
     res.render('checkout', {
       basket: found,
       total: totalPrice,
@@ -24,13 +24,13 @@ router.get('/checkout', (req, res) => {
   });
 });
 
-
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   let totalPrice = 0;
   let totalquantity = 0;
   Basket.find({
     user: req.user._id,
   }).populate('product').exec((err, found) => {
+    if (err) return next(err);
     found.forEach((element) => {
       totalPrice += element.price * element.quantity;
       totalquantity += element.quantity;
@@ -40,12 +40,12 @@ router.post('/', (req, res) => {
       currency: 'usd',
       source: req.body.stripeToken,
       description: 'Beyond Paper shopping',
-    }, (err, charge) => {
-      if (err) throw err;
-      Basket.remove({
+    }, (error, charge) => {
+      if (error) return next(error);
+      Basket.deleteMany({
         user: req.user._id,
-      }, (err, removed) => {
-        if (err) throw err;
+      }, (e, removed) => {
+        if (e) return next(e);
       });
       const productArray = [];
       if (typeof req.body.id === 'object') {

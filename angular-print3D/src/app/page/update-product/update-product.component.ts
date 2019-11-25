@@ -29,17 +29,16 @@ export class UpdateProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.product.img = [];
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
+      this.product.img.push('\\uploads\\' + item.file.name);
       alert(response);
     };
   }
 
   onUpdate() {
-    this.product.video=this.product.video+'?autoplay=1'
-    this.product.img = this.product.img.slice(11);
-    this.product.img = '\\uploads' + this.product.img;
     this.ds.updateDocument('products', this.product.seo, this.product).subscribe(
       () => this.router.navigate(['/products'])
     )
