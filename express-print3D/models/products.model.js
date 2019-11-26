@@ -57,6 +57,7 @@ const productsSchema = new Schema({
     type: Boolean,
     unique: false,
     required: false,
+    default: true,
   },
   video: {
     type: String,

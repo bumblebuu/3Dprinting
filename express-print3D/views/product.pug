@@ -8,15 +8,15 @@ block content
     .row
       .col-4.mt-5
         each img,index in product.img
-          .mySlides.mt-5
+          .mySlides.mt-5.text-center
             .numbertext=index+1
-            img.img-fluid.img-top(src=img, style='width:90%')
+            img.text-center.img-top(src=img)
           a.prev(onclick='plusSlides(-1)') &#x276E;
           a.next(onclick='plusSlides(1)') &#x276F;
         .row
           each img,index in product.img
             .column
-              img.demo.cursor(src=img, style='width:100%', onclick=`currentSlide(${index+1})`)
+              img.demo.cursor(src=img, onclick=`currentSlide(${index+1})`)
       .col-4.mt-5
         p.mt-5=product.brand
         h3=product.name
