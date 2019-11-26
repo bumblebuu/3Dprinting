@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const stripe = require('stripe')('sk_test_Nv3q84GIUB0v1TOqzawdKUbX00vVAiQ9sN');
+const stripe = require('stripe')('sk_test_l8DS0CpgFuwkbnQtTTXIgQPg00N76qw7yn');
 
 const router = express.Router();
 const Basket = require('../models/basket.model');
