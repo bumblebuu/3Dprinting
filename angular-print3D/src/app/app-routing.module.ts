@@ -9,6 +9,7 @@ import { UpdateUserComponent } from './page/update-user/update-user.component';
 import { OrdersComponent } from './page/orders/orders.component';
 import { LinechartComponent } from './page/charts/linechart/linechart.component';
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
+import { UpdateOrderComponent } from './page/update-order/update-order.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "users", component: UsersComponent },
   { path: "user/update/:id", component: UpdateUserComponent },
   { path: "orders", component: OrdersComponent },
+  { path: "order/update/:id", component: UpdateOrderComponent },
   { path: "linechart", component: LinechartComponent },
   { path: "piechart", component: PiechartComponent }
 ];

@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Edit this order!</h3>
+  </div>
+  <form action="http://localhost:3000/api/orders/update/{{order._id}}" method="post">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="user">User</label>
+        <input type="text" placeholder="User" name="order.user.firstname+order.user.lastname" class="form-control"
+          id="user" [(ngModel)]="order.user.firstname+' '+order.user.lastname" disabled>
+      </div>
+      <div class="form-group">
+        <label for="product">Product(s)</label>
+        <div class="row">
+          <div class="col" *ngFor="let product of order.product">
+            <input class="form-control" type="text" name="product" value={{product.name}} disabled>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" [(ngModel)]="order.quantity" name="order.quantity" disabled>
+          </div>
+          <div class="col">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" [(ngModel)]="order.unitprice" name="order.unitprice" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select name="status" id="status" class="form-control" [(ngModel)]="order.status">
+          <option [value]="'payed'">Payed</option>
+          <option [value]="'processed'">Processed</option>
+          <option [value]="'shipped'">Shipped</option>
+          <option [value]="'delivered'">Delivered</option>
+        </select>
+      </div>
+      <div class="card-footer text-center">
+        <button type="submit" class="btn btn-success" (click)="onUpdate()">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

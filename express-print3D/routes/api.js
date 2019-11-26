@@ -4,6 +4,7 @@ const router = express.Router();
 
 // Product model
 const Product = require('../models/products.model');
+const Order = require('../models/orders.model');
 
 // create product
 router.post('/products/add', (req, res) => {
@@ -46,6 +47,41 @@ router.put('/products/update/:seo', (req, res) => {
   }, req.body, (err, product) => {
     if (err) throw err;
     res.json(product);
+  });
+});
+
+
+router.get('/orders', (req, res, next) => {
+  Order.find({}).populate('user product').exec((err, orders) => {
+    if (err) return next(err);
+    res.json(orders);
+  });
+});
+
+router.get('/orders/:id', (req, res, next) => {
+  Order.findOne({
+    _id: req.params.id,
+  }).populate('user product').exec((err, order) => {
+    if (err) return next(err);
+    res.json(order);
+  });
+});
+
+router.put('/orders/update/:id', (req, res, next) => {
+  Order.findOneAndUpdate({
+    _id: req.params.id,
+  }, req.body, (err, order) => {
+    if (err) return next(err);
+    res.json(order);
+  });
+});
+
+router.delete('/orders/delete/:id', (req, res, next) => {
+  Order.findOneAndDelete({
+    _id: req.params.id,
+  }, (err, order) => {
+    if (err) return next(err);
+    res.json(order);
   });
 });
 

@@ -1,1 +1,47 @@
-<p>orders works!</p>
+<div class="container">
+  <div class="row">
+    <h3 class="mb-4">Orders</h3>
+  </div>
+  <div class="row">
+    <div class="col-3 mb-3">
+      <input type="text" name="search" id="search" placeholder="Search..." class="form-control"
+        [(ngModel)]="searchedPhrase">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th (click)="setOrderBy('user')">user &#8645;</th>
+            <th (click)="setOrderBy('product')">product(s) &#8645;</th>
+            <th (click)="setOrderBy('quantity')">quantity &#8645;</th>
+            <th (click)="setOrderBy('unitprice')">price &#8645;</th>
+            <th (click)="setOrderBy('status')">status &#8645;</th>
+            <th (click)="setOrderBy('insdate')">insdate &#8645;</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor='let order of orders$ | async |search:searchedPhrase| orderby:orderKey:orderDirection:changeCounter'>
+            <td>{{order.user.firstname}} {{order.user.lastname}}</td>
+            <td>
+              <p *ngFor='let product of order.product'>{{product.name}}</p>
+            </td>
+            <td>{{order.quantity}}</td>
+            <td>${{order.unitprice}}</td>
+            <td>{{order.status}}</td>
+            <td>{{order.insdate |date:'medium'}}</td>
+            <td>
+              <div class="btn-group">
+                <a routerLink="/order/update/{{order._id}}" class="btn btn-info">Edit</a>
+                <button (click)="onDelete(order._id)" class="btn btn-danger">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

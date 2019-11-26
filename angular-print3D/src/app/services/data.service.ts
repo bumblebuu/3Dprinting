@@ -8,6 +8,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class DataService {
   productList: BehaviorSubject<any> = new BehaviorSubject([]);
   product: BehaviorSubject<any> = new BehaviorSubject([]);
+  orderList: BehaviorSubject<any> = new BehaviorSubject([]);
+  order: BehaviorSubject<any> = new BehaviorSubject([]);
+
   apiURL: string = 'http://localhost:3000/api'
 
   constructor(private http: HttpClient) { }
@@ -19,11 +22,23 @@ export class DataService {
   readDocument(collectionName: string, query?: any) {
     if (query) {
       this.http.get(`${this.apiURL}/${collectionName}/${query}`).forEach(
-        data => this.product.next(data)
+        data => {
+          if (collectionName == 'products') {
+            this.product.next(data)
+          } else if (collectionName == 'orders') {
+            this.order.next(data)
+          }
+        }
       )
     }
     this.http.get(`${this.apiURL}/${collectionName}`).forEach(
-      data => this.productList.next(data)
+      data => {
+        if (collectionName == 'products') {
+          this.productList.next(data)
+        } else if (collectionName == 'orders') {
+          this.orderList.next(data)
+        }
+      }
     )
   }
 

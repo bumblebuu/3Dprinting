@@ -16,7 +16,9 @@ import { OrdersComponent } from './page/orders/orders.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ChartsModule } from 'ng2-charts';
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
-import { LinechartComponent } from './page/charts/linechart/linechart.component'
+import { LinechartComponent } from './page/charts/linechart/linechart.component';
+import { UpdateOrderComponent } from './page/update-order/update-order.component';
+import { OrderbyPipe } from './pipes/orderby.pipe'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { LinechartComponent } from './page/charts/linechart/linechart.component'
     OrdersComponent,
     FileSelectDirective,
     PiechartComponent,
-    LinechartComponent
+    LinechartComponent,
+    UpdateOrderComponent,
+    OrderbyPipe
   ],
   imports: [
     BrowserModule,
