@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  .container
+    .row
+      h1.mb-5 Basket
+    .row
+      .col-10.offset-1
+        if basket.length!==0
+          table.table
+            thead 
+              tr
+                th productname
+                th quantity
+                th price
+                th &nbsp;
+            tbody
+              each basketItem in basket
+                tr
+                  td=basketItem.product.name
+                  td=basketItem.quantity
+                  td=basketItem.price*basketItem.quantity
+                  td
+                    form(action=`/basket/remove/${basketItem._id}` method='post')
+                      button.btn.btn-sm.btn-danger(type='submit') 	&#128465;
+          hr
+          strong.total Total: 
+          | $ #{total}
+          br
+          a.mt-3.btn.btn-success(href='/pay/checkout') Pay    
+        else
+          .col-10.offset-1
+            a(href='/products', style='text-decoration: inherit;')
+              img(style='width:30%' src='img/emptybasket.png')
+              h6.text-dark Your basket is empty. Start shoppig!

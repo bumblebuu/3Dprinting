@@ -6,9 +6,9 @@ block content
     include ../public/js/productinfo.js
   .container
     .row
-      .col-4
+      .col-4.mt-5
         each img,index in product.img
-          .mySlides
+          .mySlides.mt-5
             .numbertext=index+1
             img.img-fluid.img-top(src=img, style='width:90%')
           a.prev(onclick='plusSlides(-1)') &#x276E;
@@ -28,10 +28,11 @@ block content
         small Price shown includes 27% VAT. 
         u Excludes delivery costs
         p.text-success Dispatch in 6-8 days
-        form(action=`/baskets/${product._id}`, method="post")
+        form(action=`/basket/${product._id}`, method="post")
           .form-group
             label Quantity :
-            input.form-control(type='number', name='productQuantity', value=1 , min=1, style="width:100px") 
+            input.form-control(type='number', name='quantity', value=1 , min=1, style="width:100px") 
+            input.none.form-control(type='number', name='price', value=product.price) 
             button.btn.btn-primary Add to basket
       hr
     .row
@@ -46,8 +47,11 @@ block content
               td #{product.brand}
             tr
               td Category:
-              td #{product.category}
-     
+              if product.subcategory
+                td #{product.menu}- #{product.category}- #{product.subcategory}
+              else
+                td #{product.menu}- #{product.category}
+
     .row          
       .col-5.mt-5.ml-3
         h3 Description
@@ -66,31 +70,33 @@ block content
               h5=review.text
               .row
                 .col-2
-                  small.text-muted Posted by: #{ review.from }
+                  small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
                 .col-1
                   small.text-muted #{ review.rate }&starf;
               hr
-          .col-12.text-center
-            button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
-        #review.col-6.offset-3.mt-5.mb-5.none
-          form.form(action='/products/reviews' method='post')
-            .card
-              h5.card-header Rate This Product
-              .card-body
-                input.none.form-control(name='productid' type='text' value=`${product._id}`)
-                textarea.form-control(name='text', placeholder='Write something...')
-                fieldset.rating
-                .rating
-                  input#rating-5(type='radio',value='5', name='rate')
-                  label(for='rating-5',title='Rocks!')
-                  input#rating-4(type='radio', value='4', name='rate')
-                  label(title='Pretty good', for='rating-4')
-                  input#rating-3(type='radio', value='3', name='rate')
-                  label(title='Meh', for='rating-3')
-                  input#rating-2(type='radio', value='2', name='rate')
-                  label(title='Kinda bad',for='rating-2')
-                  input#rating-1(type='radio', value='1', name='rate')
-                  label(title='Sucks big time', for='rating-1')
-              .card-footer.text-center
-                button.btn.btn-info(type='submit') SEND
-                button.btn.btn-secondary( onClick='onCancel()') CANCEL
+          if user
+            .col-12.text-center
+              button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
+          #review.col-6.offset-3.mt-5.mb-5.none
+            form.form(action='/products/reviews' method='post')
+              .card
+                h5.card-header Rate This Product
+                .card-body
+                  input.none.form-control(name='product' type='text' value=`${product._id}`)
+                  input.none.form-control(name='seo' type='text' value=`${product.seo}`)
+                  textarea.form-control(name='text', placeholder='Write something...')
+                  fieldset.rating
+                  .rating
+                    input#rating-5(type='radio',value='5', name='rate')
+                    label(for='rating-5',title='Rocks!')
+                    input#rating-4(type='radio', value='4', name='rate')
+                    label(title='Pretty good', for='rating-4')
+                    input#rating-3(type='radio', value='3', name='rate')
+                    label(title='Meh', for='rating-3')
+                    input#rating-2(type='radio', value='2', name='rate')
+                    label(title='Kinda bad',for='rating-2')
+                    input#rating-1(type='radio', value='1', name='rate')
+                    label(title='Sucks big time', for='rating-1')
+                .card-footer.text-center
+                  button.btn.btn-info(type='submit') SEND
+                  button.btn.btn-secondary( onClick='onCancel()') CANCEL

@@ -10,6 +10,8 @@ const tokgen = new TokenGenerator(256, TokenGenerator.BASE62);
 
 const User = require('../models/users.model');
 
+const regAlerts = require('./../public/scripts/register-alerts');
+
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -20,30 +22,28 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
+
   if (req.body.userName && req.body.password) {
     const userData = {
       username: req.body.userName,
       password: sha1(req.body.password),
     };
 
-    User.findOne({
-      username: userData.username,
-      password: userData.password,
-    }, (err, obj) => {
-      if (err) {
-        return next(err);
-      }
-      console.log(obj);
+    const token = tokgen.generate();
 
-      const token = tokgen.generate();
-      User.update(obj, {
-        cookie: token,
-      });
+    res.cookie('uuid', token);
 
-      return res.redirect('/products');
+    User.updateOne(
+      userData, {
+      cookie: token,
+    }, (err, result) => {
+      if (err) next(err);
     });
-  }
-  console.log('all fields are required');
+
+    return res.redirect('/products');
+  } 
+    console.log('All fields are required!');
+  
 });
 
 module.exports = router;

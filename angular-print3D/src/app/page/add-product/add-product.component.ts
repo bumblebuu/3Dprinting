@@ -17,19 +17,18 @@ export class AddProductComponent implements OnInit {
   newProduct: Product = new Product();
   products: BehaviorSubject<any> = this.ds.productList;
   constructor(private ds: DataService, private router: Router) { }
-
+  
   ngOnInit() {
+    this.newProduct.img = [];
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
+      this.newProduct.img.push('\\uploads\\' + item.file.name);
       alert(response);
     };
   }
 
   onCreate() {
-    this.newProduct.video=this.newProduct.video+'?autoplay=1'
-    this.newProduct.img = this.newProduct.img.slice(11)
-    this.newProduct.img = '\\uploads' + this.newProduct.img
     this.ds.createDocument('products', this.newProduct).subscribe(
       () => this.router.navigate(['/products'])
     )

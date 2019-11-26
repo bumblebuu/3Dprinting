@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Staatliches|Tomorrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans|Raleway|Roboto&display=swap');
+
 @font-face {
   font-family: "Cubic";
-  src: url("Cubic.ttf");
+  src: url("./../fonts/cubic.ttf");
 }
 
 /* 
 font-family: 'Tomorrow', sans-serif;
 font-family: 'Bebas Neue', cursive;
 font-family: 'Staatliches', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Odibee Sans', cursive;
  */
 
 body {
   margin: 0;
+  font-family: 'Staatliches', cursive;
 }
 
 .login,
@@ -21,13 +27,6 @@ body {
   height: 100vh;
   font-family: 'Numans', sans-serif;
   margin: 0;
-}
-
-.login {
-  background-image: url('./../img/cryptocalibur-foot-bg-2.jpg');
-}
-
-.register {
   background-image: url('./../img/maxresdefault.jpg');
 }
 
@@ -39,14 +38,15 @@ body {
 
 .login-card,
 .register-card {
-  margin-top: 40px;
-  margin-bottom: auto;
-  width: 400px;
+  position: absolute;
+  top: 50px;
+  width: 700px;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .login-card {
-  margin-top: auto;
+  width: 400px;
+  top: 200px;
 }
 
 .social_icon span {
@@ -60,7 +60,8 @@ body {
   cursor: pointer;
 }
 
-.card-header h3, label {
+.card-header h3,
+label {
   color: white;
 }
 
@@ -83,16 +84,6 @@ input:focus {
 
 }
 
-.remember {
-  color: white;
-}
-
-.remember input {
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
-}
 
 .login_btn {
   color: black;
@@ -133,7 +124,7 @@ input:focus {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 15pt;
-  color: #818181;
+  color: #898f91;
   display: block;
   transition: 0.3s;
   border: none;
@@ -175,9 +166,11 @@ input:focus {
 
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main,
 #dark-page,
-#picture {
+#picture,
+#user-pic-div,
+.dropdown-user,
+#login-btn {
   transition: margin-right, .5s;
   /* If you want a transition effect */
 }
@@ -209,7 +202,6 @@ input:focus {
   -webkit-background-clip: text;
   -webkit-text-stroke: 4px transparent;
   color: #232d2d;
-  width: 50vw;
 }
 
 .logo:hover {
@@ -221,7 +213,7 @@ input:focus {
 
 
 .title {
-  position: relative;
+  position: absolute;
   width: 25%;
   left: 10%;
   top: 25vh;
@@ -245,10 +237,11 @@ input:focus {
 
 #picture {
   background-image: url('./../img/8647.jpg');
-  width: 50%;
+  width: 50vw;
   height: 50vh;
-  position: relative;
+  position: absolute;
   top: 15vh;
+  left: 600px;
   background-size: cover;
   background-position: center;
 }
@@ -256,9 +249,9 @@ input:focus {
 .hole-1,
 .hole-2 {
   height: 100%;
-  width: 11%;
+  width: 4vw;
   background-color: #212224;
-  margin-left: 26%;
+  margin-left: 14vw;
 }
 
 .dropdown-container {
@@ -271,7 +264,7 @@ input:focus {
   padding-left: 0;
 }
 
-li .without-arrow > a {
+li .without-arrow>a {
   margin-left: 20px;
 }
 
@@ -326,4 +319,129 @@ li .without-arrow > a {
   -webkit-border-radius: 6px 6px 6px 6px;
   -moz-border-radius: 6px 6px 6px 6px;
   border-radius: 6px 6 6px 6px;
+}
+
+.product-card {
+  height: 450px;
+  max-width: 300px;
+}
+
+.card-img-top {
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  margin: auto;
+}
+
+.image-div {
+  height: 200px;
+  overflow: hidden;
+}
+
+.filter-block {
+  height: 30%;
+  padding: 10px;
+  border-radius: 5px;
+  scroll-behavior: auto;
+}
+
+#user-pic-div {
+  width: 40px;
+  height: 40px;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
+  border-radius: 20px;
+  position: relative;
+  left: 92%;
+  top: 3vh;
+  overflow: hidden;
+}
+
+.user-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.dropdown-user {
+  width: 100px;
+  position: relative;
+  top: 5vh;
+  left: 92%;
+  background-color: #232d2d;
+  border-radius: 5px;
+}
+
+.dropdown-user a {
+  color: #898f91;
+}
+
+.dropdown-user a:hover {
+  color: #f1f1f1;
+}
+
+.user-img-div {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
+  margin: auto;
+  margin-top: 100px;
+}
+
+.user-img-div:hover {
+  cursor: pointer;
+}
+
+.user-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.oneRow {
+  background-color: #eee;
+  width: 300px;
+  height: 40px;
+  margin: auto;
+  margin-top: 3px;
+  padding: 10px;
+}
+
+.oneRow p {
+  color: #626f79;
+  /* text-align: end; */
+}
+
+.oneRow:hover {
+  background-color: #aeb4b6;
+  cursor: pointer;
+}
+
+.oneRow:hover .icon,
+.oneRow:hover p {
+  color: #212224;
+}
+
+.icon {
+  color: #626f79;
+}
+
+.user-form {
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 100px;
+  display: none;
+}
+
+form input {
+font-family: 'Roboto', sans-serif;
+}
+
+#login-btn {
+  position: relative;
+  left: 90%;
+  top: 3vh;
 }

@@ -1,39 +1,51 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
 
-block content
-  .login.container-fluid
-    .container.login-container
-      .d-flex.justify-content-center.h-100
-        .card.login-card
-          .card-header
-            h3 Sign In
-            .d-flex.justify-content-end.social_icon
-              span
-                i.fab.fa-facebook-square
-              span
-                i.fab.fa-google-plus-square
-              span
-                i.fab.fa-twitter-square
-          .card-body
-            form(method='POST' action='/login' role='form')
-              .input-group.form-group
-                .input-group-prepend
-                  span.input-group-text
-                    i.fas.fa-user
-                input#userName.form-control(type='text', name='userName', placeholder='username')
-              .input-group.form-group
-                .input-group-prepend
-                  span.input-group-text
-                    i.fas.fa-key
-                input#password.form-control(type='password', name='password', placeholder='password')
-              .row.align-items-center.remember
-                input(type='checkbox')
-                | Remember Me
-              .form-group
-                input.btn.float-right.login_btn(type='submit', value='Login')
-          .card-footer
-            .d-flex.justify-content-center.links
-              | Don't have an account?
-              a(href='/register') Register
-            .d-flex.justify-content-center
-              a(href='#') Forgot your password?
+  body
+    .login.container-fluid
+      .container.login-container
+
+        .alert.alert-info.col-4.offset-4.alert-dismissible.fade(role='alert')
+          |  All fields are required!
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+
+        .d-flex.justify-content-center
+          .card.login-card
+            .card-header
+              h3 Sign In
+              .d-flex.justify-content-end.social_icon
+                span
+                  i.fab.fa-facebook-square
+                span
+                  i.fab.fa-google-plus-square
+                span
+                  i.fab.fa-twitter-square
+            .card-body
+              form(method='POST' action='/login' role='form')
+                .input-group.form-group
+                  .input-group-prepend
+                    span.input-group-text
+                      i.fas.fa-user
+                  input#userName.form-control(type='text', name='userName', placeholder='username')
+                .input-group.form-group
+                  .input-group-prepend
+                    span.input-group-text
+                      i.fas.fa-key
+                  input#password.form-control(type='password', name='password', placeholder='password')
+                .form-group
+                  input.btn.float-right.login_btn(type='submit', value='Login')
+            .card-footer
+              .d-flex.justify-content-center.links
+                | Don't have an account?
+                a(href='/register') Register
+              .d-flex.justify-content-center
+                a(href='#') Forgot your password?
+
+      script(src='/jquery/dist/jquery.min.js')
+      script(src='/bootstrap/dist/js/bootstrap.min.js')

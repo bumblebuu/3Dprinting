@@ -1,45 +1,73 @@
 extends layout
 
 block content
-  .container
-    .row
-      each product in products
-        .col-4
-          .card
-            img.card-img-top(src=product.img[0] alt='product image')
-            .card-body
-              h5.card-title #{product.name}
-              p.card-text
-                | #{product.description.split('.',2)}
-              p.card-text
-                small.text-muted Lalala
-              a.btn.btn-secondary(href=`product/${product.seo}`) Show more
-    .row
-      if (pages > 0)
-        ul.pagination.text-center
-          if (current == 1)
-            li.disabled.page-item
-              a.page-link First
-          else
-            li.page-item
-              a.page-link(href='/products/1') First
-          - var i = (Number(current) > 5 ? Number(current) - 4 : 1)
-          if (i !== 1)
-            li.disabled.page-item
-              a.page-link ...
-          - for (; i <= (Number(current) + 4) && i <= pages; i++)
-              if (i == current)
-                li.active.page-item
-                  a.page-link=`${i}`
+  .container-fluid.mt-5
+    .row.ml-5.mr-5
+      .col-12.col-md-6.col-lg-2
+        .filter-block.sticky-top
+          h3 Filtering
+          form(role='form')
+            h4.filter-heading.mb-3.mt-3 Brands
+            .checkbox-container.row
+              each brand in brands
+                .col-6
+                  input.form-check-input.brands(id=`${brand}` type="checkbox" name=`${brand}` value=`${brand}` checked=(brandsArr.includes(brand) ? "checked" : undefined))
+                  | #{brand}
+            
+            h4.filter-heading.mb-3.mt-3 Categories
+            .checkbox-container.row
+              each category in categories
+                .col-6
+                  input.form-check-input.categories(id=`${category}` type="checkbox" name=`${category}` value=`${category}` checked=(categoriesArr.includes(category) ? "checked" : undefined))
+                  | #{category}
+
+            button.btn.btn-primary.mt-3(type='button', onclick='createFetch()') Filter
+
+
+
+      .col-11.col-md-6.col-lg-10
+        .row
+          each product in products
+            .col-12.col-md-6.col-lg-3
+              .card.product-card.mb-5
+                .image-div
+                  img.card-img-top.mx-auto.d-block(src=product.img[0] alt='product image')
+                .card-body
+                  h5.card-title #{product.name}
+                  h6.card-text #{product.brand}
+                  h6.card-text #{product.price}€
+                  p.card-text
+                    if (product.isactive == 1)
+                      small.text-muted In stock
+                    else
+                      small.text-muted Out of stock
+                  a.btn.btn-info.btn-block(href=`product/${product.seo}`) Show more
+        .row
+          if (pages > 0)
+            ul.pagination.text-center
+              if (current == 1)
+                li.disabled.page-item
+                  a.page-link First
               else
                 li.page-item
-                  a.page-link(href=`/products/${i}`)=`${i}`
-              if (i == Number(current) + 4 && i < pages)
+                  a.page-link(href=`1`) First
+              - var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+              if (i !== 1)
                 li.disabled.page-item
                   a.page-link ...
-          if (current == pages)
-            li.disabled.page-item
-              a.page-link Last
-          else
-            li.page-item
-              a.page-link(href=`/products/${pages}`) Last
+              - for (; i <= (Number(current) + 4) && i <= pages; i++)
+                  if (i == current)
+                    li.active.page-item
+                      a.page-link=`${i}`
+                  else
+                    li.page-item
+                      a.page-link(href=`${i}`)=`${i}`
+                  if (i == Number(current) + 4 && i < pages)
+                    li.disabled.page-item
+                      a.page-link ...
+              if (current == pages)
+                li.disabled.page-item
+                  a.page-link Last
+              else
+                li.page-item
+                  a.page-link(href=`${pages}`) Last

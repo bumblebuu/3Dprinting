@@ -5,11 +5,23 @@ html
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
     link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
   body
     #main
       .header
-        a.logo(href='#') o
+        a.logo(href='/') o
+        if user
+          if user.role == 'user'
+            a.dropdown-btn(href='#')
+              #user-pic-div
+                img.user-pic(src=`/img/users/${user.pictureurl}`)
+              .dropdown-container.dropdown-user
+                a.nav-link(href='/user') Profile
+                a.nav-link(href='/basket') Basket
+                a.nav-link(href='/orders') Orders
+                a.nav-link(href='/logout') Logout
+        else
+          a#login-btn.btn.btn-info(href='/login') Login
         button.openbtn(onclick='openNav()') ☰
         #dark-page.flex-row.d-flex
           .title
@@ -30,16 +42,16 @@ html
           .dropdown-container
             ul
               li.dropdown-submenu.caret-off
-                a.nav-link(href='#') Printers and Scanners
+                a.nav-link(href='/products/1?c=printers&scanners&tools&filaments') Printers and Scanners
                 ul.dropdown-menu
                   li
-                    a(href='#') Printers
+                    a(href='/products/1?c=printers') Printers
                   li
-                    a.nav-link(href='#') Scanners
+                    a.nav-link(href='/products/1?c=scanners') Scanners
                   li
-                    a.nav-link(href='#') Filaments
+                    a.nav-link(href='/products/1?c=filaments') Filaments
                   li
-                    a.nav-link(href='#') Tools
+                    a.nav-link(href='/products/1?c=tools') Tools
   
               li.dropdown-submenu.caret-off
                 a.nav-link(href='#') Science
@@ -89,3 +101,5 @@ html
     script(src='/jquery/dist/jquery.min.js')
     script(src='/bootstrap/dist/js/bootstrap.min.js')
     script(src='/scripts/navbar.js')
+    script(src='/scripts/filter.js')
+    script(src='/scripts/user-page.js')
