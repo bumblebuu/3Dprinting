@@ -7,29 +7,27 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
   body
-    #main
-      .header
-        a.logo(href='/') o
-        if user
-          if user.role == 'user'
-            a.dropdown-btn(href='#')
-              #user-pic-div
-                img.user-pic(src=`/img/users/${user.pictureurl}`)
-              .dropdown-container.dropdown-user
-                a.nav-link(href='/user') Profile
-                a.nav-link(href='/basket') Basket
-                a.nav-link(href='/orders') Orders
-                a.nav-link(href='/logout') Logout
-        else
-          a#login-btn.btn.btn-info(href='/login') Login
-        button.openbtn(onclick='openNav()') ☰
-        #dark-page.flex-row.d-flex
-          .title
-            h1.beyond beyond
-            h1.paper paper
-          #picture.flex-row.d-flex
-            .hole-1
-            .hole-2
+    nav.navbar.sticky-top
+      a.logo.navbar-brand.ml-3(href='/') o
+      if user
+        if user.role == 'user'
+          a.dropdown-btn(href='#')
+            #user-pic-div
+              img.user-pic(src=`/img/users/${user.pictureurl}`)
+            .dropdown-container.dropdown-user
+              a.nav-link(href='/user') Profile
+              a.nav-link(href='/logout') Logout
+      else
+        a#login-btn.btn.btn-info(href='/login') Login
+      button.openbtn(onclick='openNav()') ☰
+
+    .header
+      .title.text-center.mt-5.col-md-4.col-12
+        h1.beyond beyond
+        h1.paper paper
+      #picture.col-0.col-lg-7.offset-lg-0.col-md-5.offset-md-1.flex-row.d-flex
+        .hole-1
+        .hole-2
 
     #mySidebar.sidebar
       ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu', style='display: block; position: static; margin-bottom: 5px; *width: 180px;')
@@ -54,34 +52,34 @@ html
                     a.nav-link(href='/products/1?c=tools') Tools
   
               li.dropdown-submenu.caret-off
-                a.nav-link(href='#') Science
+                a.nav-link(href='/products/1?c=health&electronics&mechanics&arthitecture') Science
                 ul.dropdown-menu
                   li
-                    a(href='#') Health
+                    a(href='/products/1?c=health') Health
                   li
-                    a.nav-link(href='#') Electronics
+                    a.nav-link(href='/products/1?c=electronics') Electronics
                   li
-                    a.nav-link(href='#') Mechanics
+                    a.nav-link(href='/products/1?c=mechanics') Mechanics
                   li
-                    a.nav-link(href='#') Architecture
+                    a.nav-link(href='/products/1?c=arthitecture') Architecture
 
               li.dropdown-submenu.caret-off
-                a.nav-link(href='#') Magic
+                a.nav-link(href='/products/1?c=kids&practical&accessories') Magic
                 ul.dropdown-menu
                   li.dropdown-submenu
-                    a(href='#') Kids
+                    a(href='/products/1?c=kids') Kids
                     ul.dropdown-menu
                       li
                         a(href='#') Lego
                   li.dropdown-submenu
-                    a.nav-link(href='#') Practical
+                    a.nav-link(href='/products/1?c=practical') Practical
                     ul.dropdown-menu
                       li
                         a(href='#') Inside
                       li
                         a(href='#') Outside
                   li.dropdown-submenu
-                    a.nav-link(href='#') Accessories
+                    a.nav-link(href='/products/1?c=accessories') Accessories
                     ul.dropdown-menu
                       li
                         a(href='#') Jewellery
