@@ -39,7 +39,7 @@ body {
 .login-card,
 .register-card {
   position: absolute;
-  top: 50px;
+  top: 100px;
   width: 700px;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -328,6 +328,7 @@ li .without-arrow>a {
 .filter-block {
   height: 30%;
   padding: 10px;
+  top: 80px;
   border-radius: 5px;
   scroll-behavior: auto;
 }
@@ -345,7 +346,7 @@ li .without-arrow>a {
 
 #login-btn {
   position: absolute;
-  right: 50px;
+  right: 70px;
   top: 20px;
 }
 

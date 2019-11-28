@@ -60,7 +60,10 @@ router.post('/', async (req, res, next) => {
       return res.redirect('/login');
     });
   } else {
-    console.log('all fields are required');
+    res.render('register', {
+      title: 'Register',
+      show: true,
+    });
   }
 });
 
