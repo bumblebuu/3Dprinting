@@ -67,7 +67,23 @@ block content
           h3.mb-5 Product Reviews
           if reviews
             each review in reviews
-              h5=review.text
+              .row
+                .col-6
+                  p=review.text
+                .col-2
+                  -function dateFormatting(dateString) {
+                    -const date = new Date(dateString);
+                    -const d = date.getDate();
+                    -const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    -const m = monthNames[date.getMonth()];
+                    -const y = date.getFullYear();
+                    -const h= date.getHours();
+                    -const min=date.getMinutes();
+                    -const t = date.getTime();
+                    -const sec = date.getSeconds();
+                    -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
+                  -}
+                  small.text-muted=dateFormatting(review.insdate)
               .row
                 .col-2
                   small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}

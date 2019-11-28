@@ -64,18 +64,38 @@ block form
       input.form-control(type='text', placeholder='Enter bank name')
     .col-3.offset-9
       button.btn.btn-dark.btn-block(type='submit') Save
-  form.user-form#orders(method='DELETE', action='/user/orders' role='form')
+  .user-form#orders
     table.table
       thead
         tr
-          th Product
+          th Product(s)
+          th Quantity
+          th Price
           th Orderdate
           th
       tbody
-        tr
-          td product
-          td orderdate
-          td
-            button.btn.btn-danger(type='submit') Delete order
+        -function dateFormatting(dateString) {
+          -const date = new Date(dateString);
+          -const d = date.getDate();
+          -const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          -const m = monthNames[date.getMonth()];
+          -const y = date.getFullYear();
+          -const h= date.getHours();
+          - const min=date.getMinutes();
+          -const t = date.getTime();
+          -const sec = date.getSeconds();
+          -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
+        -}
+        each order in orders
+          tr
+            td
+              each item in order.product
+                p(style='margin:0;padding:0;')=item.name
+            td=order.quantity
+            td $ #{order.unitprice}
+            td #{dateFormatting(order.insdate)}
+            td
+              form(method='DELETE', action=`/user/orders/${order._id}`)
+                button.btn.btn-danger(type='submit') Delete order
   form.user-form#delete(method='DELETE', action='/user' role='form')
 

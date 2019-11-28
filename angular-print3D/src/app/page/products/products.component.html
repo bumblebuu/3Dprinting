@@ -19,7 +19,6 @@
               <th (click)="setOrderBy('seo')">seo &#8645;</th>
               <th (click)="setOrderBy('brand')">brand &#8645;</th>
               <th>description</th>
-              <th>img</th>
               <th (click)="setOrderBy('menu')">menu &#8645;</th>
               <th (click)="setOrderBy('category')">category &#8645;</th>
               <th (click)="setOrderBy('price')">price &#8645;</th>
@@ -32,10 +31,9 @@
               <td>{{product.seo}}</td>
               <td>{{product.brand}}</td>
               <td>{{product.description.split('.',1)}}</td>
-              <td>{{product.img}}</td>
               <td>{{product.menu}}</td>
               <td>{{product.category}}</td>
-              <td>{{product.price}}</td>
+              <td>${{product.price}}</td>
               <td>
                 <div class="btn-group">
                   <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>

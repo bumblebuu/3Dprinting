@@ -177,7 +177,7 @@ router.get('/product/:seo', (req, res, next) => {
     }, async (err, product) => {
       await Review.find({
         product: product._id,
-      }).populate('user').exec((err, reviews) => {
+      }).populate('user').sort('-insdate').exec((err, reviews) => {
         if (err) return next(err);
         res.render('product', {
           product,

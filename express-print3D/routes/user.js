@@ -11,6 +11,7 @@ const sha1 = require('sha1');
 const formidable = require('formidable');
 const util = require('util');
 const User = require('../models/users.model');
+const Order = require('../models/orders.model');
 
 
 /* GET users listing. */
@@ -19,9 +20,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/user-form', (req, res, next) => {
-  res.render('user-form', {
-    title: 'User account',
-    user: req.user,
+  Order.find({
+    user: req.user._id,
+  }).populate('product').sort('-insdate').exec((err, orders) => {
+    if (err) next(err);
+    res.render('user-form', {
+      title: 'User account',
+      user: req.user,
+      orders,
+    });
   });
 });
 
@@ -83,8 +90,13 @@ router.post('/billing', (req, res, next) => {
 
 });
 
-router.delete('/orders', (req, res, next) => {
-
+router.get('/orders/:id', (req, res, next) => {
+  Order.findOneAndDelete({
+    _id: req.params.id,
+  }, (err, deleted) => {
+    if (err) next(err);
+    res.redirect('/user/user-form');
+  });
 });
 
 router.post('/upload', (req, res, next) => {
@@ -93,9 +105,9 @@ router.post('/upload', (req, res, next) => {
     // The file name of the uploaded file
     const fileName = req.user.username + file.upload.name;
     console.log(fileName);
-    if (!fileName.endsWith('.jpg')
-      && !fileName.endsWith('.jpeg')
-      && !fileName.endsWith('.png')) {
+    if (!fileName.endsWith('.jpg') &&
+      !fileName.endsWith('.jpeg') &&
+      !fileName.endsWith('.png')) {
       console.log('Nope, just jpg and png');
       return res.redirect('/user');
     }
