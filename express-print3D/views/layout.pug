@@ -14,9 +14,9 @@ html
           a.dropdown-btn(href='#')
             #user-pic-div
               img.user-pic(src=`/img/users/${user.pictureurl}`)
-            .dropdown-container.dropdown-user
-              a.nav-link(href='/user') Profile
-              a.nav-link(href='/logout') Logout
+          .dropdown-container.dropdown-user
+            a.nav-link(href='/user') Profile
+            a.nav-link(href='/logout') Logout
       else
         a#login-btn.btn.btn-info(href='/login') Login
       button.openbtn(onclick='openNav()') ☰
@@ -25,7 +25,7 @@ html
       .title.text-center.mt-5.col-md-4.col-12
         h1.beyond beyond
         h1.paper paper
-      #picture.col-0.col-lg-7.offset-lg-0.col-md-5.offset-md-1.flex-row.d-flex
+      #picture.col-12.col-lg-7.col-md-5flex-row.d-flex
         .hole-1
         .hole-2
 
