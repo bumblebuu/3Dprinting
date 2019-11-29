@@ -26,14 +26,16 @@ router.get('/checkout', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   let totalPrice = 0;
-  let totalquantity = 0;
+  const totalquantity = [];
   Basket.find({
     user: req.user._id,
   }).populate('product').exec((err, found) => {
     if (err) return next(err);
     found.forEach((element) => {
       totalPrice += element.price * element.quantity;
-      totalquantity += element.quantity;
+      totalquantity.push({
+        [element.product.name]: element.quantity,
+      });
     });
     stripe.charges.create({
       amount: parseInt(totalPrice * 100, 10),

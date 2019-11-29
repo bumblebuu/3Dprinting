@@ -23,7 +23,7 @@ const ordersSchema = new Schema({
     ref: 'Products',
   }],
   quantity: {
-    type: Number,
+    type: [{}],
     unique: false,
     required: true,
   },
