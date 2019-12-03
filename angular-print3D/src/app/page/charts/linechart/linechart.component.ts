@@ -27,15 +27,13 @@ export class LinechartComponent implements OnInit {
   public lineChartPlugins = [];
 
   constructor(private cs: ChartService) {
-    // this.thisYear = new Date().getFullYear();
-    // this.cs.readData('orders').subscribe(data => {
-    //   data.forEach(item => {
-    //     this.lineChartData = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2019' }];
-    //     new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
-    //     console.log(this.lineChartData[0].data);
-    //   })
-
-  // })
+    this.thisYear = new Date().getFullYear();
+    this.cs.readData('orders').subscribe(data => {
+      this.lineChartData = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2019' }];
+      data.forEach(item => {
+        new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
+      })
+    })
 }
 
 ngOnInit() {

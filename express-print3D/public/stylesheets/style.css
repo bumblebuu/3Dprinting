@@ -433,3 +433,9 @@ li .without-arrow>a {
 form input {
   font-family: 'Roboto', sans-serif;
 }
+
+.quantity {
+  width: 60px;
+  background-color: #fff !important;
+  text-align: center;
+}

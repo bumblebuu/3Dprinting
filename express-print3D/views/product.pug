@@ -48,9 +48,9 @@ block content
             tr
               td Category:
               if product.subcategory
-                td #{product.menu}- #{product.category}- #{product.subcategory}
+                td #{product.menu}/ #{product.category}/ #{product.subcategory}
               else
-                td #{product.menu}- #{product.category}
+                td #{product.menu}/ #{product.category}
 
     .row          
       .col-5.mt-5.ml-3
@@ -86,7 +86,8 @@ block content
                   small.text-muted=dateFormatting(review.insdate)
               .row
                 .col-2
-                  small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
+                  if review.user
+                    small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
                 .col-1
                   small.text-muted #{ review.rate }&starf;
               hr

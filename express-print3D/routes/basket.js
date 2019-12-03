@@ -56,30 +56,38 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
-router.post('/remove/:id', (req, res, next) => {
-  const query = Basket.find({
+router.get('/removeItem/:id', (req, res, next) => {
+  Basket.findOneAndDelete({
     _id: req.params.id,
-  }).select('quantity -_id');
-
-  query.exec((err, quantity) => {
-    if (quantity[0].quantity > 1) {
-      newQuantity = quantity[0].quantity - 1;
-    } else {
-      Basket.remove({
-        _id: req.params.id,
-      }, (err, removed) => {
-        if (err) return next(err);
-      });
-    }
-    console.log(newQuantity);
-    Basket.update({
-      _id: req.params.id,
-    }, {
-      quantity: newQuantity,
-    }, (err, result) => {
-      res.redirect('/basket');
-    });
+  }, (err, basket) => {
+    if (err) next(err);
+    res.redirect('/basket');
   });
 });
 
+router.get('/removeAll/:id', (req, res, next) => {
+  Basket.deleteMany({
+    user: req.params.id,
+  }, (err, basket) => {
+    if (err) next(err);
+    res.redirect('/basket');
+  });
+});
+router.get('/:id', async (req, res, next) => {
+  Basket.findOne({
+    user: req.params.id,
+  }, (err, basket) => {
+    if (err) next(err);
+    res.json(basket);
+  });
+});
+
+router.put('/:id', async (req, res, next) => {
+  Basket.findOneAndUpdate({
+    user: req.params.id,
+  }, req.body, (err, basket) => {
+    if (err) next(err);
+    res.json(basket);
+  });
+});
 module.exports = router;

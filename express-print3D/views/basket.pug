@@ -18,18 +18,27 @@ block content
               each basketItem in basket
                 tr
                   td=basketItem.product.name
-                  td=basketItem.quantity
-                  td=basketItem.price*basketItem.quantity
                   td
-                    form(action=`/basket/remove/${basketItem._id}` method='post')
-                      button.btn.btn-sm.btn-danger(type='submit') 	&#128465;
+                    button.btn.btn-danger(onClick=`quantityChanged('${user._id}','${basketItem.product._id}','minus')`) -
+                    input.quantity(name='quantity', type='number', value=basketItem.quantity, readonly)
+                    button.btn.btn-success(onClick=`quantityChanged('${user._id}','${basketItem.product._id}','plus')`) +
+                  td=basketItem.price
+                  td
+                    form(action=`/basket/removeItem/${basketItem._id}`, method='delete')
+                      button.btn.btn-danger(type='submit') &#128465;
           hr
-          strong.total Total: 
-          | $ #{total}
-          br
-          a.mt-3.btn.btn-success(href='/pay/checkout') Pay    
+          .row
+            .col-9
+              strong.total Total: $ #{total}
+            .col-3.text-center
+              form(action=`/basket/removeAll/${user._id}`, method='delete')
+                button.mb-2.btn.btn-danger(type='submit') Empty basket
+          .text-center
+            a.mt-3.mb-3.btn.btn-lg.btn-success(href='/pay/checkout') Pay    
         else
           .col-10.offset-1
             a(href='/products', style='text-decoration: inherit;')
               img(style='width:30%' src='img/emptybasket.png')
               h6.text-dark Your basket is empty. Start shoppig!
+  
+  script(src="/js/basket.js")
