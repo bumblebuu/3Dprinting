@@ -41,23 +41,7 @@ router.get('/:page', async (req, res, next) => {
         const brandsArr = brandsString.split('&');
 
         Product.find({
-          $or: [{
-            category: {
-              $in: categoriesArr,
-            },
-          },
-          {
-            brand: {
-              $in: brandsArr,
-            },
-          },
-          ],
-        })
-          .skip((perPage * page) - perPage)
-          .limit(perPage)
-          .exec((err, products) => {
-            Product.countDocuments({
-              $or: [{
+            $or: [{
                 category: {
                   $in: categoriesArr,
                 },
@@ -67,6 +51,22 @@ router.get('/:page', async (req, res, next) => {
                   $in: brandsArr,
                 },
               },
+            ],
+          })
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec((err, products) => {
+            Product.countDocuments({
+              $or: [{
+                  category: {
+                    $in: categoriesArr,
+                  },
+                },
+                {
+                  brand: {
+                    $in: brandsArr,
+                  },
+                },
               ],
             }).exec((err, count) => {
               if (err) return next(err);
@@ -87,10 +87,10 @@ router.get('/:page', async (req, res, next) => {
         const categoriesArr = text.split('&');
 
         Product.find({
-          category: {
-            $in: categoriesArr,
-          },
-        })
+            category: {
+              $in: categoriesArr,
+            },
+          })
           .skip((perPage * page) - perPage)
           .limit(perPage)
           .exec((err, products) => {
@@ -118,10 +118,10 @@ router.get('/:page', async (req, res, next) => {
       const brandsArr = text.split('&');
 
       Product.find({
-        brand: {
-          $in: brandsArr,
-        },
-      })
+          brand: {
+            $in: brandsArr,
+          },
+        })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, products) => {
@@ -178,7 +178,7 @@ router.get('/product/:seo', (req, res, next) => {
       await Review.find({
         product: product._id,
       }).populate('user').sort('-insdate').exec((err, reviews) => {
-        if (err) return next(err);
+        if (err) next(err);
         res.render('product', {
           product,
           reviews,
@@ -206,4 +206,30 @@ router.post('/reviews', (req, res, next) => {
   }
 });
 
+router.get('/reviews/:id', (req, res, next) => {
+  Review.findOne({
+    _id: req.params.id,
+  }, (err, review) => {
+    if (err) next(err);
+    res.json(review);
+  });
+});
+
+router.put('/reviews/edit/:id', (req, res, next) => {
+  Review.findOneAndUpdate({
+    _id: req.params.id,
+  }, req.body, (err, review) => {
+    if (err) next(err);
+    res.json(review);
+  });
+});
+
+router.get('/reviews/remove/:id', (req, res, next) => {
+  Review.findOneAndDelete({
+    _id: req.params.id,
+  }, (err, review) => {
+    if (err) next(err);
+    res.redirect('back');
+  });
+});
 module.exports = router;

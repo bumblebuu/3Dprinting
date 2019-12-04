@@ -61,3 +61,35 @@ function showSlides(n) {
   dots[slideIndex - 1].className += ' active';
   captionText.innerHTML = dots[slideIndex - 1].alt;
 }
+
+function toggleDisabled(event) {
+  const {
+    id,
+  } = event.target.dataset;
+  const disabledElement = document.querySelector(`.edit[data-id="${id}"]`);
+  const hiddenElement = document.querySelector(`.hide[data-id="${id}"]`);
+
+  if (disabledElement.disabled === false) {
+    disabledElement.disabled = true;
+  } else {
+    disabledElement.disabled = false;
+  }
+  hiddenElement.classList.toggle('hidden');
+}
+
+function updateReview(user, review) {
+  const newText = event.target.previousElementSibling;
+  fetch(`http://localhost:3000/products/reviews/${review}`).then(response => response.json()).then((reviewToEdit) => {
+    reviewToEdit.text = newText.value;
+    fetch(`http://localhost:3000/products/reviews/edit/${review}`, {
+      method: 'PUT',
+      body: JSON.stringify(reviewToEdit),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    });
+  });
+
+  newText.disabled = true;
+  event.target.classList.toggle('hidden');
+}

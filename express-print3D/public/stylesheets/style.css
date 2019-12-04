@@ -439,3 +439,11 @@ form input {
   background-color: #fff !important;
   text-align: center;
 }
+.edit:disabled {
+  background-color: #fff;
+  border: 0px
+}
+
+.hidden{
+  display: none;
+}

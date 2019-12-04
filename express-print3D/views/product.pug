@@ -66,11 +66,12 @@ block content
         .product-background.mt-3.mb-3
           h3.mb-5 Product Reviews
           if reviews
-            each review in reviews
+            each review,index in reviews
               .row
-                .col-6
-                  p=review.text
-                .col-2
+                .col-7
+                  input.form-control.edit(data-id=index, disabled, name='text', value=review.text)
+                  button.mt-2.btn.btn-outline-success.hidden.hide(data-id=index, onclick=`updateReview('${user._id}','${review._id}')`) Change
+                .col-3
                   -function dateFormatting(dateString) {
                     -const date = new Date(dateString);
                     -const d = date.getDate();
@@ -84,8 +85,17 @@ block content
                     -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
                   -}
                   small.text-muted=dateFormatting(review.insdate)
+                if user
+                  if user.firstname==review.user.firstname && user.lastname==review.user.lastname
+                    .col-2.text-right
+                      .dropdown
+                        button#dropdownMenuButton.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                          a.btn.btn-outline-secondary.dropdown-item(href=`/products/reviews/remove/${review._id}`)
+                            i.fa.fa-trash(aria-hidden='true')
+                          button.btn.btn-outline-secondary.dropdown-item(data-id=index, onclick=`toggleDisabled(event)`) &#9998;
               .row
-                .col-2
+                .col-3
                   if review.user
                     small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
                 .col-1
