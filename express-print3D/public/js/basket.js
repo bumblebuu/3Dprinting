@@ -20,12 +20,9 @@ function quantityChanged(user, product, direction) {
 }
 
 function updateBasket(user, product, newQuantity) {
-  fetch(`http://localhost:3000/basket/${user}`).then(response => response.json()).then(((basket) => {
-    if (basket.product === product) {
-      basket.quantity = newQuantity;
-    }
-    console.log(basket);
-    fetch(`http://localhost:3000/basket/${user}`, {
+  fetch(`http://localhost:3000/basket/${product}`).then(response => response.json()).then(((basket) => {
+    basket.quantity = newQuantity;
+    fetch(`http://localhost:3000/basket/${product}`, {
       method: 'PUT',
       body: JSON.stringify(basket),
       headers: new Headers({

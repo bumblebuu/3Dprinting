@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
 const router = express.Router();
 const Basket = require('../models/basket.model');
@@ -73,9 +72,11 @@ router.get('/removeAll/:id', (req, res, next) => {
     res.redirect('/basket');
   });
 });
+
 router.get('/:id', async (req, res, next) => {
   Basket.findOne({
-    user: req.params.id,
+    user: req.user._id,
+    product: req.params.id,
   }, (err, basket) => {
     if (err) next(err);
     res.json(basket);
@@ -84,7 +85,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   Basket.findOneAndUpdate({
-    user: req.params.id,
+    user: req.user._id,
+    product: req.params.id,
   }, req.body, (err, basket) => {
     if (err) next(err);
     res.json(basket);
