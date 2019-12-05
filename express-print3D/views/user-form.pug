@@ -72,6 +72,7 @@ block form
           th Quantity
           th Price
           th Orderdate
+          th Status
           th
       tbody
         -function dateFormatting(dateString) {
@@ -91,9 +92,12 @@ block form
             td
               each item in order.product
                 p(style='margin:0;padding:0;')=item.name
-            td=order.quantity
+            td
+              each quantity, index in order.quantity
+                p(style='margin:0;padding:0;')=quantity[order.product[index].name]
             td $ #{order.unitprice}
             td #{dateFormatting(order.insdate)}
+            td=order.status
             td
               form(method='DELETE', action=`/user/orders/${order._id}`)
                 button.btn.btn-danger(type='submit') Delete order

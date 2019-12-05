@@ -5,6 +5,7 @@ const router = express.Router();
 // Product model
 const Product = require('../models/products.model');
 const Order = require('../models/orders.model');
+const Review = require('../models/reviews.model');
 
 // create product
 router.post('/products/add', (req, res) => {
@@ -32,6 +33,15 @@ router.get('/products/:seo', (req, res) => {
   });
 });
 
+router.get('/products/active/ones', (req, res, next) => {
+  Product.find({
+    isactive: true,
+  }, (err, products) => {
+    if (err) throw err;
+    res.json(products);
+  });
+});
+
 router.delete('/products/delete/:seo', (req, res) => {
   Product.findOneAndDelete({
     seo: req.params.seo,
@@ -52,7 +62,7 @@ router.put('/products/update/:seo', (req, res) => {
 
 
 router.get('/orders', (req, res, next) => {
-  Order.find({}).populate('user product').exec((err, orders) => {
+  Order.find({}).populate('user product').sort('-insdate').exec((err, orders) => {
     if (err) return next(err);
     res.json(orders);
   });
@@ -85,4 +95,20 @@ router.delete('/orders/delete/:id', (req, res, next) => {
   });
 });
 
+
+router.get('/reviews', (req, res, next) => {
+  Review.find({}).populate('user product').sort('-insdate').exec((err, reviews) => {
+    if (err) return next(err);
+    res.json(reviews);
+  });
+});
+
+router.delete('/reviews/delete/:id', (req, res, next) => {
+  Review.findOneAndDelete({
+    _id: req.params.id
+  }, (err, review) => {
+    if (err) next(err);
+    res.json(review)
+  })
+})
 module.exports = router;

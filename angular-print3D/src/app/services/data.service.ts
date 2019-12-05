@@ -10,6 +10,7 @@ export class DataService {
   product: BehaviorSubject<any> = new BehaviorSubject([]);
   orderList: BehaviorSubject<any> = new BehaviorSubject([]);
   order: BehaviorSubject<any> = new BehaviorSubject([]);
+  reviewList: BehaviorSubject<any> = new BehaviorSubject([]);
 
   apiURL: string = 'http://localhost:3000/api'
 
@@ -38,7 +39,16 @@ export class DataService {
         } else if (collectionName == 'orders') {
           this.orderList.next(data)
         }
+        if (collectionName == 'reviews') {
+          this.reviewList.next(data)
+        }
       }
+    )
+  }
+
+  readActiveProducts(collectionName: string) {
+    this.http.get(`${this.apiURL}/${collectionName}/active/ones`).forEach(
+      data => this.productList.next(data)
     )
   }
 

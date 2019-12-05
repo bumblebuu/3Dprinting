@@ -16,14 +16,20 @@ export class ProductsComponent implements OnInit {
   changeCounter: number = 0;
 
   constructor(private ds: DataService) {
-    this.ds.readDocument('products')
+    this.ds.readActiveProducts('products')
   }
 
   ngOnInit() {
   }
 
   onDelete(seo: string): void {
-    this.ds.deleteDocument('products', seo)
+    this.ds.updateDocument('products', seo, { isactive: 0 }).subscribe(
+      () => this.ds.readActiveProducts('products')
+    )
+  }
+
+  showAll(): void {
+    this.ds.readDocument('products')
   }
 
   setOrderBy(key: string): void {

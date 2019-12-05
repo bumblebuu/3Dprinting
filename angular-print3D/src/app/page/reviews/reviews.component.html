@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row mb-3">
+    <h3>Reviews</h3>
+  </div>
+  <div class="row">
+    <div class="col-3 offset-1 mb-3">
+      <input type="text" name="search" id="search" placeholder="Search..." class="form-control"
+        [(ngModel)]="searchedPhrase">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>user</th>
+            <th>product</th>
+            <th>text</th>
+            <th (click)='setOrderBy("rate")'>rate &#8645;</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let review of reviews$|async|search:searchedPhrase|orderby:orderKey:orderDirection:changeCounter'>
+            <td>{{review.user.firstname}} {{review.user.lastname}}</td>
+            <td>{{review.product.name}}</td>
+            <td>{{review.text}}</td>
+            <td>{{review.rate}}</td>
+            <td>
+              <button class='btn btn-danger' (click)='onDelete(review._id)'>x</button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,8 @@ import { ChartsModule } from 'ng2-charts';
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
 import { LinechartComponent } from './page/charts/linechart/linechart.component';
 import { UpdateOrderComponent } from './page/update-order/update-order.component';
-import { OrderbyPipe } from './pipes/orderby.pipe'
+import { OrderbyPipe } from './pipes/orderby.pipe';
+import { ReviewsComponent } from './page/reviews/reviews.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { OrderbyPipe } from './pipes/orderby.pipe'
     PiechartComponent,
     LinechartComponent,
     UpdateOrderComponent,
-    OrderbyPipe
+    OrderbyPipe,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,

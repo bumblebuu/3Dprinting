@@ -10,6 +10,7 @@ import { OrdersComponent } from './page/orders/orders.component';
 import { LinechartComponent } from './page/charts/linechart/linechart.component';
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
 import { UpdateOrderComponent } from './page/update-order/update-order.component';
+import { ReviewsComponent } from './page/reviews/reviews.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: "orders", component: OrdersComponent },
   { path: "order/update/:id", component: UpdateOrderComponent },
   { path: "linechart", component: LinechartComponent },
-  { path: "piechart", component: PiechartComponent }
+  { path: "piechart", component: PiechartComponent },
+  { path: "reviews", component: ReviewsComponent },
 ];
 
 @NgModule({

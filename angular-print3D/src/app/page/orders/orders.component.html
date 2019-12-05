@@ -29,7 +29,9 @@
             <td>
               <p *ngFor='let product of order.product'>{{product.name}}</p>
             </td>
-            <td>{{order.quantity}}</td>
+            <td>
+              <p *ngFor='let quantity of order.quantity;index as i'>{{quantity[order.product[i].name]}}</p>
+            </td>
             <td>${{order.unitprice}}</td>
             <td>{{order.status}}</td>
             <td>{{order.insdate |date:'medium'}}</td>

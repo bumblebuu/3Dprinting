@@ -22,6 +22,9 @@ router.get('/', (req, res, next) => {
 router.get('/user-form', (req, res, next) => {
   Order.find({
     user: req.user._id,
+    status: {
+      $ne: 'cancelled',
+    },
   }).populate('product').sort('-insdate').exec((err, orders) => {
     if (err) next(err);
     res.render('user-form', {
@@ -91,8 +94,10 @@ router.post('/billing', (req, res, next) => {
 });
 
 router.get('/orders/:id', (req, res, next) => {
-  Order.findOneAndDelete({
+  Order.findOneAndUpdate({
     _id: req.params.id,
+  }, {
+    status: 'cancelled',
   }, (err, deleted) => {
     if (err) next(err);
     res.redirect('/user/user-form');
@@ -105,9 +110,9 @@ router.post('/upload', (req, res, next) => {
     // The file name of the uploaded file
     const fileName = req.user.username + file.upload.name;
     console.log(fileName);
-    if (!fileName.endsWith('.jpg') &&
-      !fileName.endsWith('.jpeg') &&
-      !fileName.endsWith('.png')) {
+    if (!fileName.endsWith('.jpg')
+      && !fileName.endsWith('.jpeg')
+      && !fileName.endsWith('.png')) {
       console.log('Nope, just jpg and png');
       return res.redirect('/user');
     }
