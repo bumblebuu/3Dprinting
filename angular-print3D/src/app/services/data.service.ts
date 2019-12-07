@@ -11,6 +11,8 @@ export class DataService {
   orderList: BehaviorSubject<any> = new BehaviorSubject([]);
   order: BehaviorSubject<any> = new BehaviorSubject([]);
   reviewList: BehaviorSubject<any> = new BehaviorSubject([]);
+  userList: BehaviorSubject<any> = new BehaviorSubject([]);
+  user: BehaviorSubject<any> = new BehaviorSubject([]);
 
   apiURL: string = 'http://localhost:3000/api'
 
@@ -28,6 +30,8 @@ export class DataService {
             this.product.next(data)
           } else if (collectionName == 'orders') {
             this.order.next(data)
+          } else if (collectionName == 'users') {
+            this.user.next(data)
           }
         }
       )
@@ -39,8 +43,11 @@ export class DataService {
         } else if (collectionName == 'orders') {
           this.orderList.next(data)
         }
-        if (collectionName == 'reviews') {
+        else if (collectionName == 'reviews') {
           this.reviewList.next(data)
+        }
+        else if (collectionName == 'users') {
+          this.userList.next(data)
         }
       }
     )

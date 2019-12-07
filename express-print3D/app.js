@@ -59,6 +59,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('D:/Projects/3Dprinting/express-print3D/public/img/users'));
 
 app.use(async (req, res, next) => {
   const user = await userModul.checkLogin(req);

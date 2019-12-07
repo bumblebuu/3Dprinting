@@ -1,1 +1,64 @@
-<p>update-user works!</p>
+<div class="card">
+  <div class="card-header text-dark">
+    <h3>Edit page for user: {{user.firstname}} {{user.lastname}}!</h3>
+  </div>
+  <form (submit)="onSubmit($event)">
+    <div class="card-body">
+      <div class="form-group">
+        <img [src]="linkImg(user.pictureurl)" alt="picture" class="user-picture-big">
+        <button class="btn btn-info col-2 offset-1" (click)="useDefault(user.gender)">Use default image</button>
+      </div>
+      <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input type="text" class="form-control" name="firstname" id="firstname" [(ngModel)]="user.firstname">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" [(ngModel)]="user.lastname">
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" disabled>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select name="role" id="role" [(ngModel)]="user.role" class="form-control">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-3">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" name="country" id="country" [(ngModel)]="user.address[0]">
+          </div>
+          <div class="col-3">
+            <label for="city">City</label>
+            <input type="text" class="form-control" name="city" id="city" [(ngModel)]="user.address[1]">
+          </div>
+          <div class="col-1">
+            <label for="zip">ZIP</label>
+            <input type="number" class="form-control" name="zip" id="zip" [(ngModel)]="user.address[2]">
+          </div>
+          <div class="col-4">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" name="street" id="street" [(ngModel)]="user.address[3]">
+          </div>
+          <div class="col-1">
+            <label for="door">Door</label>
+            <input type="number" class="form-control" name="door" id="door" [(ngModel)]="user.address[4]">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-secondary col-1 offset-8" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn btn-success col-2 offset-1" (click)="onSubmit()">Save changes</button>
+      </div>
+    </div>
+  </form>
+</div>

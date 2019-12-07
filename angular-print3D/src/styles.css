@@ -2,4 +2,27 @@
   background-image: url('./assets/color9.png');
   background-attachment: fixed;
   background-size: cover;
+  min-height: 100vh;
+}
+
+.user-picture-div {
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
+}
+
+.user-picture {
+  height: 100%;
+  width: auto;
+}
+
+.user-picture-big {
+  height: 200px;
+  width: auto;
+  border-radius: 15px;
+  background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
 }

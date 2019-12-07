@@ -1,4 +1,5 @@
 export class User {
+  _id: string;
   firstname: string;
   lastname: string;
   username: string;
@@ -7,6 +8,6 @@ export class User {
   gender: string;
   address: string;
   pictureurl?: string;
-  role?: string;
+  role: string;
   cookie: string
 }

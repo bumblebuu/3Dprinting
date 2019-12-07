@@ -6,6 +6,7 @@ const router = express.Router();
 const Product = require('../models/products.model');
 const Order = require('../models/orders.model');
 const Review = require('../models/reviews.model');
+const User = require('../models/users.model');
 
 // create product
 router.post('/products/add', (req, res) => {
@@ -110,5 +111,31 @@ router.delete('/reviews/delete/:id', (req, res, next) => {
     if (err) next(err);
     res.json(review)
   })
-})
+});
+
+router.get('/users', (req, res, next) => {
+  User.find({}).exec((err, users) => {
+    if (err) return next(err);
+    res.json(users);
+  });
+});
+
+router.get('/users/:id', (req, res, next) => {
+  User.findOne({
+    _id: req.params.id,
+  }).exec((err, user) => {
+    if (err) return next(err);
+    res.json(user);
+  });
+});
+
+router.put('/users/update/:id', (req, res, next) => {
+  User.findOneAndUpdate({
+    _id: req.params.id,
+  }, req.body, (err, user) => {
+    if (err) return next(err);
+    res.json(user);
+  });
+});
+
 module.exports = router;
