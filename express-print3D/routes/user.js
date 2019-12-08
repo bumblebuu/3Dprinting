@@ -140,12 +140,27 @@ router.post('/upload', (req, res, next) => {
   });
 });
 
-router.delete('/', (req, res, next) => {
-  User.deleteOne({
-    cookie: req.user.cookie,
-  }, (err, obj) => {
-    if (err) next(err);
-    console.log(obj);
+router.post('/:id', (req, res, next) => {
+  let username = '';
+  let email = '';
+  User.findOne({
+    _id: req.params.id,
+  }, (err, user) => {
+    if (err) return next(err);
+    username = user.username;
+    email = user.email;
+  });
+
+  User.findOneAndUpdate({
+    _id: req.params.id,
+  }, {
+    firstname: 'deleted',
+    lastname: 'account',
+    username: `${username  }deleted`,
+    email: `${email  }deleted`,
+  }, (err, user) => {
+    if (err) return next(err);
+    res.redirect('../../logout');
   });
 });
 

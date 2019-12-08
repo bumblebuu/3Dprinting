@@ -28,7 +28,6 @@ const createFetch = function () {
   const categories = isThere(categoriesUrl);
 
   const url = `http://localhost:3000/products/1?${categories}${brands}`;
-  console.log(url);
 
   window.location = url;
 

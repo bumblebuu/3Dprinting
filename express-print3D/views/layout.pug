@@ -10,6 +10,13 @@ html
     nav.navbar.sticky-top
       a.logo.navbar-brand.ml-3(href='/') o
       if user
+        if user.role == 'admin'
+          a.dropdown-btn(href='#')
+            #user-pic-div
+              img.user-pic(src=`/img/users/${user.pictureurl}`)
+          .dropdown-container.dropdown-user
+            a.nav-link(href='/api') Admin page
+            a.nav-link(href='/logout') Logout
         if user.role == 'user'
           a.dropdown-btn(href='#')
             #user-pic-div
@@ -70,23 +77,23 @@ html
                     a(href='/products/1?c=kids') Kids
                     ul.dropdown-menu
                       li
-                        a(href='#') Lego
+                        a(href='/products/1?s=lego') Lego
                   li.dropdown-submenu
                     a.nav-link(href='/products/1?c=practical') Practical
                     ul.dropdown-menu
                       li
-                        a(href='#') Inside
+                        a(href='/products/1?s=inside') Inside
                       li
-                        a(href='#') Outside
+                        a(href='/products/1?s=outside') Outside
                   li.dropdown-submenu
                     a.nav-link(href='/products/1?c=accessories') Accessories
                     ul.dropdown-menu
                       li
-                        a(href='#') Jewellery
+                        a(href='/products/1?s=jewellery') Jewellery
                       li
-                        a(href='#') Phone cases
+                        a(href='/products/1?s=phone-cases') Phone cases
                       li
-                        a(href='#') Other
+                        a(href='/products/1?s=other') Other
 
               li.without-arrow
                 a.nav-link(href='#') Print your own idea
@@ -98,7 +105,7 @@ html
 
     script(src='/jquery/dist/jquery.min.js')
     script(src='/bootstrap/dist/js/bootstrap.bundle.min.js')
-    script(src='/bootstrap/dist/js/')
+    //-script(src='/bootstrap/dist/js/')
     script(src='/scripts/navbar.js')
     script(src='/scripts/filter.js')
     script(src='/scripts/user-page.js')

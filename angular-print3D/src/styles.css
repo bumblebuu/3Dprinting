@@ -16,8 +16,8 @@
 }
 
 .user-picture {
-  height: 100%;
-  width: auto;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 .user-picture-big {

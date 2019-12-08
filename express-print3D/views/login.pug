@@ -10,9 +10,14 @@ html
     .login.container-fluid
       .container.login-container
 
-        if show
+        if show2
           .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
             |  All fields are required!
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+              span(aria-hidden='true') ×
+        if show1
+          .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
+            |  Wrong username or password!
             button.close(type='button', data-dismiss='alert', aria-label='Close')
               span(aria-hidden='true') ×
 

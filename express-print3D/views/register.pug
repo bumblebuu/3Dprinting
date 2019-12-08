@@ -10,9 +10,19 @@ html
     .register.container-fluid
       .container.register-container
 
-        if show
+        if show2
           .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
             |  All fields are required!
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+              span(aria-hidden='true') ×
+        if show1
+          .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
+            |  This email is already in use!
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+              span(aria-hidden='true') ×
+        if show3
+          .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
+            |  This username is already in use!
             button.close(type='button', data-dismiss='alert', aria-label='Close')
               span(aria-hidden='true') ×
 

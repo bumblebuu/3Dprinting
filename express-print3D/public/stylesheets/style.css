@@ -447,3 +447,8 @@ form input {
 .hidden{
   display: none;
 }
+
+.btn-show {
+  position: absolute;
+  bottom: 5%;
+}

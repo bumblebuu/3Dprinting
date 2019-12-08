@@ -20,24 +20,32 @@ router.post('/', async (req, res, next) => {
     && req.body.firstName
     && req.body.lastName
     && req.body.email) {
-    // Check if passwords match
-    if (req.body.password !== req.body.passwordAgain) {
-      const err = new Error('passwords do not match');
-      err.status = 400;
-      return next(err);
-    }
 
     // Check sex
     if (req.body.gender == 'female') {
       picUrl = 'default-woman.png';
     }
 
-    // Check if this user already exisits
-    const user = await User.findOne({
+    // Check if this email is already in use
+    const userEmail = await User.findOne({
       email: req.body.email,
     });
-    if (user) {
-      return res.status(400).send('That user already exists!');
+    if (userEmail) {
+      return res.render('register', {
+        title: 'Register',
+        show1: true,
+      });
+    }
+
+    // Check if this username is already in use
+    const userName = await User.findOne({
+      username: req.body.userName,
+    });
+    if (userName) {
+      return res.render('register', {
+        title: 'Register',
+        show3: true,
+      });
     }
 
     // create the object we're going to send the mongoose
@@ -62,7 +70,7 @@ router.post('/', async (req, res, next) => {
   } else {
     res.render('register', {
       title: 'Register',
-      show: true,
+      show2: true,
     });
   }
 });

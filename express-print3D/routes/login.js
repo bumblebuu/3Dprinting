@@ -26,6 +26,13 @@ router.post('/', (req, res, next) => {
       password: sha1(req.body.password),
     };
 
+    if (!User.findOne(userData)){
+      return res.render('login', {
+        title: 'Login',
+        show1: true,
+      });
+    }
+
     const token = tokgen.generate();
 
     res.cookie('uuid', token);
@@ -39,10 +46,11 @@ router.post('/', (req, res, next) => {
     );
 
     return res.redirect('/products');
+
   } else {
     res.render('login', {
       title: 'Login',
-      show: true,
+      show2: true,
     });
   }
 });
