@@ -16,6 +16,8 @@ export class UpdateProductComponent implements OnInit {
 
   product$: BehaviorSubject<any> = this.ds.product;
   product: Product;
+  wrongAmmount: boolean = false;
+  missingData;
 
   constructor(private ds: DataService, private ar: ActivatedRoute, private router: Router) {
     this.ar.params.forEach(params => {
@@ -39,8 +41,24 @@ export class UpdateProductComponent implements OnInit {
   }
 
   onUpdate() {
-    this.ds.updateDocument('products', this.product.seo, this.product).subscribe(
-      () => this.router.navigate(['/products'])
-    )
+    const keys = ['name', 'seo', 'brand', 'description', 'img', 'menu', 'category', 'price'];
+    let error = false;
+    let missing = [];
+    keys.forEach((k) => {
+      if (!this.product[k]) {
+        error = true;
+        missing.push(k);
+        this.missingData = 'You skipped: ';
+        this.missingData += missing;
+      } else if (this.product[k] < 1) {
+        error = true;
+        this.wrongAmmount = true;
+      }
+    })
+    if (!error) {
+      this.ds.updateDocument('products', this.product.seo, this.product).subscribe(
+        () => this.router.navigate(['/products'])
+      )
+    }
   }
 }

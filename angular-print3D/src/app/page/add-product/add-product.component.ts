@@ -16,8 +16,14 @@ export class AddProductComponent implements OnInit {
 
   newProduct: Product = new Product();
   products: BehaviorSubject<any> = this.ds.productList;
-  constructor(private ds: DataService, private router: Router) { }
-  
+  missingData;
+  wrongAmmount: boolean = false;
+  wrongName: boolean = false;
+
+  constructor(private ds: DataService, private router: Router) {
+    this.ds.readDocument('products')
+  }
+
   ngOnInit() {
     this.newProduct.img = [];
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
@@ -29,9 +35,36 @@ export class AddProductComponent implements OnInit {
   }
 
   onCreate() {
-    this.ds.createDocument('products', this.newProduct).subscribe(
-      () => this.router.navigate(['/products'])
-    )
+    const keys = ['name', 'seo', 'brand', 'description', 'menu', 'category', 'price'];
+    let error = false;
+    let missing = [];
+
+    keys.forEach((k) => {
+      if (!this.newProduct[k]) {
+        console.log('missing');
+        error = true;
+        missing.push(k);
+        this.missingData = 'You skipped: ';
+        this.missingData += missing;
+      } else if (this.newProduct[k] <1) {
+        console.log(k);
+        error = true;
+        this.wrongAmmount = true;
+      } else if (k == 'name') {
+        console.log('name');
+        for (let i = 0; i < this.products.value.length; i += 1) {
+          if (this.products.value[i].name === this.newProduct[k]) {
+            error = true;
+            this.wrongName = true
+          }
+        }
+      }
+    })
+    if (!error) {
+      this.ds.createDocument('products', this.newProduct).subscribe(
+        () => this.router.navigate(['/products'])
+      )
+    }
   }
   onKey(event: any) {
     this.newProduct.seo = event.target.value.toString()               // Convert to string

@@ -1,114 +1,136 @@
-        <div class="card">
-          <div class="card-header">
-            <h3>Edit this product!</h3>
-          </div>
-          <form action="http://localhost:3000/api/products/update/{{product.seo}}" method="post">
-            <div class="card-body">
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="card">
+        <div class="card-header">
+          <h3>Edit this product!</h3>
+        </div>
+        <form action="http://localhost:3000/api/products/update/{{product.seo}}" method="post">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" placeholder="Name" class="form-control" name="product.name" id="name"
+                [(ngModel)]="product.name" disabled>
+            </div>
+            <div class="form-group">
+              <label for="seo">
+                Seo
+              </label>
+              <input class="form-control" [(ngModel)]="product.seo" type="text" name="product.seo" id="seo" disabled>
+            </div>
+            <div class="form-group">
+              <label for="brand">
+                Brand
+              </label>
+              <input class="form-control" [(ngModel)]="product.brand" type="text" name="product.brand" id="brand"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="description">
+                Description
+              </label>
+              <textarea rows="5" class="form-control" [(ngModel)]="product.description" name="product.description"
+                id="description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="img">
+                Image
+              </label>
+              <br>
+              <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple />
+              <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
+                [disabled]="!uploader.getNotUploadedItems().length">
+                Upload
+              </button>
+            </div>
+            <div class="form-group">
+              <label for="video">
+                Video
+              </label>
+              <input class="form-control" [(ngModel)]="product.video" type="text" name="product.video" id="video"
+                required>
+            </div>
+            <div class="form-group">
               <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" placeholder="Name" class="form-control" name="product.name" id="name"
-                  [(ngModel)]="product.name" disabled>
-              </div>
-              <div class="form-group">
-                <label for="seo">
-                  Seo
-                </label>
-                <input class="form-control" [(ngModel)]="product.seo" type="text" name="product.seo" id="seo" disabled>
-              </div>
-              <div class="form-group">
-                <label for="brand">
-                  Brand
-                </label>
-                <input class="form-control" [(ngModel)]="product.brand" type="text" name="product.brand" id="brand"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="description">
-                  Description
-                </label>
-                <textarea class="form-control" [(ngModel)]="product.description" name="product.description"
-                  id="description" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="img">
-                  Image
-                </label>
-                <br>
-                <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple />
-                <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
-                  [disabled]="!uploader.getNotUploadedItems().length">
-                  Upload
-                </button>
-              </div>
-              <div class="form-group">
-                <label for="video">
-                  Video
-                </label>
-                <input class="form-control" [(ngModel)]="product.video" type="text" name="product.video" id="video"
-                  required>
-              </div>
-              <div class="form-group">
-                <div class="form-group">
-                  <label for="menu">Menu</label>
-                  <select name="menu" id="menu" class="form-control" [(ngModel)]="product.menu">
-                    <option [value]="'Printers and Scanners'">Printers and Scanners</option>
-                    <option [value]="'Science'">Science</option>
-                    <option [value]="'Magic'">Magic</option>
-                    <option [value]="'Print your own idea'">Print your own idea</option>
-                  </select>
-                </div>
-                <div *ngIf="product.menu" class="form-group">
-                  <label for="category">
-                    Category
-                  </label>
-                  <div [ngSwitch]="product.menu">
-                    <!-- the same view can be shown in more than one case -->
-                    <select name="category" class="form-control" [(ngModel)]="product.category"
-                      *ngSwitchCase="'Printers and Scanners'">
-                      <option [value]="'printers'">Printers</option>
-                      <option [value]="'scanners'">Scanners</option>
-                      <option [value]="'filaments'">Filaments</option>
-                      <option [value]="'tools'">Tools</option>
-                    </select>
-
-                    <select *ngSwitchCase="'Science'" name="category" class="form-control"
-                      [(ngModel)]="product.category">
-                      <option [value]="'health'">Health</option>
-                      <option [value]="'electronics'">Electronics</option>
-                      <option [value]="'mechanics'">Mechanics</option>
-                      <option [value]="'architecture'">Architecture</option>
-                    </select>
-
-                    <select *ngSwitchCase="'Magic'" name="category" class="form-control" [(ngModel)]="product.category">
-                      <option [value]="'kids'">Kids</option>
-                      <option [value]="'practical'">Practical</option>
-                      <option [value]="'accessories'">Accessories</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group" *ngIf="product.menu==='Magic'">
-                <label for="subcategory">Subcategory</label>
-                <select name="subcategory" id="subcategory" class="form-control" [ngSwitch]="product.category"
-                  [(ngModel)]="product.subcategory">
-                  <option *ngSwitchCase="'kids'" [value]="lego">Lego</option>
-                  <option *ngSwitchCase="'practical'" [value]="'inside'">Inside</option>
-                  <option *ngSwitchCase="'practical'" [value]="'outside'">Outside</option>
-                  <option *ngSwitchCase="'accessories'" [value]="'jewellery'">Jewellery</option>
-                  <option *ngSwitchCase="'accessories'" [value]="'phone cases'">Phone cases</option>
-                  <option *ngSwitchCase="'accessories'" [value]="'other'">Other</option>
+                <label for="menu">Menu</label>
+                <select name="menu" id="menu" class="form-control" [(ngModel)]="product.menu">
+                  <option [value]="'Printers and Scanners'">Printers and Scanners</option>
+                  <option [value]="'Science'">Science</option>
+                  <option [value]="'Magic'">Magic</option>
+                  <option [value]="'Print your own idea'">Print your own idea</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="price">
-                  Price
+              <div *ngIf="product.menu" class="form-group">
+                <label for="category">
+                  Category
                 </label>
-                <input class="form-control" [(ngModel)]="product.price" type="number" name="product.price" id="price"
-                  required>
-              </div>
-              <div class="card-footer text-center">
-                <button type="submit" class="btn btn-success" (click)="onUpdate()">Submit</button>
+                <div [ngSwitch]="product.menu">
+                  <!-- the same view can be shown in more than one case -->
+                  <select name="category" class="form-control" [(ngModel)]="product.category"
+                    *ngSwitchCase="'Printers and Scanners'">
+                    <option [value]="'printers'">Printers</option>
+                    <option [value]="'scanners'">Scanners</option>
+                    <option [value]="'filaments'">Filaments</option>
+                    <option [value]="'tools'">Tools</option>
+                  </select>
+
+                  <select *ngSwitchCase="'Science'" name="category" class="form-control" [(ngModel)]="product.category">
+                    <option [value]="'health'">Health</option>
+                    <option [value]="'electronics'">Electronics</option>
+                    <option [value]="'mechanics'">Mechanics</option>
+                    <option [value]="'architecture'">Architecture</option>
+                  </select>
+
+                  <select *ngSwitchCase="'Magic'" name="category" class="form-control" [(ngModel)]="product.category">
+                    <option [value]="'kids'">Kids</option>
+                    <option [value]="'practical'">Practical</option>
+                    <option [value]="'accessories'">Accessories</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </form>
-        </div>
+            <div class="form-group" *ngIf="product.menu==='Magic'">
+              <label for="subcategory">Subcategory</label>
+              <select name="subcategory" id="subcategory" class="form-control" [ngSwitch]="product.category"
+                [(ngModel)]="product.subcategory">
+                <option *ngSwitchCase="'kids'" [value]="lego">Lego</option>
+                <option *ngSwitchCase="'practical'" [value]="'inside'">Inside</option>
+                <option *ngSwitchCase="'practical'" [value]="'outside'">Outside</option>
+                <option *ngSwitchCase="'accessories'" [value]="'jewellery'">Jewellery</option>
+                <option *ngSwitchCase="'accessories'" [value]="'phone cases'">Phone cases</option>
+                <option *ngSwitchCase="'accessories'" [value]="'other'">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="price">
+                Price
+              </label>
+              <input class="form-control" [(ngModel)]="product.price" type="number" name="product.price" id="price"
+                required>
+              <div *ngIf="wrongAmmount" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> Looks like you forgot, you have to write a positive number as price.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" ng-true-value='true' ng-false-value='false' [(ngModel)]="product.isactive"
+                type="checkbox" id="active" name="product.isactive" checked>
+              <label class="form-check-label" for="active">Active</label>
+            </div>
+            <div *ngIf="missingData" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Holy guacamole!</strong> {{missingData}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="card-footer text-center">
+              <button type="submit" class="btn btn-success" (click)="onUpdate()">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

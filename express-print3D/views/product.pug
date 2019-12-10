@@ -71,7 +71,7 @@ block content
                 .col-7
                   input.form-control.edit(data-id=index, disabled, name='text', value=review.text)
                   button.mt-2.btn.btn-outline-success.hidden.hide(data-id=index, onclick=`updateReview('${user._id}','${review._id}')`) Change
-                .col-3
+                .col-2.text-right
                   -function dateFormatting(dateString) {
                     -const date = new Date(dateString);
                     -const d = date.getDate();
@@ -87,7 +87,7 @@ block content
                   small.text-muted=dateFormatting(review.insdate)
                 if user
                   if user.firstname==review.user.firstname && user.lastname==review.user.lastname
-                    .col-2.text-right
+                    .col-2
                       .dropdown
                         button#dropdownMenuButton.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                         .dropdown-menu(aria-labelledby='dropdownMenuButton')
