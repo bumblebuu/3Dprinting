@@ -12,13 +12,19 @@ let brands;
 let categories;
 let subCategories;
 
-Product.find().distinct('brand', (error, brandList) => {
+Product.find({
+  isactive: true,
+}).distinct('brand', (error, brandList) => {
   brands = brandList;
 });
-Product.find().distinct('category', (error, categoryList) => {
+Product.find({
+  isactive: true,
+}).distinct('category', (error, categoryList) => {
   categories = categoryList;
 });
-Product.find().distinct('subcategory', (error, subCategoryList) => {
+Product.find({
+  isactive: true,
+}).distinct('subcategory', (error, subCategoryList) => {
   subCategories = subCategoryList;
 });
 
@@ -41,46 +47,33 @@ router.get('/:page', async (req, res, next) => {
     const search = url.parse(req.url).query;
     const text = search.replace('-', ' ');
     if (text.includes('c=') && text.includes('s=') && text.includes('b=')) {
-      let textC = text.slice(2);
-      let index1 = (textC.indexOf('=')) - 1;
-      let index2 = (textC.lastIndexOf('=')) - 1;
+      const textC = text.slice(2);
+      const index1 = (textC.indexOf('=')) - 1;
+      const index2 = (textC.lastIndexOf('=')) - 1;
       categoriesString = textC.slice(0, index1);
       subCategoriesString = textC.slice(index1 + 2, index2);
       brandsString = textC.slice(index2 + 2);
-    }
-
-    else if (text.includes('c=') && text.includes('s=')){
-      let textC = text.slice(2);
-      let index1 = (textC.indexOf('=')) - 1;
+    } else if (text.includes('c=') && text.includes('s=')) {
+      const textC = text.slice(2);
+      const index1 = (textC.indexOf('=')) - 1;
       categoriesString = textC.slice(0, index1);
       subCategoriesString = textC.slice(index1 + 2);
-    }
-
-    else if (text.includes('c=') && text.includes('b=')) {
-      let textC = text.slice(2);
-      let index1 = (textC.indexOf('=')) - 1;
+    } else if (text.includes('c=') && text.includes('b=')) {
+      const textC = text.slice(2);
+      const index1 = (textC.indexOf('=')) - 1;
       categoriesString = textC.slice(0, index1);
       brandsString = textC.slice(index1 + 2);
-    }
-    
-    else if (text.includes('s=') && text.includes('b=')){
-      let textC = text.slice(2);
-      let index1 = (textC.indexOf('=')) - 1;
+    } else if (text.includes('s=') && text.includes('b=')) {
+      const textC = text.slice(2);
+      const index1 = (textC.indexOf('=')) - 1;
       subCategoriesString = textC.slice(0, index1);
       brandsString = textC.slice(index1 + 2);
-    }
-
-    else {
-      if (text.includes('c=')){
-        categoriesString = text.slice(2);
-      }
-      else if (text.includes('s=')){
-        subCategoriesString = text.slice(2);
-      }
-      else if (text.includes('b=')){
-        brandsString = text.slice(2);
-      }
-
+    } else if (text.includes('c=')) {
+      categoriesString = text.slice(2);
+    } else if (text.includes('s=')) {
+      subCategoriesString = text.slice(2);
+    } else if (text.includes('b=')) {
+      brandsString = text.slice(2);
     }
 
     if (!categoriesString) {
@@ -100,42 +93,44 @@ router.get('/:page', async (req, res, next) => {
     }
 
     Product.find({
-          $or: [{
-              category: {
-                $in: categoriesArr,
-              },
-            },
-            {
-              subcategory: {
-                $in: subCategoriesArr,
-              },
-            },
-            {
-              brand: {
-                $in: brandsArr,
-              },
-            },
-          ],
-        })
+      isactive: true,
+      $or: [{
+        category: {
+          $in: categoriesArr,
+        },
+      },
+      {
+        subcategory: {
+          $in: subCategoriesArr,
+        },
+      },
+      {
+        brand: {
+          $in: brandsArr,
+        },
+      },
+      ],
+    })
       .skip((perPage * page) - perPage)
       .limit(perPage)
       .exec((err, products) => {
         Product.countDocuments({
+          isactive: true,
           $or: [{
-              category: {
-                $in: categoriesArr,
-              },
+            category: {
+              $in: categoriesArr,
             },
-            {
-              subcategory: {
-                $in: subCategoriesArr,
-              },
+          },
+          {
+            subcategory: {
+              $in: subCategoriesArr,
             },
-            {
-              brand: {
-                $in: brandsArr,
-              },
+          },
+          {
+            brand: {
+              $in: brandsArr,
             },
+          },
           ],
         }).exec((err, count) => {
           if (err) return next(err);
@@ -156,12 +151,15 @@ router.get('/:page', async (req, res, next) => {
       });
 
   } else {
-    Product
-      .find({})
+    Product.find({
+      isactive: true,
+    })
       .skip((perPage * page) - perPage)
       .limit(perPage)
       .exec((err, products) => {
-        Product.countDocuments().exec((err, count) => {
+        Product.countDocuments({
+          isactive: true,
+        }).exec((err, count) => {
           if (err) return next(err);
           res.render('products', {
             title: 'Products',

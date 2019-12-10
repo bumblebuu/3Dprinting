@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor='let product of products$ | async |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter'>
+            *ngFor='let product of products$ | async |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter; let i=index'>
             <td>{{product.name}}</td>
             <td>{{product.seo}}</td>
             <td>{{product.brand}}</td>
@@ -41,7 +41,31 @@
             <td>
               <div class="btn-group">
                 <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>
-                <button (click)="onDelete(product.seo)" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]='"#"+product.seo'>
+                  Delete
+                </button>
+                <div class="modal fade" [id]="product.seo" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete {{product.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        This action sets the products status to inactive, so it won't appear on the site.
+                        Are you sure, you want to do this?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" (click)="onDelete(product.seo)"  class="close" data-dismiss="modal" class="btn btn-danger">Yes, I'm
+                          sure</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>
