@@ -1,6 +1,18 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+      
+  body
+    .error-page.container-fluid
+      .container-fluid.error-container
+          .row.pt-5
+            h1.col-4.offset-8 404
+            h3.col-4.offset-8.text-light OH NO!
+            h2.col-4.offset-8.text-light It seems that the page you are looking for is lost!
+            a.col-2.offset-9.mt-5.btn.btn-outline-dark.btn-back.btn-lg(href='/') GO BACK TO OUR INDEX PAGE
+    script(src='/jquery/dist/jquery.min.js')
+    script(src='/bootstrap/dist/js/bootstrap.bundle.min.js')

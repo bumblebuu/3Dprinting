@@ -17,23 +17,47 @@ font-family: 'Odibee Sans', cursive;
 
 body {
   margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+.products-page, .product-page, .user-page {
   font-family: 'Staatliches', cursive;
+}
+
+.login,
+.register,
+.error-page {
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
 }
 
 .login,
 .register {
   background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-  font-family: 'Numans', sans-serif;
-  margin: 0;
   background-image: url('./../img/maxresdefault.jpg');
+  font-family: 'Numans', sans-serif;
+}
+
+.error-page {
+  background-size: 120%;
+  background-position-x: right;
+  background-image: url('./../img/polygon-planet.jpg');
+  font-family: 'Odibee Sans', cursive;
 }
 
 .login-container,
-.register-container {
+.register-container,
+.error-container {
   height: 100%;
-  align-content: center;
+}
+
+.error-container h1 {
+  font-size: 170pt;
+}
+
+.error-container h3 {
+  font-size: 60pt;
 }
 
 .login-card,
@@ -195,19 +219,25 @@ nav {
   height: 80px;
 }
 
+.actionButton {
+  background-color: #3a4b4b;
+  color: whitesmoke;
+}
+
+.actionButton:hover {
+  background: -webkit-linear-gradient(-86deg, rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 91%);
+}
 
 .logo {
-  font-size: 30pt;
-  font-family: "Cubic";
+  width: 60px;
   background: -webkit-linear-gradient(-86deg, rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 91%);
   -webkit-background-clip: text;
   -webkit-text-stroke: 2px transparent;
-  color: #232d2d;
   position: fixed;
+  top: 10px;
 }
 
 .logo:hover {
-  color: #111;
   background: -webkit-linear-gradient(-86deg, rgb(47, 148, 139) 5%, rgb(5, 76, 88) 53%, rgb(3, 63, 73) 91%);
   -webkit-background-clip: text;
   -webkit-text-stroke: 2px transparent;
@@ -344,16 +374,26 @@ li .without-arrow>a {
   left: 93%;
 }
 
-#login-btn {
+#login-btn,
+.username {
   position: absolute;
   right: 70px;
   top: 20px;
+  font-size: 12pt;
 }
 
 .user-pic {
   width: 40px;
   height: 40px;
   border-radius: 20px;
+}
+
+.cart-img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 20px;
+  left: 89%;
 }
 
 .dropdown-user {
@@ -439,16 +479,77 @@ form input {
   background-color: #fff !important;
   text-align: center;
 }
+
 .edit:disabled {
   background-color: #fff;
   border: 0px
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
 .btn-show {
   position: absolute;
   bottom: 5%;
+}
+
+.btn-back {
+  border: 2px solid grey;
+  color: #898f91;
+}
+
+.parallax-1 {
+  opacity: 0.8;
+  height: 300px;
+  background-attachment: fixed;
+  background-position-y: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('./../img/hexagon.jpg');
+}
+
+.card-container-1,
+.card-container-2,
+.card-container-3,
+.card-container-4 {
+  height: 800px;
+}
+
+.card-container-1, .card-container-4 {
+  background-color: #fff;
+}
+
+.card-container-3 {
+background-color: rgb(199, 199, 199);
+}
+
+.card-container-2 {
+  background-color: #000;
+  background-image: url('./../img/kisspng-hexagonal-tiling-sphere-hex-map-grid-5abe340ee0d9f0.png');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position-x: center;
+  background-position-y: top;
+}
+
+.offer-div {
+  background-color: #4f5050;
+  color: whitesmoke;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.row-pullup {
+  margin-top: -50px;
+}
+
+.menu-link {
+  display: flex;
+  float: right;
+  align-items: baseline;
 }

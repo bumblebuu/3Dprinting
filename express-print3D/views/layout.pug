@@ -8,30 +8,33 @@ html
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
   body
     nav.navbar.sticky-top
-      a.logo.navbar-brand.ml-3(href='/') o
+      a(href='/')
+        img.logo(src='/img/dome1.png' alt='logo')
       if user
         if user.role == 'admin'
           a.dropdown-btn(href='#')
-            #user-pic-div
-              img.user-pic(src=`/img/users/${user.pictureurl}`)
+            span.username.mt-2 #{ user.username }
           .dropdown-container.dropdown-user
-            a.nav-link(href='/api') Admin page
+            a.nav-link(href='/api') Admin
             a.nav-link(href='/logout') Logout
         if user.role == 'user'
+          a(href='/user/basket')
+            img.cart-img(src='/img/shopping-cart (3).png' alt='cart')
           a.dropdown-btn(href='#')
             #user-pic-div
-              img.user-pic(src=`/img/users/${user.pictureurl}`)
+              img.user-pic(src=`/img/users/${user.pictureurl}` alt='user picture')
           .dropdown-container.dropdown-user
             a.nav-link(href='/user') Profile
             a.nav-link(href='/logout') Logout
       else
-        a#login-btn.btn.btn-info(href='/login') Login
+        a#login-btn.btn.btn-outline-info(href='/login') Login
       button.openbtn(onclick='openNav()') ☰
 
     .header
       .title.text-center.mt-5.col-md-4.col-12
         h1.beyond beyond
         h1.paper paper
+        a.btn.actionButton.mt-5(href='/products') See our products
       #picture.col-12.col-lg-7.col-md-5flex-row.d-flex
         .hole-1
         .hole-2
@@ -102,6 +105,11 @@ html
 
 
     block content
+    .footer
+      .container-fluid
+        .row
+          .col-4
+
 
     script(src='/jquery/dist/jquery.min.js')
     script(src='/bootstrap/dist/js/bootstrap.bundle.min.js')
