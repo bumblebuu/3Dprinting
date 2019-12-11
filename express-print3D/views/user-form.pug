@@ -130,7 +130,7 @@ block form
             td #{dateFormatting(order.insdate)}
             td=order.status
             td
-              form(method='DELETE', action=`/user/orders/${order._id}`)
+              form(method='POST', action=`/user/orders/${order._id}`)
                 button.btn.btn-danger(type='submit') Delete order
 
   form.user-form#delete(method='POST', action=`/user/${user._id}`)
