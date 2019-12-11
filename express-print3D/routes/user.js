@@ -93,7 +93,7 @@ router.post('/billing', (req, res, next) => {
 
 });
 
-router.get('/orders/:id', (req, res, next) => {
+router.post('/orders/:id', (req, res, next) => {
   Order.findOneAndUpdate({
     _id: req.params.id,
   }, {
