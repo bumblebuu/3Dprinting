@@ -514,6 +514,7 @@ form input {
 .card-container-3,
 .card-container-4 {
   height: 800px;
+  margin: 0;
 }
 
 .card-container-1, .card-container-4 {
@@ -533,6 +534,7 @@ background-color: rgb(199, 199, 199);
   background-size: 80%;
   background-position-x: center;
   background-position-y: top;
+  height: 400px;
 }
 
 .offer-div {
@@ -557,11 +559,12 @@ background-color: rgb(199, 199, 199);
 
 .video-container {
   margin: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+  height: 500px;
+  width: auto;
 }
 
 #myVideo {
-  
+  height: 500px;
+  position: absolute;
+  right: 0;
 }
