@@ -21,7 +21,9 @@
         <div class="row">
           <div class="col">
             <label for="quantity">Quantity</label>
-            <input type="text" class="form-control" [(ngModel)]="order.quantity" name="order.quantity" disabled>
+            <div class="col" *ngFor="let quantity of order.quantity; index as i">
+              <input type="text" class="form-control" value={{quantity[order.product[i].name]}} name="quantity" disabled>
+            </div>
           </div>
           <div class="col">
             <label for="price">Price</label>
