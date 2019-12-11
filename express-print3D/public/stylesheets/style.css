@@ -518,6 +518,7 @@ form input {
 
 .card-container-1, .card-container-4 {
   background-color: #fff;
+  height: 500px;
 }
 
 .card-container-3 {
@@ -552,4 +553,15 @@ background-color: rgb(199, 199, 199);
   display: flex;
   float: right;
   align-items: baseline;
+}
+
+.video-container {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#myVideo {
+  
 }
