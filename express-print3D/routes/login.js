@@ -19,19 +19,25 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   if (req.body.userName && req.body.password) {
     const userData = {
       username: req.body.userName,
       password: sha1(req.body.password),
     };
 
-    if (!User.findOne(userData)){
-      return res.render('login', {
-        title: 'Login',
-        show1: true,
-      });
-    }
+
+    await User.findOne(userData, (err, obj) => {
+      if (err) next(err);
+      console.log(obj);
+      if (obj === null) {
+        return res.render('login', {
+          title: 'Login',
+          show1: true,
+        });
+      }
+    });
+
 
     const token = tokgen.generate();
 
@@ -42,17 +48,15 @@ router.post('/', (req, res, next) => {
         cookie: token,
       }, (err, result) => {
         if (err) next(err);
-      }
+      },
     );
 
     return res.redirect('/products');
-
-  } else {
-    res.render('login', {
-      title: 'Login',
-      show2: true,
-    });
   }
+  return res.render('login', {
+    title: 'Login',
+    show2: true,
+  });
 });
 
 module.exports = router;

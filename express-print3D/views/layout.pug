@@ -15,7 +15,7 @@ html
           a.dropdown-btn(href='#')
             span.username.mt-2 #{ user.username }
           .dropdown-container.dropdown-user
-            a.nav-link(href='/api') Admin
+            a.nav-link(href='http://localhost:4200') Admin
             a.nav-link(href='/logout') Logout
         if user.role == 'user'
           a(href='/user/basket')
