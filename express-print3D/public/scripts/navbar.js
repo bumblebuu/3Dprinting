@@ -1,19 +1,26 @@
 
 function openNav() {
+  $(window).scrollTop(0);
+
   document.getElementById('mySidebar').style.right = '0';
   document.querySelector('.header').style.marginRight = '300px';
   document.querySelector('nav').style.marginRight = '300px';
   document.querySelector('.openbtn').style.display = 'none';
   document.querySelector('.dropdown-user').style.display = 'none';
   document.querySelector('.dropdown-user').setAttribute.disabled = 'disabled';
+
+  $('body').addClass('stop-scrolling');
 }
 
 function closeNav() {
+
   document.getElementById('mySidebar').style.right = '-300px';
   document.querySelector('.header').style.marginRight = '0';
   document.querySelector('nav').style.marginRight = '0';
   document.querySelector('.openbtn').style.display = 'block';
   document.querySelector('.dropdown-user').setAttribute.disabled = 'enabled';
+
+  $('body').removeClass('stop-scrolling');
 }
 
 const dropdown = document.getElementsByClassName('dropdown-btn');
