@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
+import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 const url = 'http://localhost:3000/upload';
 
 @Component({
@@ -14,6 +15,7 @@ const url = 'http://localhost:3000/upload';
 export class AddProductComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({ url: url, itemAlias: 'photo' });
 
+  newProductForm: FormGroup;
   newProduct: Product = new Product();
   products: BehaviorSubject<any> = this.ds.productList;
   missingData;
@@ -21,8 +23,9 @@ export class AddProductComponent implements OnInit {
   wrongName: boolean = false;
 
   constructor(private ds: DataService, private router: Router) {
-    this.ds.readDocument('products')
+    this.ds.readDocument('products');
   }
+
 
   ngOnInit() {
     this.newProduct.img = [];
@@ -41,17 +44,11 @@ export class AddProductComponent implements OnInit {
 
     keys.forEach((k) => {
       if (!this.newProduct[k]) {
-        console.log('missing');
         error = true;
         missing.push(k);
         this.missingData = 'You skipped: ';
         this.missingData += missing;
-      } else if (this.newProduct[k] <1) {
-        console.log(k);
-        error = true;
-        this.wrongAmmount = true;
       } else if (k == 'name') {
-        console.log('name');
         for (let i = 0; i < this.products.value.length; i += 1) {
           if (this.products.value[i].name === this.newProduct[k]) {
             error = true;

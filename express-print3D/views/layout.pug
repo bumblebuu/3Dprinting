@@ -18,13 +18,14 @@ html
             a.nav-link(href='http://localhost:4200') Admin
             a.nav-link(href='/logout') Logout
         if user.role == 'user'
-          a(href='/user/basket')
+          a(href='/basket')
             img.cart-img(src='/img/shopping-cart (3).png' alt='cart')
           a.dropdown-btn(href='#')
             #user-pic-div
               img.user-pic(src=`/img/users/${user.pictureurl}` alt='user picture')
           .dropdown-container.dropdown-user
             a.nav-link(href='/user') Profile
+            a.nav-link(href='/orders') Orders
             a.nav-link(href='/logout') Logout
       else
         a#login-btn.btn.btn-outline-info(href='/login') Login

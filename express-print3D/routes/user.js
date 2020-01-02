@@ -20,18 +20,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/user-form', (req, res, next) => {
-  Order.find({
-    user: req.user._id,
-    status: {
-      $ne: 'cancelled',
-    },
-  }).populate('product').sort('-insdate').exec((err, orders) => {
-    if (err) next(err);
-    res.render('user-form', {
-      title: 'User account',
-      user: req.user,
-      orders,
-    });
+  res.render('user-form', {
+    title: 'User account',
+    user: req.user,
   });
 });
 
@@ -93,17 +84,6 @@ router.post('/billing', (req, res, next) => {
 
 });
 
-router.post('/orders/:id', (req, res, next) => {
-  Order.findOneAndUpdate({
-    _id: req.params.id,
-  }, {
-    status: 'cancelled',
-  }, (err, deleted) => {
-    if (err) next(err);
-    res.redirect('/user/user-form');
-  });
-});
-
 router.post('/upload', (req, res, next) => {
   const form = new formidable.IncomingForm();
   form.parse(req, (err, fields, file) => {
@@ -156,8 +136,8 @@ router.post('/:id', (req, res, next) => {
   }, {
     firstname: 'deleted',
     lastname: 'account',
-    username: `${username  }deleted`,
-    email: `${email  }deleted`,
+    username: `${username }deleted`,
+    email: `${email }deleted`,
   }, (err, user) => {
     if (err) return next(err);
     res.redirect('../../logout');

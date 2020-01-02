@@ -1,0 +1,48 @@
+extends layout
+block content
+  .container
+    .row
+      h1.mt-3 Orders
+    .row
+      .col-10.offset-1.mt-3
+        if orders.length!==0
+          table.table
+            thead
+              tr
+                th Product(s)
+                th Quantity
+                th Price
+                th Orderdate
+                th Status
+                th
+            tbody
+              -function dateFormatting(dateString) {
+                -const date = new Date(dateString);
+                -const d = date.getDate();
+                -const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                -const m = monthNames[date.getMonth()];
+                -const y = date.getFullYear();
+                -const h= date.getHours();
+                - const min=date.getMinutes();
+                -const t = date.getTime();
+                -const sec = date.getSeconds();
+                -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
+              -}
+              each order in orders
+                tr
+                  td
+                    each item in order.product
+                      p(style='margin:0;padding:0;')=item.name
+                  td
+                    each quantity, index in order.quantity
+                      p(style='margin:0;padding:0;')=quantity[order.product[index].name]
+                  td $ #{order.unitprice}
+                  td #{dateFormatting(order.insdate)}
+                  td=order.status
+                  td
+                    form(method='POST', action=`/orders/${order._id}`)
+                      button.btn.btn-danger(type='submit') Delete order
+        else
+          a.text-center(href='/products', style='text-decoration: inherit;')
+            img(style='width:100%' src='/img/empty_cart.jpg')
+            h6 You don't have any orders. Start shopping!         
