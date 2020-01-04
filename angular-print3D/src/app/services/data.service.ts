@@ -27,11 +27,11 @@ export class DataService {
       this.http.get(`${this.apiURL}/${collectionName}/${query}`).forEach(
         data => {
           if (collectionName == 'products') {
-            this.product.next(data)
+            this.product.next(data);
           } else if (collectionName == 'orders') {
-            this.order.next(data)
+            this.order.next(data);
           } else if (collectionName == 'users') {
-            this.user.next(data)
+            this.user.next(data);
           }
         }
       )
@@ -39,15 +39,15 @@ export class DataService {
     this.http.get(`${this.apiURL}/${collectionName}`).forEach(
       data => {
         if (collectionName == 'products') {
-          this.productList.next(data)
+          this.productList.next(data);
         } else if (collectionName == 'orders') {
-          this.orderList.next(data)
+          this.orderList.next(data);
         }
         else if (collectionName == 'reviews') {
-          this.reviewList.next(data)
+          this.reviewList.next(data);
         }
         else if (collectionName == 'users') {
-          this.userList.next(data)
+          this.userList.next(data);
         }
       }
     )
@@ -55,7 +55,7 @@ export class DataService {
 
   readActiveProducts(collectionName: string) {
     this.http.get(`${this.apiURL}/${collectionName}/active/ones`).forEach(
-      data => this.productList.next(data)
+      data => this.productList.next(data),
     )
   }
 
@@ -65,7 +65,7 @@ export class DataService {
 
   deleteDocument(collectionName: string, query: any): void {
     this.http.delete(`${this.apiURL}/${collectionName}/delete/${query}`).forEach(
-      done => this.readDocument(collectionName)
+      done => this.readDocument(collectionName),
     );
 
   }
