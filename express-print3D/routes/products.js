@@ -134,6 +134,7 @@ router.get('/:page', async (req, res, next) => {
           ],
         }).exec((err, count) => {
           if (err) return next(err);
+          console.log(products, count);
           res.render('products', {
             title: 'Products',
             products,
@@ -161,6 +162,7 @@ router.get('/:page', async (req, res, next) => {
           isactive: true,
         }).exec((err, count) => {
           if (err) return next(err);
+          console.log(products, count);
           res.render('products', {
             title: 'Products',
             products,

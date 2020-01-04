@@ -20,7 +20,9 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-.products-page, .product-page, .user-page {
+.products-page,
+.product-page,
+.user-page {
   font-family: 'Staatliches', cursive;
 }
 
@@ -230,19 +232,9 @@ nav {
 
 .logo {
   width: 60px;
-  background: -webkit-linear-gradient(-86deg, rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 91%);
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 2px transparent;
   position: fixed;
-  top: 10px;
+  top: 15px;
 }
-
-.logo:hover {
-  background: -webkit-linear-gradient(-86deg, rgb(47, 148, 139) 5%, rgb(5, 76, 88) 53%, rgb(3, 63, 73) 91%);
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 2px transparent;
-}
-
 
 .beyond,
 .paper {
@@ -517,13 +509,14 @@ form input {
   margin: 0;
 }
 
-.card-container-1, .card-container-4 {
+.card-container-1,
+.card-container-4 {
   background-color: #fff;
   height: 500px;
 }
 
 .card-container-3 {
-background-color: rgb(199, 199, 199);
+  background-color: rgb(199, 199, 199);
 }
 
 .card-container-2 {
@@ -546,7 +539,6 @@ background-color: rgb(199, 199, 199);
   justify-content: center;
 }
 
-
 .row-pullup {
   margin-top: -50px;
 }
@@ -555,6 +547,14 @@ background-color: rgb(199, 199, 199);
   display: flex;
   float: right;
   align-items: baseline;
+}
+
+.card-link {
+  color: #60caca;
+}
+
+.card-link:hover {
+  color: rgb(29, 135, 143) !important;
 }
 
 .video-container {
@@ -573,3 +573,16 @@ background-color: rgb(199, 199, 199);
   height: 100%;
   overflow: hidden;
 }
+
+.card-browse {
+  border: none;
+}
+
+.card-browse:hover {
+  background-color: #72d6d1;
+}
+
+.card-browse:hover .card-link {
+  color: #fff;
+}
+
