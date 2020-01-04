@@ -62,7 +62,7 @@ block content
                 | Please enter a valid email address for shipping updates.
             .mb-3
               label.text-secondary(for='address') Address
-              input#address.form-control(type='text', placeholder='1234 Main St', value=user.address[0] required='')
+              input#address.form-control(type='text', placeholder='1234 Main St', value=`${user.address[3]} ${user.address[4]}` required='')
               .invalid-feedback
                 | Please enter your shipping address.
             .mb-3
@@ -73,13 +73,13 @@ block content
             .row
               .col-md-4.mb-3
                 label.text-secondary(for='city') City
-                input#city.form-control(type='text', placeholder='', required='')
+                input#city.form-control(type='text', value=user.address[1], placeholder='', required='')
                 .invalid-feedback
                   | Please provide a valid city.
               .col-md-5.mb-3
                 label.text-secondary(for='country') Country
                 select#country.custom-select.d-block.w-100(required='')
-                  option(value='') Country...
+                  option(value=user.address[0]) #{user.address[0]}
                   option(value='AF') Afghanistan
                   option(value='AL') Albania
                   option(value='DZ') Algeria
@@ -331,7 +331,7 @@ block content
                   | Please select a valid country.
               .col-md-3.mb-3
                 label.text-secondary(for='zip') Zip
-                input#zip.form-control(type='text', placeholder='', required='')
+                input#zip.form-control(type='text', placeholder='',value=user.address[2], required='')
                 .invalid-feedback
                   | Zip code required.
             hr.mb-4
@@ -347,9 +347,6 @@ block content
               .custom-control.custom-radio
                 input#credit.custom-control-input(name='paymentMethod', type='radio', checked='', required='')
                 label.text-secondary.custom-control-label(for='credit') Credit card
-              .custom-control.custom-radio
-                input#debit.custom-control-input(name='paymentMethod', type='radio', required='')
-                label.text-secondary.custom-control-label(for='debit') Debit card
               .custom-control.custom-radio
                 input#paypal.custom-control-input(name='paymentMethod', type='radio', required='')
                 label.text-secondary.custom-control-label(for='paypal') Paypal

@@ -50,9 +50,6 @@ export class UpdateProductComponent implements OnInit {
         missing.push(k);
         this.missingData = 'You skipped: ';
         this.missingData += missing;
-      } else if (this.product[k] < 1) {
-        error = true;
-        this.wrongAmmount = true;
       }
     })
     if (!error) {

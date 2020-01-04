@@ -6,7 +6,6 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-const User = require('./models/users.model');
 const UserModul = require('./moduls/user.modul');
 
 const userModul = new UserModul();
@@ -19,6 +18,7 @@ const productsRouter = require('./routes/products');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const basketRouter = require('./routes/basket');
+const ordersRouter = require('./routes/orders');
 const apiRoutes = require('./routes/api');
 const uploadRouter = require('./routes/upload');
 const payRouter = require('./routes/pay');
@@ -82,6 +82,7 @@ app.use('/upload', uploadRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/basket', basketRouter);
+app.use('/orders', ordersRouter);
 app.use('/upload', uploadRouter);
 app.use('/pay', payRouter);
 

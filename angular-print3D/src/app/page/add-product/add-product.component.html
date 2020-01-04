@@ -5,14 +5,16 @@
         <div class="card-header">
           <h3>Add new product!</h3>
         </div>
-        <form action="http://localhost:3000/api/products/add" method="post">
+        <form #newProductForm="ngForm" novalidate action="http://localhost:3000/api/products/add" method="post">
           <div class="card-body">
             <div class="form-group">
               <label for="name">
                 Name
               </label>
               <input class="form-control" [(ngModel)]="newProduct.name" type="text" name="product.name"
-                (keyup)="onKey($event)" id="name" required>
+                (keyup)="onKey($event)" id="name" required #productName="ngModel" placeholder="Name of the product">
+              <div *ngIf="productName.invalid && (productName.touched || productName.dirty)" class="alert alert-danger">
+                Name is required</div>
               <div *ngIf="wrongName" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Holy guacamole!</strong> It seems like this name already exsists in the database.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -32,21 +34,26 @@
                 Brand
               </label>
               <input class="form-control" [(ngModel)]="newProduct.brand" type="text" name="product.brand" id="brand"
-                required>
+                required #brand="ngModel" placeholder="Brand of the product">
+              <div *ngIf="brand.invalid && (brand.touched || brand.dirty)" class="alert alert-danger">Brand is required
+              </div>
             </div>
             <div class="form-group">
               <label for="description">
                 Description
               </label>
-              <textarea rows='5' class="form-control" [(ngModel)]="newProduct.description" name="product.description"
-                id="description" required></textarea>
+              <textarea rows="5" class="form-control" [(ngModel)]="newProduct.description" name="product.description"
+                id="description" required #description="ngModel" placeholder="Description of the product"></textarea>
+              <div *ngIf="description.invalid && (description.touched || description.dirty)" class="alert alert-danger">
+                Description is required
+              </div>
             </div>
             <div class="form-group">
               <label for="img">
                 Image
               </label>
               <br>
-              <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple/>
+              <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple />
               <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
                 [disabled]="!uploader.getNotUploadedItems().length">
                 Upload
@@ -56,8 +63,7 @@
               <label for="video">
                 Video
               </label>
-              <input class="form-control" [(ngModel)]="newProduct.video" type="text" name="product.video" id="video"
-                required>
+              <input class="form-control" [(ngModel)]="newProduct.video" type="text" name="product.video" id="video" placeholder="Link of the product's video">
             </div>
             <div class="form-group">
               <label for="menu">Menu</label>
@@ -113,12 +119,10 @@
                 Price
               </label>
               <input class="form-control" [(ngModel)]="newProduct.price" type="number" name="product.price" id="price"
-                required>
-              <div *ngIf="wrongAmmount" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> Looks like you forgot, you have to write a positive number as price.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                required min="1" #price="ngModel" pattern="^[0-9]+$">
+              <div *ngIf="price.invalid && (price.touched || price.dirty)" class="alert alert-danger">Price is required
+                and it must be a
+                positive number.
               </div>
             </div>
             <div *ngIf="missingData" class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -129,7 +133,8 @@
             </div>
           </div>
           <div class="card-footer text-center">
-            <button type="submit" class="btn btn-success" (click)="onCreate()">Submit</button>
+            <button [disabled]="newProductForm.form.invalid" type="submit" class="btn btn-success"
+              (click)="onCreate()">Submit</button>
           </div>
         </form>
       </div>

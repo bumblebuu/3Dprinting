@@ -5,13 +5,13 @@
         <div class="card-header">
           <h3>Edit this product!</h3>
         </div>
-        <form action="http://localhost:3000/api/products/update/{{product.seo}}" method="post">
+        <form #editProductForm="ngForm" novalidate action="http://localhost:3000/api/products/update/{{product.seo}}"
+          method="post">
           <div class="card-body">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" placeholder="Name" class="form-control" name="product.name" id="name"
-                [(ngModel)]="product.name" disabled>
-            </div>
+                [(ngModel)]="product.name" disabled></div>
             <div class="form-group">
               <label for="seo">
                 Seo
@@ -23,14 +23,18 @@
                 Brand
               </label>
               <input class="form-control" [(ngModel)]="product.brand" type="text" name="product.brand" id="brand"
-                required>
+                required #brand="ngModel">
+              <div *ngIf="brand.invalid && (brand.touched || brand.dirty)" class="alert alert-danger"> Brand is required
+              </div>
             </div>
             <div class="form-group">
               <label for="description">
                 Description
               </label>
               <textarea rows="5" class="form-control" [(ngModel)]="product.description" name="product.description"
-                id="description" required></textarea>
+                id="description" required #description="ngModel"></textarea>
+              <div *ngIf="description.invalid && (description.touched || description.dirty)" class="alert alert-danger">
+                Description is required</div>
             </div>
             <div class="form-group">
               <label for="img">
@@ -47,8 +51,7 @@
               <label for="video">
                 Video
               </label>
-              <input class="form-control" [(ngModel)]="product.video" type="text" name="product.video" id="video"
-                required>
+              <input class="form-control" [(ngModel)]="product.video" type="text" name="product.video" id="video">
             </div>
             <div class="form-group">
               <div class="form-group">
@@ -106,13 +109,9 @@
                 Price
               </label>
               <input class="form-control" [(ngModel)]="product.price" type="number" name="product.price" id="price"
-                required>
-              <div *ngIf="wrongAmmount" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> Looks like you forgot, you have to write a positive number as price.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+                required min="1" pattern="^[0-9]+$" #price="ngModel">
+              <div *ngIf="price.invalid && (price.touched || price.dirty)" class="alert alert-danger"> Price is required
+                and it must be a positive number</div>
             </div>
             <div class="form-check mb-2">
               <input class="form-check-input" ng-true-value='true' ng-false-value='false' [(ngModel)]="product.isactive"
@@ -126,7 +125,8 @@
               </button>
             </div>
             <div class="card-footer text-center">
-              <button type="submit" class="btn btn-success" (click)="onUpdate()">Submit</button>
+              <button type="submit" [disabled]="editProductForm.form.invalid" class="btn btn-success"
+                (click)="onUpdate()">Submit</button>
             </div>
           </div>
         </form>
