@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <h3 class="mb-4">Orders</h3>
+  <div class="row mb-3">
+    <h3>Orders</h3>
   </div>
   <div class="row">
     <div class="col-3 mb-3">
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor='let order of orders$ | async |search:searchedPhrase| orderby:orderKey:orderDirection:changeCounter'>
+            *ngFor='let order of orders$ | async |search:searchedPhrase| orderby:orderKey:orderDirection:changeCounter |slice: (page - 1) * pageSize: (page - 1) * pageSize + pageSize'>
             <td>{{order.user.firstname}} {{order.user.lastname}}</td>
             <td>
               <p *ngFor='let product of order.product'>{{product.name}}</p>
@@ -43,6 +43,10 @@
             </td>
           </tr>
         </tbody>
+        <div *ngIf="orders$.value.length>pageSize">
+          <ngb-pagination [collectionSize]="orders$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+        </div>
       </table>
     </div>
   </div>

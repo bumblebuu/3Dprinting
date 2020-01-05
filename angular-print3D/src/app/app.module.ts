@@ -20,8 +20,8 @@ import { LinechartComponent } from './page/charts/linechart/linechart.component'
 import { UpdateOrderComponent } from './page/update-order/update-order.component';
 import { OrderbyPipe } from './pipes/orderby.pipe';
 import { ReviewsComponent } from './page/reviews/reviews.component';
-import { RolePipe } from './pipes/role.pipe'
-
+import { RolePipe } from './pipes/role.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +48,8 @@ import { RolePipe } from './pipes/role.pipe'
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

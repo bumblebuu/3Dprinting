@@ -8,7 +8,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
+  page = 1;
+  pageSize = 10;
   users$: BehaviorSubject<any> = this.ds.userList;
   orderKey: string = '';
   orderDirection: number = 1;

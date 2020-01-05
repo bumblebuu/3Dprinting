@@ -1,84 +1,87 @@
-<div class="container">
-  <div class="row">
-    <h3>Products</h3>
-  </div>
-  <div class="row">
-    <div class="col-4 mt-3 mb-3">
-      <a href="/product/add" class="btn btn-block btn-info">Add new product</a></div>
-    <div class="col-4 mt-3 mb-3">
-      <input type="text" class="form-control" name="search" placeholder="Search..." id="search"
-        [(ngModel)]="searchedPhrase">
+  <div class="container">
+    <div class="row mb-3">
+      <h3>Products</h3>
     </div>
-    <div class="col-4 mt-3 mb-3">
-      <button (click)='showAll()' class="btn btn-block btn-info">Show all product</button></div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th (click)="setOrderBy('name')">
-              name &#8645;</th>
-            <th (click)="setOrderBy('seo')">seo &#8645;</th>
-            <th (click)="setOrderBy('brand')">brand &#8645;</th>
-            <th>description</th>
-            <th (click)="setOrderBy('menu')">menu &#8645;</th>
-            <th (click)="setOrderBy('category')">category&#8645;</th>
-            <th (click)="setOrderBy('price')">price &#8645;</th>
-            <th (click)="setOrderBy('isactive')">active&#8645;</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor='let product of products$ | async |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter; let i=index'>
-            <td>{{product.name}}</td>
-            <td>{{product.seo}}</td>
-            <td>{{product.brand}}</td>
-            <td>{{product.description.split('.',1)}}</td>
-            <td>{{product.menu}}</td>
-            <td>{{product.category}}</td>
-            <td>${{product.price}}</td>
-            <td>
-              <div class="form-check">
-                <input type="checkbox" style="width:20px; height:20px" ng-true-value='true' ng-false-value='false' name="product.isactive" id="active"
-                  [(ngModel)]="product.isactive" class="form-check-input" disabled>
+    <div class="row">
+      <div class="col-4 mb-3">
+        <a href="/product/add" class="btn btn-block btn-info">Add new product</a>
+      </div>
+      <div class="col-4 mb-3">
+        <input type="text" class="form-control" name="search" placeholder="Search..." id="search"
+          [(ngModel)]="searchedPhrase">
+      </div>
+      <div class="col-4 mb-3">
+        <button (click)='showAll()' class="btn btn-block btn-info">Show all product</button>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th (click)="setOrderBy('name')">
+            name &#8645;</th>
+          <th (click)="setOrderBy('seo')">seo &#8645;</th>
+          <th (click)="setOrderBy('brand')">brand &#8645;</th>
+          <th>description</th>
+          <th (click)="setOrderBy('menu')">menu &#8645;</th>
+          <th (click)="setOrderBy('category')">category&#8645;</th>
+          <th (click)="setOrderBy('price')">price &#8645;</th>
+          <th (click)="setOrderBy('isactive')">active&#8645;</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor='let product of products$| async |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i=index '>
+          <td>{{product.name}}</td>
+          <td>{{product.seo}}</td>
+          <td>{{product.brand}}</td>
+          <td>{{product.description.split('.',1)}}</td>
+          <td>{{product.menu}}</td>
+          <td>{{product.category}}</td>
+          <td>${{product.price}}</td>
+          <td>
+            <div class="form-check">
+              <input type="checkbox" style="width:20px; height:20px" ng-true-value='true' ng-false-value='false'
+                name="product.isactive" id="active" [(ngModel)]="product.isactive" class="form-check-input" disabled>
+            </div>
+          </td>
+          <td>
+            <div class="btn-group">
+              <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]='"#"+product.seo'>
+                Delete
+              </button>
+              <div class="modal fade" [id]="product.seo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Delete {{product.name}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      This action sets the products status to inactive, so it won't appear on the site.
+                      Are you sure, you want to do this?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <button type="button" (click)="onDelete(product.seo)" data-dismiss="modal"
+                        class="btn btn-danger close">Yes, I'm
+                        sure</button>
+                    </div>
+                  </div>
                 </div>
-            </td>
-    <td>
-      <div class="btn-group">
-        <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]='"#"+product.seo'>
-          Delete
-        </button>
-        <div class="modal fade" [id]="product.seo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete {{product.name}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                This action sets the products status to inactive, so it won't appear on the site.
-                Are you sure, you want to do this?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" (click)="onDelete(product.seo)" data-dismiss="modal"
-                  class="btn btn-danger close">Yes, I'm
-                  sure</button>
               </div>
             </div>
-          </div>
-        </div>
+          </td>
+        </tr>
+      </tbody>
+      <div *ngIf="products$.value.length > pageSize">
+        <ngb-pagination class="mt-5 d-flex justify-content-center" [collectionSize]="products$.value.length"
+          [pageSize]="pageSize" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+        </ngb-pagination>
       </div>
-    </td>
-    </tr>
-    </tbody>
     </table>
   </div>
-</div>
-</div>

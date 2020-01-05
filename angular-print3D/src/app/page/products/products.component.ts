@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-products',
@@ -9,27 +8,28 @@ import { Product } from 'src/app/models/product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  page = 1;
+  pageSize = 10;
+  previousPage: any;
   products$: BehaviorSubject<any> = this.ds.productList;
   orderKey: string = '';
   orderDirection: number = 1;
   changeCounter: number = 0;
 
   constructor(private ds: DataService) {
-    this.ds.readActiveProducts('products')
+    this.ds.readActiveProducts('products');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onDelete(seo: string): void {
     this.ds.updateDocument('products', seo, { isactive: 0 }).subscribe(
-      () => this.ds.readActiveProducts('products')
+      () => this.ds.readActiveProducts('products'),
     )
   }
 
   showAll(): void {
-    this.ds.readDocument('products')
+    this.ds.readDocument('products');
   }
 
   setOrderBy(key: string): void {

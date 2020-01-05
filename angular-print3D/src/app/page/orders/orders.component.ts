@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-
+  page = 1;
+  pageSize = 10;
   orders$: BehaviorSubject<any> = this.ds.orderList;
   orderKey: string = '';
   orderDirection: number = 1;

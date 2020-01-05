@@ -21,7 +21,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let review of reviews$|async|search:searchedPhrase|orderby:orderKey:orderDirection:changeCounter'>
+          <tr
+            *ngFor='let review of reviews$|async|search:searchedPhrase|orderby:orderKey:orderDirection:changeCounter |slice:(page - 1) * pageSize:(page - 1) * pageSize + pageSize'>
             <td>{{review.user.firstname}} {{review.user.lastname}}</td>
             <td>{{review.product.name}}</td>
             <td>{{review.text}}</td>
@@ -31,6 +32,10 @@
             </td>
           </tr>
         </tbody>
+        <div *ngIf="reviews$.value.length>pageSize">
+          <ngb-pagination [collectionSize]="reviews$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+        </div>
       </table>
     </div>
   </div>

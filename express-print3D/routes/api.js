@@ -106,11 +106,11 @@ router.get('/reviews', (req, res, next) => {
 
 router.delete('/reviews/delete/:id', (req, res, next) => {
   Review.findOneAndDelete({
-    _id: req.params.id
+    _id: req.params.id,
   }, (err, review) => {
     if (err) next(err);
-    res.json(review)
-  })
+    res.json(review);
+  });
 });
 
 router.get('/users', (req, res, next) => {
