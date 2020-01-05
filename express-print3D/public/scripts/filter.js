@@ -1,3 +1,5 @@
+
+// Filter products
 const createFetch = function () {
 
   // Value read from document
