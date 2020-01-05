@@ -3,6 +3,8 @@ const createFetch = function () {
   // Value read from document
   const brandsInputs = document.querySelectorAll('.brands');
   const categoriesInputs = document.querySelectorAll('.categories');
+  const select = document.querySelector('#per-page');
+  const perPage = select.value;
 
   function getValues(nameInput) {
     let names = '';
@@ -27,8 +29,31 @@ const createFetch = function () {
   const brands = isThere(brandsUrl);
   const categories = isThere(categoriesUrl);
 
-  const url = `http://localhost:3000/products/1?${categories}${brands}`;
+  const url = `http://localhost:3000/products/1?${perPage}${categories}${brands}`;
 
   window.location = url;
 
 };
+
+// Products per page
+function getval(sel) {
+  console.log(sel.value);
+  const regex = /\?[0-9]{2,2}/;
+  let url = '';
+
+  const urlBase = window.location.href;
+
+  if (urlBase.search(regex) > -1) {
+    const index = urlBase.search(regex);
+    const url1 = urlBase.substring(0, index);
+    const url2 = urlBase.substring(index+3,);
+    url = url1.concat(`?${sel.value}${url2}`);
+  } else {
+    url = urlBase.concat(`?${sel.value}`);
+  }
+
+  console.log(url);
+
+  window.location = url;
+
+}

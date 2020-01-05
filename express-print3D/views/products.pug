@@ -27,12 +27,18 @@ block content
 
       .col-11.col-md-6.col-lg-10
         .row
-          .col-4
+          .col-4.ml-4
             input.form-control#searchInput(type='text' placeholder='Search...' onkeyup="searchFunction()")
+          .col-2.offset-4
+            select.form-control#per-page(onchange="getval(this);")
+              option(value='08' selected=(perPage == 8 ? 'selected' : undefined)) 8 per page
+              option(value='12' selected=(perPage == 12 ? 'selected' : undefined)) 12 per page
+              option(value='24' selected=(perPage == 24 ? 'selected' : undefined)) 24 per page
+            
 
-        .row.mt-5.list-
+        ul.row.mt-5#search-ul(style='list-style: none')
           each product in products
-            .col-12.col-md-6.col-lg-3
+            li.col-12.col-md-6.col-lg-3
               .card.product-card.mb-5
                 .image-div
                   img.card-img-top.mx-auto.d-block(src=product.img[0] alt='product image')
@@ -65,7 +71,7 @@ block content
                       a.page-link=`${i}`
                   else
                     li.page-item
-                      a.page-link(href=`${i}`)=`${i}`
+                      a.page-link(href=`${i}?${search}`)=`${i}`
                   if (i == Number(current) + 4 && i < pages)
                     li.disabled.page-item
                       a.page-link ...

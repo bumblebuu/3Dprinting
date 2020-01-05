@@ -33,7 +33,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:page', async (req, res, next) => {
-  const perPage = 8;
   const page = req.params.page || 1;
   let categoriesString;
   let brandsString;
@@ -41,10 +40,19 @@ router.get('/:page', async (req, res, next) => {
   let categoriesArr = [];
   let subCategoriesString;
   let subCategoriesArr = [];
-
-
+  let perPage = 8;
+  let search = '';
   if (url.parse(req.url).query) {
-    const search = url.parse(req.url).query;
+    console.log(url.parse(req.url).query);
+    perPage = parseInt(url.parse(req.url).query.slice(0, 2));
+    console.log(perPage);
+    search = url.parse(req.url).query.slice(2);
+    console.log(search);
+  }
+  console.log(perPage);
+  console.log(search);
+
+  if (search.length > 0) {
     const text = search.replace('-', ' ');
     if (text.includes('c=') && text.includes('s=') && text.includes('b=')) {
       const textC = text.slice(2);
@@ -134,7 +142,6 @@ router.get('/:page', async (req, res, next) => {
           ],
         }).exec((err, count) => {
           if (err) return next(err);
-          console.log(products, count);
           res.render('products', {
             title: 'Products',
             products,
@@ -145,12 +152,13 @@ router.get('/:page', async (req, res, next) => {
             categoriesArr,
             brandsArr,
             subCategoriesArr,
+            search,
+            perPage,
             pages: Math.ceil(count / perPage),
             user: req.user,
           });
         });
       });
-
   } else {
     Product.find({
       isactive: true,
@@ -162,7 +170,6 @@ router.get('/:page', async (req, res, next) => {
           isactive: true,
         }).exec((err, count) => {
           if (err) return next(err);
-          console.log(products, count);
           res.render('products', {
             title: 'Products',
             products,
@@ -173,6 +180,7 @@ router.get('/:page', async (req, res, next) => {
             categoriesArr: [],
             brandsArr: [],
             subCategoriesArr: [],
+            perPage,
             pages: Math.ceil(count / perPage),
             user: req.user,
           });
@@ -196,7 +204,6 @@ router.get('/product/:seo', (req, res, next) => {
           reviews,
           user: req.user,
         });
-
       });
     });
   }
@@ -244,4 +251,155 @@ router.get('/reviews/remove/:id', (req, res, next) => {
     res.redirect('back');
   });
 });
+
+// router.post('/:page', async (req, res, next) => {
+//   const perPage = req.body.perPage || 8;
+//   const page = req.params.page || 1;
+//   let categoriesString;
+//   let brandsString;
+//   let brandsArr = [];
+//   let categoriesArr = [];
+//   let subCategoriesString;
+//   let subCategoriesArr = [];
+
+
+//   if (url.parse(req.url).query) {
+//     const search = url.parse(req.url).query;
+//     const text = search.replace('-', ' ');
+//     if (text.includes('c=') && text.includes('s=') && text.includes('b=')) {
+//       const textC = text.slice(2);
+//       const index1 = (textC.indexOf('=')) - 1;
+//       const index2 = (textC.lastIndexOf('=')) - 1;
+//       categoriesString = textC.slice(0, index1);
+//       subCategoriesString = textC.slice(index1 + 2, index2);
+//       brandsString = textC.slice(index2 + 2);
+//     } else if (text.includes('c=') && text.includes('s=')) {
+//       const textC = text.slice(2);
+//       const index1 = (textC.indexOf('=')) - 1;
+//       categoriesString = textC.slice(0, index1);
+//       subCategoriesString = textC.slice(index1 + 2);
+//     } else if (text.includes('c=') && text.includes('b=')) {
+//       const textC = text.slice(2);
+//       const index1 = (textC.indexOf('=')) - 1;
+//       categoriesString = textC.slice(0, index1);
+//       brandsString = textC.slice(index1 + 2);
+//     } else if (text.includes('s=') && text.includes('b=')) {
+//       const textC = text.slice(2);
+//       const index1 = (textC.indexOf('=')) - 1;
+//       subCategoriesString = textC.slice(0, index1);
+//       brandsString = textC.slice(index1 + 2);
+//     } else if (text.includes('c=')) {
+//       categoriesString = text.slice(2);
+//     } else if (text.includes('s=')) {
+//       subCategoriesString = text.slice(2);
+//     } else if (text.includes('b=')) {
+//       brandsString = text.slice(2);
+//     }
+
+//     if (!categoriesString) {
+//       categoriesArr = [];
+//     } else {
+//       categoriesArr = categoriesString.split('&');
+//     }
+//     if (!subCategoriesString) {
+//       subCategoriesArr = [];
+//     } else {
+//       subCategoriesArr = subCategoriesString.split('&');
+//     }
+//     if (!brandsString) {
+//       brandsArr = [];
+//     } else {
+//       brandsArr = brandsString.split('&');
+//     }
+
+//     Product.find({
+//       isactive: true,
+//       $or: [{
+//         category: {
+//           $in: categoriesArr,
+//         },
+//       },
+//       {
+//         subcategory: {
+//           $in: subCategoriesArr,
+//         },
+//       },
+//       {
+//         brand: {
+//           $in: brandsArr,
+//         },
+//       },
+//       ],
+//     })
+//       .skip((perPage * page) - perPage)
+//       .limit(perPage)
+//       .exec((err, products) => {
+//         Product.countDocuments({
+//           isactive: true,
+//           $or: [{
+//             category: {
+//               $in: categoriesArr,
+//             },
+//           },
+//           {
+//             subcategory: {
+//               $in: subCategoriesArr,
+//             },
+//           },
+//           {
+//             brand: {
+//               $in: brandsArr,
+//             },
+//           },
+//           ],
+//         }).exec((err, count) => {
+//           if (err) return next(err);
+//           console.log(count);
+//           res.render('products', {
+//             title: 'Products',
+//             products,
+//             current: page,
+//             brands,
+//             categories,
+//             subCategories,
+//             categoriesArr,
+//             brandsArr,
+//             subCategoriesArr,
+//             search,
+//             pages: Math.ceil(count / perPage),
+//             user: req.user,
+//           });
+//         });
+//       });
+
+//   } else {
+//     Product.find({
+//       isactive: true,
+//     })
+//       .skip((perPage * page) - perPage)
+//       .limit(perPage)
+//       .exec((err, products) => {
+//         Product.countDocuments({
+//           isactive: true,
+//         }).exec((err, count) => {
+//           if (err) return next(err);
+//           console.log(products, count);
+//           res.render('products', {
+//             title: 'Products',
+//             products,
+//             current: page,
+//             brands,
+//             categories,
+//             subCategories,
+//             categoriesArr: [],
+//             brandsArr: [],
+//             subCategoriesArr: [],
+//             pages: Math.ceil(count / perPage),
+//             user: req.user,
+//           });
+//         });
+//       });
+//   }
+// });
+
 module.exports = router;
