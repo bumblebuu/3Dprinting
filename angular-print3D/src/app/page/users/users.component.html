@@ -28,7 +28,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let user of users$ | async |role:filterKey:filterPhrase |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter'>
+          <tr
+            *ngFor='let user of users$ | async |role:filterKey:filterPhrase |search:searchedPhrase |orderby:orderKey:orderDirection:changeCounter | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize'>
             <td>
               <div class="user-picture-div">
                 <img [src]="linkImg(user.pictureurl)" alt="picture" class="user-picture">
@@ -46,6 +47,10 @@
             </td>
           </tr>
         </tbody>
+        <div *ngIf="users$.value.length>pageSize">
+          <ngb-pagination [collectionSize]="users$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
+            [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+        </div>
       </table>
     </div>
   </div>

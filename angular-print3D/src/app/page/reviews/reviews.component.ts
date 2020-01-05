@@ -8,6 +8,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
+  page = 1;
+  pageSize = 10;
   orderKey;
   orderDirection;
 
