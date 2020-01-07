@@ -51,53 +51,53 @@ html
           .dropdown-container
             ul
               li.dropdown-submenu.caret-off
-                a.nav-link(href='/products/1?c=printers&scanners&tools&filaments') Printers and Scanners
+                a.nav-link(href='/products/1?08c=printers&scanners&tools&filaments') Printers and Scanners
                 ul.dropdown-menu
                   li
-                    a(href='/products/1?c=printers') Printers
+                    a(href='/products/1?08c=printers') Printers
                   li
-                    a.nav-link(href='/products/1?c=scanners') Scanners
+                    a.nav-link(href='/products/1?08c=scanners') Scanners
                   li
-                    a.nav-link(href='/products/1?c=filaments') Filaments
+                    a.nav-link(href='/products/1?08c=filaments') Filaments
                   li
-                    a.nav-link(href='/products/1?c=tools') Tools
+                    a.nav-link(href='/products/1?08c=tools') Tools
   
               li.dropdown-submenu.caret-off
-                a.nav-link(href='/products/1?c=health&electronics&mechanics&arthitecture') Science
+                a.nav-link(href='/products/1?08c=health&electronics&mechanics&arthitecture') Science
                 ul.dropdown-menu
                   li
-                    a(href='/products/1?c=health') Health
+                    a(href='/products/1?08c=health') Health
                   li
-                    a.nav-link(href='/products/1?c=electronics') Electronics
+                    a.nav-link(href='/products/1?08c=electronics') Electronics
                   li
-                    a.nav-link(href='/products/1?c=mechanics') Mechanics
+                    a.nav-link(href='/products/1?08c=mechanics') Mechanics
                   li
-                    a.nav-link(href='/products/1?c=arthitecture') Architecture
+                    a.nav-link(href='/products/1?08c=arthitecture') Architecture
 
               li.dropdown-submenu.caret-off
-                a.nav-link(href='/products/1?c=kids&practical&accessories') Magic
+                a.nav-link(href='/products/1?08c=kids&practical&accessories') Magic
                 ul.dropdown-menu
                   li.dropdown-submenu
-                    a(href='/products/1?c=kids') Kids
+                    a(href='/products/1?08c=kids') Kids
                     ul.dropdown-menu
                       li
-                        a(href='/products/1?s=lego') Lego
+                        a(href='/products/1?08s=lego') Lego
                   li.dropdown-submenu
-                    a.nav-link(href='/products/1?c=practical') Practical
+                    a.nav-link(href='/products/1?08c=practical') Practical
                     ul.dropdown-menu
                       li
-                        a(href='/products/1?s=inside') Inside
+                        a(href='/products/1?08s=inside') Inside
                       li
-                        a(href='/products/1?s=outside') Outside
+                        a(href='/products/1?08s=outside') Outside
                   li.dropdown-submenu
-                    a.nav-link(href='/products/1?c=accessories') Accessories
+                    a.nav-link(href='/products/1?08c=accessories') Accessories
                     ul.dropdown-menu
                       li
-                        a(href='/products/1?s=jewellery') Jewellery
+                        a(href='/products/1?08s=jewellery') Jewellery
                       li
-                        a(href='/products/1?s=phone-cases') Phone cases
+                        a(href='/products/1?08s=phone-cases') Phone cases
                       li
-                        a(href='/products/1?s=other') Other
+                        a(href='/products/1?08s=other') Other
 
               li.without-arrow
                 a.nav-link(href='#') Print your own idea
@@ -106,10 +106,98 @@ html
 
 
     block content
-    .footer
-      .container-fluid
+    footer.footer_area
+      .container
         .row
-          .col-4
+          .col-md-3.col-sm-6
+            .single_ftr
+              h4.sf_title Contacts
+              ul
+                li 4080 Repperts Coaol Road Sackson, MS 00201 USA
+                li
+                  | (+123) 685 78 455 
+                  br
+                  |  (+064) 336 987 245
+                li Contact@yourcompany.com
+          // End Col
+          .col-md-3.col-sm-6
+            .single_ftr
+              h4.sf_title Information
+              ul
+                li
+                  a(href='#') About Us
+                li
+                  a(href='#') Delivery Information
+                li
+                  a(href='#') Privacy Policy
+                li
+                  a(href='#') Terms & Conditions
+                li
+                  a(href='#') Contact Us
+          // End Col
+          .col-md-3.col-sm-6
+            .single_ftr
+              h4.sf_title Services
+              ul
+                li
+                  a(href='#') Returns
+                li
+                  a(href='#') Site Map
+                li
+                  a(href='#') Wish List
+                li
+                  a(href='#') My Account
+                li
+                  a(href='#') Order History
+          // End Col
+          .col-md-3.col-sm-6
+            .single_ftr
+              h4.sf_title Newsletter
+              .newsletter_form
+                p
+                  | There are many variations of passages of Lorem Ipsum available, but the majority have
+                form.form-inline(method='post')
+                  input#email.form-control(name='EMAIL', placeholder='Enter Your Email', type='email')
+                  button.btn.btn-default(type='submit')
+                    i.fa.fa-search
+          // End Col
+      .ftr_btm_area
+        .container
+          .row
+            .col-sm-4
+              .ftr_social_icon
+                ul
+                  li
+                    a(href='#')
+                      i.fa.fa-facebook
+                  li
+                    a(href='#')
+                      i.fa.fa-google
+                  li
+                    a(href='#')
+                      i.fa.fa-linkedin
+                  li
+                    a(href='#')
+                      i.fa.fa-twitter
+                  li
+                    a(href='#')
+                      i.fa.fa-rss
+            .col-sm-4
+              p.copyright_text.text-center © 2019 All Rights Reserved Bootstrap 4 footer
+            .col-sm-4
+              .payment_mthd_icon.text-right
+                ul
+                  li
+                    i.fa.fa-cc-paypal
+                  li
+                    i.fa.fa-cc-visa
+                  li
+                    i.fa.fa-cc-discover
+                  li
+                    i.fa.fa-cc-mastercard
+                  li
+                    i.fa.fa-cc-amex
+
 
 
     script(src='/jquery/dist/jquery.min.js')
