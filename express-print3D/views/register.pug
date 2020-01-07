@@ -30,13 +30,13 @@ html
           .card.register-card
             .card-header
               h3 Registration
-              .d-flex.justify-content-end.social_icon
-                span
-                  i.fab.fa-facebook-square
-                span
-                  i.fab.fa-google-plus-square
-                span
-                  i.fab.fa-twitter-square
+              //- .d-flex.justify-content-end.social_icon
+              //-   span
+              //-     i.fab.fa-facebook-square
+              //-   span
+              //-     i.fab.fa-google-plus-square
+              //-   span
+              //-     i.fab.fa-twitter-square
             .card-body
               form(method='POST' action='/register' role='form')
                 .input-group.form-group
@@ -68,7 +68,7 @@ html
                   .form-group.col-2
                     input#address4.form-control(type='number', name='address', placeholder='Door', onfocus="clearInput('#address4')", onblur="addressCheck()")
                 .form-group.mt-4
-                  input.btn.float-right.login_btn(type='submit', value='Register')
+                  input.btn.float-right.login_btn.enable-btn(type='submit' value='Register' disabled)
             .card-footer
               .d-flex.justify-content-center.links
                 | Already have an account?

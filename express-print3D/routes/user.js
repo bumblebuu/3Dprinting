@@ -16,17 +16,35 @@ const Order = require('../models/orders.model');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-  res.redirect('/user/user-form');
-});
-
-router.get('/user-form', (req, res, next) => {
   res.render('user-form', {
     title: 'User account',
     user: req.user,
   });
 });
 
-router.post('/account', (req, res, next) => {
+
+router.post('/account', async (req, res, next) => {
+  // Check if this email is already in use
+  if (req.body.email !== req.user.email) {
+    const userEmail = await User.findOne({
+      email: req.body.email,
+    });
+    if (userEmail) {
+      return res.json('This email is already in use!');
+    }
+  }
+
+  // Check if this username is already in use
+  if (req.body.username !== req.user.username) {
+    const userName = await User.findOne({
+      username: req.body.username,
+    });
+    if (userName) {
+      return res.json('This username is already in use!');
+    }
+  }
+
+  // Update
   User.updateOne({
     cookie: req.user.cookie,
   }, {
@@ -38,8 +56,8 @@ router.post('/account', (req, res, next) => {
     if (err) next(err);
 
     console.log(obj);
+    return res.json('SAVED!');
   });
-  return res.redirect('/user-form');
 });
 
 
@@ -59,13 +77,11 @@ router.post('/address', (req, res, next) => {
 
 router.post('/password', (req, res, next) => {
   if (req.user.password !== sha1(req.body.oldPassword)) {
-    console.log('Not the same as the old one!');
-    return res.redirect('/user/user-form');
+    return res.json('Your old password does not match!');
   }
 
   if (req.body.newPassword !== req.body.newPasswordConf) {
-    console.log('Not confirmed!');
-    return res.redirect('/user/user-form');
+    return res.json('New passwords does not match!');
   }
 
   User.updateOne({
@@ -76,13 +92,10 @@ router.post('/password', (req, res, next) => {
     if (err) next(err);
 
     console.log(obj);
-    return res.redirect('/user/user-form');
+    return res.json('SAVED!');
   });
 });
 
-router.post('/billing', (req, res, next) => {
-
-});
 
 router.post('/upload', (req, res, next) => {
   const form = new formidable.IncomingForm();
@@ -136,8 +149,8 @@ router.post('/:id', (req, res, next) => {
   }, {
     firstname: 'deleted',
     lastname: 'account',
-    username: `${username }deleted`,
-    email: `${email }deleted`,
+    username: `${username}deleted`,
+    email: `${email}deleted`,
   }, (err, user) => {
     if (err) return next(err);
     res.redirect('../../logout');

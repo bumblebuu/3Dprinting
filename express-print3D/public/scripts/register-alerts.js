@@ -1,10 +1,11 @@
+
 function clearInput(id) {
   const node = document.querySelector(id);
   if (node.nextElementSibling) {
     node.nextElementSibling.remove();
   }
-  node.setAttribute('class', 'form-control');
 }
+
 
 function getText(problem) {
   if (problem == 'empty') {
@@ -17,7 +18,7 @@ function getText(problem) {
     return 'Has to be at least 6 characters long!';
   }
   if (problem == 'format') {
-    return 'Please use the shown format!';
+    return 'Please use the right format!';
   }
   if (problem == 'lenght2') {
     return 'Has to be at least 8 characters long!';
@@ -31,9 +32,10 @@ function getText(problem) {
 }
 
 function isInvalid(node, problem) {
-  node.setAttribute('class', 'is-invalid form-control');
+  node.classList.add('is-invalid');
+  node.classList.remove('is-valid');
   const text = document.createElement('div');
-  text.setAttribute('class', 'invalid-feedback');
+  text.classList.add('is-invalid');
   text.textContent = getText(problem);
   node.parentElement.appendChild(text);
 }
@@ -50,7 +52,8 @@ function firstNameCheck() {
     isInvalid(name, 'justString');
     return;
   }
-  name.setAttribute('class', 'is-valid form-control');
+  name.classList.remove('is-invalid');
+  name.classList.add('is-valid');
 }
 
 function lastNameCheck() {
@@ -64,7 +67,8 @@ function lastNameCheck() {
     isInvalid(name, 'justString');
     return;
   }
-  name.setAttribute('class', 'is-valid form-control');
+  name.classList.remove('is-invalid');
+  name.classList.add('is-valid');
 }
 
 function userNameCheck() {
@@ -78,7 +82,8 @@ function userNameCheck() {
     isInvalid(name, 'length');
     return;
   }
-  name.setAttribute('class', 'is-valid form-control');
+  name.classList.remove('is-invalid');
+  name.classList.add('is-valid');
 }
 
 function emailCheck() {
@@ -92,7 +97,8 @@ function emailCheck() {
     isInvalid(email, 'format');
     return;
   }
-  email.setAttribute('class', 'is-valid form-control');
+  email.classList.remove('is-invalid');
+  email.classList.add('is-valid');
 }
 
 function passwordCheck() {
@@ -111,7 +117,8 @@ function passwordCheck() {
     isInvalid(password, 'number');
     return;
   }
-  password.setAttribute('class', 'is-valid form-control');
+  password.classList.remove('is-invalid');
+  password.classList.add('is-valid');
   return password.value;
 }
 
@@ -126,13 +133,48 @@ function passAgainCheck() {
     isInvalid(password, 'notConf');
     return;
   }
-  password.setAttribute('class', 'is-valid form-control');
+  password.classList.remove('is-invalid');
+  password.classList.add('is-valid');
 }
 
 function addressCheck() {
   const address = document.querySelector('#address');
 }
 
-function makeAlert() {
-  $('.alert').addClass('show');
+function enable(id, className) {
+  const div = document.querySelector(id);
+  const required = div.getElementsByClassName(className);
+  const btn = div.querySelector('.enable-btn');
+  const arr = Array.from(required);
+
+  function checkClass(item) {
+    return item.classList.contains('is-valid');
+  }
+  const itIs = arr.every(checkClass);
+  if (itIs) {
+    btn.removeAttribute('disabled');
+  } else {
+    btn.setAttribute('disabled', true);
+  }
 }
+
+const required = document.querySelectorAll('.required');
+required.forEach((node) => {
+  node.addEventListener('blur', () => {
+    enable('.register-card', 'required');
+  });
+});
+
+const account = document.querySelectorAll('.account');
+account.forEach((node) => {
+  node.addEventListener('blur', () => {
+    enable('#account', 'account');
+  });
+});
+
+const password = document.querySelectorAll('.password');
+password.forEach((node) => {
+  node.addEventListener('blur', () => {
+    enable('#passwordDiv', 'password');
+  });
+});

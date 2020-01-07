@@ -462,7 +462,7 @@ li .without-arrow>a {
   display: none;
 }
 
-form input {
+.user-form input {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -586,3 +586,10 @@ form input {
   color: #fff;
 }
 
+#account {
+  display: block;
+}
+
+.checkX {
+  display: none;
+}

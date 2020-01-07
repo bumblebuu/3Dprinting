@@ -15,7 +15,7 @@ block content
             p.col-7 Account
             a.col-2(href="#")
               i.fas.fa-chevron-right.icon(aria-hidden='true')
-          .oneRow.flex-row.d-flex(onclick='toggleForm("password")')
+          .oneRow.flex-row.d-flex(onclick='toggleForm("passwordDiv")')
             a.col-3(href='#')
               i.fas.fa-key.icon(aria-hidden='true')
             p.col-7 Change password
@@ -39,4 +39,8 @@ block content
           .row
             .col-8.offset-1
               block form
+              .save-reaction.row
+                img.col-2.checkX#check(src="/img/checked.png", alt="checked")
+                img.col-2.checkX#cancel(src="/img/cancel.png", alt="cancel")
+                h5#savedIcon.col-8.mt-3
 

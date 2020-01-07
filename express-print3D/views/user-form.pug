@@ -1,22 +1,6 @@
 extends user
 
 block form
-  form.user-form#account(method='POST' action='/user/account' role='form')
-    .form-group
-      h6 Firstname
-      input.form-control(type='text' name='firstname' placeholder=`${user.firstname}` value=`${user.firstname}`)
-    .form-group
-      h6 Lasttname
-      input.form-control(type='text' name='lastname' placeholder=`${user.lastname}` value=`${user.lastname}`)
-    .form-group
-      h6 Username
-      input.form-control(type='text' name='username' placeholder=`${user.username}` value=`${user.username}`)
-    .form-group
-      h6 Email address
-      input.form-control(type='email' name='email' placeholder=`${user.email}` value=`${user.email}`)
-      small.form-text.text-muted We'll never share your email with anyone else.
-    .col-3.offset-9
-      button.btn.btn-dark.btn-block(type='submit') Save
 
   form.user-form#upload(method='POST' action='/user/upload' role='form' enctype='multipart/form-data')
     .form-group
@@ -27,20 +11,37 @@ block form
         .input-group-append
           button.btn.btn-outline-secondary(type='sumbit') Upload
 
-  form.user-form#password(method='POST', action='/user/password' role='form')
+  .user-form#account
+    .form-group
+      h6 Firstname
+      input.form-control#firstName.account(type='text' name='firstname' placeholder=`${user.firstname}` value=`${user.firstname}` onfocus="clearInput('#firstName')" onblur='firstNameCheck()')
+    .form-group
+      h6 Lastname
+      input.form-control#lastName.account(type='text' name='lastname' placeholder=`${user.lastname}` value=`${user.lastname}` onfocus="clearInput('#lastName')" onblur='lastNameCheck()')
+    .form-group
+      h6 Username
+      input.form-control#userName.account(type='text' name='username' placeholder=`${user.username}` value=`${user.username}` onfocus="clearInput('#userName')" onblur='userNameCheck()')
+    .form-group
+      h6 Email address
+      input.form-control#email.account(type='email' name='email' placeholder=`${user.email}` value=`${user.email}` onfocus="clearInput('#email')" onblur='emailCheck()')
+      small.form-text.text-muted We'll never share your email with anyone else.
+    .col-3.offset-9
+      button.btn.btn-dark.btn-block.enable-btn(type='submit' onclick='saveAccount()' disabled) Save
+
+  .user-form#passwordDiv
     .form-group
       h6 Current password
-      input.form-control(type='password' name='oldPassword' placeholder='Enter password' value='')
+      input.form-control#oldPassword(type='password' name='oldPassword' placeholder='Enter password' value='' onfocus="clearInput('#oldPassword')")
     .form-group
       h6 New password
-      input.form-control(type='password' name='newPassword' placeholder='Enter password' value='')
+      input.form-control#password.password(type='password' name='newPassword' placeholder='Enter password' value='' onfocus="clearInput('#password')" onblur='passwordCheck()')
     .form-group
       h6 New password again
-      input.form-control(type='password' name='newPasswordConf' placeholder='Enter password' value='')
+      input.form-control#passwordAgain.password(type='password' name='newPasswordConf' placeholder='Enter password' value='' onfocus="clearInput('#passwordAgain')", onblur="passAgainCheck()")
     .col-3.offset-9
-      button.btn.btn-dark.btn-block(type='submit') Save
+      button.btn.btn-dark.btn-block.enable-btn(type='submit' onclick='savePassword()' disabled) Save
 
-  form.user-form#address(method='POST', action='/user/address' role='form')
+  .user-form#address
     .form-group
       h6 Country
       input.form-control(type='text' name='address' placeholder=`${user.address[0]}` value=`${user.address[0]}`)
@@ -57,7 +58,7 @@ block form
       h6 Number
       input.form-control(type='number' name='address' placeholder=`${user.address[4]}` value=`${user.address[4]}`)
     .col-3.offset-9
-      button.btn.btn-dark.btn-block(type='submit') Save
+      button.btn.btn-dark.btn-block(type='submit' onclick='saveAddress()') Save
 
   form.user-form#delete(method='POST', action=`/user/${user._id}`)
     .form-group
