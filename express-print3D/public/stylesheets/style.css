@@ -516,7 +516,7 @@ li .without-arrow>a {
   height: 500px;
 }
 
-.card-container-3 {
+.card-container-3, .card-container-2 {
   background-color: rgb(199, 199, 199);
   padding-top: 50px;
 }
