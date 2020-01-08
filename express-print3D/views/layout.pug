@@ -109,18 +109,22 @@ html
     footer.footer_area
       .container
         .row
-          .col-md-3.col-sm-6
+          .col-md-4.col-sm-6
             .single_ftr
               h4.sf_title Contacts
               ul
-                li 4080 Repperts Coaol Road Sackson, MS 00201 USA
-                li
-                  | (+123) 685 78 455 
+                li Peterdy Str. 205, BUDAPEST, 1071,
                   br
-                  |  (+064) 336 987 245
-                li Contact@yourcompany.com
+                  | HUNGARY
+                li Amy Santiago - CS colleague
+                  br
+                  |(+36) 68 78 5455
+                li Rosa Diaz - CS colleague
+                  br
+                  |  (+36) 33 987 6245
+                li beyond.paper.webshop@gmail.com
           // End Col
-          .col-md-3.col-sm-6
+          .col-md-4.col-sm-6
             .single_ftr
               h4.sf_title Information
               ul
@@ -135,31 +139,17 @@ html
                 li
                   a(href='#') Contact Us
           // End Col
-          .col-md-3.col-sm-6
-            .single_ftr
-              h4.sf_title Services
-              ul
-                li
-                  a(href='#') Returns
-                li
-                  a(href='#') Site Map
-                li
-                  a(href='#') Wish List
-                li
-                  a(href='#') My Account
-                li
-                  a(href='#') Order History
-          // End Col
-          .col-md-3.col-sm-6
+          .col-md-4.col-sm-6
             .single_ftr
               h4.sf_title Newsletter
               .newsletter_form
-                p
-                  | There are many variations of passages of Lorem Ipsum available, but the majority have
-                form.form-inline(method='post')
-                  input#email.form-control(name='EMAIL', placeholder='Enter Your Email', type='email')
+                p Are you interested in 3D printing technology
+                  br
+                  | and new developments?
+                form.form-inline(action='/newsletter' method='post')
+                  input#newsLetterEmail.form-control(name='newsLetterEmail', placeholder='Enter Your Email', type='email')
                   button.btn.btn-default(type='submit')
-                    i.fa.fa-search
+                    i.fas.fa-pen-nib
           // End Col
       .ftr_btm_area
         .container
@@ -168,35 +158,35 @@ html
               .ftr_social_icon
                 ul
                   li
-                    a(href='#')
-                      i.fa.fa-facebook
+                    a(href='facebook.com')
+                      i.fab.fa-facebook-f
                   li
-                    a(href='#')
-                      i.fa.fa-google
+                    a(href='google.com')
+                      i.fab.fa-google
                   li
-                    a(href='#')
-                      i.fa.fa-linkedin
+                    a(href='linkedin.com')
+                      i.fab.fa-linkedin-in
                   li
-                    a(href='#')
-                      i.fa.fa-twitter
+                    a(href='twitter.com')
+                      i.fab.fa-twitter
                   li
-                    a(href='#')
-                      i.fa.fa-rss
+                    a(href='instagram.com')
+                      i.fab.fa-instagram
             .col-sm-4
-              p.copyright_text.text-center © 2019 All Rights Reserved Bootstrap 4 footer
+              p.copyright_text.text-center © 2019 All Rights Reserved Beyond Paper Co.
             .col-sm-4
               .payment_mthd_icon.text-right
                 ul
                   li
-                    i.fa.fa-cc-paypal
+                    i.fab.fa-cc-paypal
                   li
-                    i.fa.fa-cc-visa
+                    i.fab.fa-cc-visa
                   li
-                    i.fa.fa-cc-discover
+                    i.fab.fa-cc-discover
                   li
-                    i.fa.fa-cc-mastercard
+                    i.fab.fa-cc-mastercard
                   li
-                    i.fa.fa-cc-amex
+                    i.fab.fa-cc-amex
 
 
 

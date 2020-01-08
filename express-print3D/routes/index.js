@@ -10,4 +10,10 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/newsletter', (req, res, next) =>{
+  const emailAddress = req.body.newsLetterEmail;
+
+  
+})
+
 module.exports = router;
