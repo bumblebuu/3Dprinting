@@ -3,8 +3,9 @@ extends layout
 block content
   .container-fluid.card-container-1
     .row
-      .col-5
-      .col-7
+      .col-4.offset-1.mt-5
+        h2 3D printing, also known as additive manufacturing, is a manufacturing process where a 3D printer creates three-dimensional objects by depositing materials layer by layer in accordance to the object’s 3D digital model.
+      .col-6.offset-1
         .video-container
           video#myVideo(autoplay='', muted='', loop='')
             source(src='/img/y2mate.com - satisfying_3d_prints_timelapse_episode_7_prusa_i3_mk3_octopi_Dss1yUHH-QY_1080p.mp4', type='video/mp4')

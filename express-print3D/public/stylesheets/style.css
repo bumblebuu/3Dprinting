@@ -511,12 +511,13 @@ li .without-arrow>a {
   height: 900px;
 }
 
-.card-container-1,
-.card-container-4 {
-  background-color: #fff;
+.card-container-1 {
   height: 500px;
+  font-family: 'Odibee Sans', cursive;
+  color: #3a444b;
 }
 
+.card-container-1,
 .card-container-3,
 .card-container-2 {
   background-color: rgb(199, 199, 199);
@@ -569,9 +570,7 @@ li .without-arrow>a {
 }
 
 #myVideo {
-  height: 500px;
-  position: absolute;
-  right: 0;
+  height: 400px;
 }
 
 .stop-scrolling {
