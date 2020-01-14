@@ -83,13 +83,5 @@ router.get('/:id', async (req, res, next) => {
   });
 });
 
-router.put('/:id', async (req, res, next) => {
-  Basket.findOneAndUpdate({
-    user: req.user._id,
-    product: req.params.id,
-  }, req.body, (err, basket) => {
-    if (err) next(err);
-    res.json(basket);
-  });
-});
+
 module.exports = router;

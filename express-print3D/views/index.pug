@@ -143,7 +143,63 @@ block content
                 i.ml-2.fas.fa-magic.icon(aria-hidden='true')
         
 
-  //- .container-fluid.parallax-2
+  .container-fluid.parallax-1
+    .container
+      .row
+        .col-10.offset-1.mt-5
+          #carouselExampleIndicators.carousel.slide.mt-5(data-ride='carousel')
+            .carousel-inner
+              .carousel-item.active.text-center
+                a(href=`/products/product/${productCarousel[0].seo}`, style='text-decoration: inherit;')
+                  img.carousel-img(src=`${productCarousel[0].img[0]}`)
+                  h4.text-light.text-center=productCarousel[0].name
+                //- img.text-center.user-pic.mb-5(style="position:absolute; left:47%", src=`/img/users/${reviewCarousel[0].user.pictureurl}`, alt="user picture")
+                //- fieldset.rating.mt-5
+                //-   .rating
+                //-     input(type='radio',value='5', name='rate', checked=(reviewCarousel[0].rate == 5))
+                //-     label(for='rating-5',title='Rocks!')
+                //-     input(type='radio', value='4', name='rate', checked=(reviewCarousel[0].rate == 4))
+                //-     label(title='Pretty good', for='rating-4')
+                //-     input(type='radio', value='3', name='rate', checked=(reviewCarousel[0].rate == 3))
+                //-     label(title='Meh', for='rating-3')
+                //-     input(type='radio', value='2', name='rate', checked=(reviewCarousel[0].rate == 2))
+                //-     label(title='Kinda bad',for='rating-2')
+                //-     input(type='radio', value='1', name='rate', checked=(reviewCarousel[0].rate == 1))
+                //-     label(title='Sucks big time', for='rating-1')
+                //- h4
+                //-   div.text-light.text-center “#{reviewCarousel[0].text}”
+                //- h6.text-center
+                //-   b.text-light.text-center #{reviewCarousel[0].user.firstname} #{reviewCarousel[0].user.lastname}
+              each product in productCarousel
+                if product !== productCarousel[0]
+                  .carousel-item.text-center
+                    a(href=`/products/product/${product.seo}`, style='text-decoration: inherit;')
+                      img.carousel-img(src=`${product.img[0]}`)
+                      h4.text-light.text-center=product.name
+                    //- img.user-pic.mb-5(style="position:absolute; left:47%", src=`/img/users/${review.user.pictureurl}`, alt="user picture")
+                    //- fieldset.rating.mt-5
+                    //-   .rating
+                    //-     input(type='radio',value='5', name='rate', checked=(review.rate == 5))
+                    //-     label(for='rating-5',title='Rocks!')
+                    //-     input(type='radio', value='4', name='rate', checked=(review.rate == 4))
+                    //-     label(title='Pretty good', for='rating-4')
+                    //-     input(type='radio', value='3', name='rate', checked=(review.rate == 3))
+                    //-     label(title='Meh', for='rating-3')
+                    //-     input(type='radio', value='2', name='rate', checked=(review.rate == 2))
+                    //-     label(title='Kinda bad',for='rating-2')
+                    //-     input(type='radio', value='1', name='rate', checked=(review.rate == 1))
+                    //-     label(title='Sucks big time', for='rating-1')
+                    //- h4
+                    //-   div.text-light.text-center “#{review.text}”
+                    //- h6.text-center
+                    //-   b.text-light.text-center #{review.user.firstname} #{review.user.lastname}
+            a.carousel-control-prev.mr-5(href='#carouselExampleIndicators', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next.ml-5(href='#carouselExampleIndicators', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+
   .container-fluid.card-container-3
     .container
       .row

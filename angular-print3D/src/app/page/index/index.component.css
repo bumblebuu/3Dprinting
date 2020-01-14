@@ -1,0 +1,41 @@
+.prodCard:hover {
+  background-color: #AFFBDB;
+}
+
+.prodCard {
+  background-color: #AFFBDBA7;
+}
+
+.userCard:hover {
+  background-color: #ACE7FF;
+}
+
+.userCard {
+  background-color: #ACE7FFA5;
+}
+
+.revCard:hover {
+  background-color: #BFFCC6;
+}
+
+.revCard {
+  background-color: #BFFCC6A5;
+}
+
+.orderCard:hover {
+  background-color: #85E3FF;
+}
+
+.orderCard {
+  background-color: #85E3FFA5;
+}
+
+a {
+  opacity: 0.7;
+  text-decoration: none;
+  color: #22262A;
+}
+
+a:hover {
+  opacity: 1
+}
