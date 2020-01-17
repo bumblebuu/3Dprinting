@@ -65,7 +65,24 @@ export class IndexComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+  public geoChart = {
+    title: 'Geo Chart',
+    type: 'GeoChart',
+    data: [
+      ['Country', 'Users'],
+    ],
+    options: {
+      width: '100%',
+      height: 450,
+      chartArea: { left: 10, top: 10, bottom: 0, height: "100%" },
+      colorAxis: { colors: ['#aec7e8', '#1f77b4'] },
+      displayMode: 'regions',
+    }
+  }
+
   constructor(private ds: DataService, private cs: ChartService) {
+    let userAddress = [];
+    let userNumberByAddress = [];
     this.ds.readDocument('products');
     this.ds.readDocument('users')
     this.ds.readDocument('reviews')
@@ -134,6 +151,22 @@ export class IndexComponent implements OnInit {
         })
         this.pieChartData.push(this.printersOrdered, this.scannersOrdered, this.filamentsOrdered, this.toolsOrdered, this.healthOrdered, this.electronicsOrdered, this.mechanicsOrdered, this.architectureOrdered, this.legosOrdered, this.insideOrdered, this.outsideOrdered, this.jewelleriesOrdered, this.phonecasesOrdered, this.otherOrdered, this.uniquesOrdered)
       })
+    this.cs.readData('users').subscribe(data =>
+      data.forEach(user => {
+        if (userAddress.indexOf(user.address[0]) === -1) {
+          userAddress.push(user.address[0])
+          userNumberByAddress.push(1)
+        } else {
+          let indexNum = userAddress.indexOf(user.address[0])
+          userNumberByAddress[indexNum] += 1;
+        }
+        if (user === data[data.length - 1]) {
+          for (let i = 0; i < userAddress.length; i += 1) {
+            this.geoChart.data.push([userAddress[i], `${userAddress[i]}: ` + userNumberByAddress[i]])
+          }
+        }
+      }),
+    )
   }
 
   ngOnInit() {
