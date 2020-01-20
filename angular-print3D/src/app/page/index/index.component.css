@@ -43,11 +43,13 @@
 .geo {
   width: 100%;
   height: 450px;
+  cursor: move;
+  position: relative;
 }
 
 @media screen and (max-width: 992px) {
   .geo {
-    width: 440px;
+    width: 470px;
     height: 100%;
   }
 }
@@ -57,4 +59,11 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.zoom-buttons {
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 70px
 }

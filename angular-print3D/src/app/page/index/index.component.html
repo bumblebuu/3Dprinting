@@ -116,11 +116,17 @@
           <h5>Users from all around the world</h5>
         </div>
         <div class="card-body">
-          <p class="card-text d-flex justify-content-center">
+          <div class="btn-group-vertical zoom-buttons">
+            <button class="btn btn-outline-secondary" (click)="zoomIn(zoomNum)">+</button>
+            <button class="btn btn-outline-secondary" (click)="zoomOut(zoomNum)">-</button>
+          </div>
+          <p class="card-text d-flex justify-content-center" style="overflow:hidden; width: 100%; height: 450px;">
             <a href="/users">
-              <google-chart class="geo" [title]="geoChart.title" [type]="geoChart.type" [data]="geoChart.data"
-                [options]="geoChart.options">
-              </google-chart>
+              <div id="container">
+                <google-chart (pan)="onPan($event)" class=" geo" [title]="geoChart.title" [type]="geoChart.type"
+                  [data]="geoChart.data" [options]="geoChart.options">
+                </google-chart>
+              </div>
             </a>
           </p>
         </div>

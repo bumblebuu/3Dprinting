@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, SingleDataSet, Color } from 'ng2-charts';
 import { ChartService } from 'src/app/services/chart.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  zoomNum: number = 1;
   products$: BehaviorSubject<any> = this.ds.productList;
   users$: BehaviorSubject<any> = this.ds.userList;
   reviews$: BehaviorSubject<any> = this.ds.reviewList;
@@ -170,6 +171,15 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  zoomIn(zoomNum) {
+    this.zoomNum = this.zoomNum + 0.1;
+    $(".geo").css("zoom", this.zoomNum + 0.1)
+  }
+  zoomOut(zoomNum) {
+    this.zoomNum = this.zoomNum - 0.1;
+    $(".geo").css("zoom", this.zoomNum - 0.1)
   }
 
 }
