@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, SingleDataSet, Color } from 'ng2-charts';
 import { ChartService } from 'src/app/services/chart.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  zoomNum: number = 1;
   products$: BehaviorSubject<any> = this.ds.productList;
   users$: BehaviorSubject<any> = this.ds.userList;
   reviews$: BehaviorSubject<any> = this.ds.reviewList;
@@ -65,7 +66,24 @@ export class IndexComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+  public geoChart = {
+    title: 'Geo Chart',
+    type: 'GeoChart',
+    data: [
+      ['Country', 'Users'],
+    ],
+    options: {
+      width: '100%',
+      height: 450,
+      chartArea: { left: 10, top: 10, bottom: 0, height: "100%" },
+      colorAxis: { colors: ['#aec7e8', '#1f77b4'] },
+      displayMode: 'regions',
+    }
+  }
+
   constructor(private ds: DataService, private cs: ChartService) {
+    let userAddress = [];
+    let userNumberByAddress = [];
     this.ds.readDocument('products');
     this.ds.readDocument('users')
     this.ds.readDocument('reviews')
@@ -134,9 +152,34 @@ export class IndexComponent implements OnInit {
         })
         this.pieChartData.push(this.printersOrdered, this.scannersOrdered, this.filamentsOrdered, this.toolsOrdered, this.healthOrdered, this.electronicsOrdered, this.mechanicsOrdered, this.architectureOrdered, this.legosOrdered, this.insideOrdered, this.outsideOrdered, this.jewelleriesOrdered, this.phonecasesOrdered, this.otherOrdered, this.uniquesOrdered)
       })
+    this.cs.readData('users').subscribe(data =>
+      data.forEach(user => {
+        if (userAddress.indexOf(user.address[0]) === -1) {
+          userAddress.push(user.address[0])
+          userNumberByAddress.push(1)
+        } else {
+          let indexNum = userAddress.indexOf(user.address[0])
+          userNumberByAddress[indexNum] += 1;
+        }
+        if (user === data[data.length - 1]) {
+          for (let i = 0; i < userAddress.length; i += 1) {
+            this.geoChart.data.push([userAddress[i], `${userAddress[i]}: ` + userNumberByAddress[i]])
+          }
+        }
+      }),
+    )
   }
 
   ngOnInit() {
+  }
+
+  zoomIn(zoomNum) {
+    this.zoomNum = this.zoomNum + 0.1;
+    $(".geo").css("zoom", this.zoomNum + 0.1)
+  }
+  zoomOut(zoomNum) {
+    this.zoomNum = this.zoomNum - 0.1;
+    $(".geo").css("zoom", this.zoomNum - 0.1)
   }
 
 }

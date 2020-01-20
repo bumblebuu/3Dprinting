@@ -21,7 +21,8 @@ import { UpdateOrderComponent } from './page/update-order/update-order.component
 import { OrderbyPipe } from './pipes/orderby.pipe';
 import { ReviewsComponent } from './page/reviews/reviews.component';
 import { RolePipe } from './pipes/role.pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GoogleChartsModule } from 'angular-google-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     UpdateOrderComponent,
     OrderbyPipe,
     ReviewsComponent,
-    RolePipe
+    RolePipe,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +50,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    GoogleChartsModule.forRoot(),
     NgbModule
   ],
   providers: [],

@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"
+  type="text/javascript"></script>
 <div class="container">
   <div class="row">
     <div class="col-md-8 mt-3">
@@ -9,7 +11,7 @@
           <div class="card-deck text-center">
             <div class="card prodCard">
               <div class="card-body">
-                <a href="/products">
+                <a href="/products" class="overview">
                   <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
                   <h6 class="card-title">Products</h6>
                   <p class="card-text">{{products$.value.length}}</p>
@@ -18,7 +20,7 @@
             </div>
             <div class="card userCard">
               <div class="card-body">
-                <a href="/users">
+                <a href="/users" class="overview">
                   <i class="fa fa-users fa-2x" aria-hidden="true"></i>
                   <h6 class="card-title">Users</h6>
                   <p class="card-text">{{users$.value.length}}</p>
@@ -27,7 +29,7 @@
             </div>
             <div class="card revCard">
               <div class="card-body">
-                <a href="/reviews">
+                <a href="/reviews" class="overview">
                   <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
                   <h6 class="card-title">Reviews</h6>
                   <p class="card-text">{{reviews$.value.length}}</p>
@@ -36,7 +38,7 @@
             </div>
             <div class="card orderCard">
               <div class="card-body">
-                <a href="/orders">
+                <a href="/orders" class="overview">
                   <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
                   <h6 class="card-title">Orders</h6>
                   <p class="card-text">{{orders$.value.length}}</p>
@@ -44,55 +46,45 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 mt-2 pie">
-              <a href="/piechart">
-                <small>Products ordered by category</small>
-                <div style="display: block;" class="mt-5">
-                  <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                    [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
-                    [legend]="pieChartLegend">
-                  </canvas>
-                </div>
-              </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card-deck mt-3">
+            <div class="card">
+              <div class="card-header">
+                <h5>Products ordered</h5>
+              </div>
+              <div class="card-body mt-5">
+                <a href="/piechart">
+                  <div style="display: block;">
+                    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                      [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
+                      [legend]="pieChartLegend">
+                    </canvas>
+                  </div>
+                </a>
+              </div>
             </div>
-            <div class="col-6 mt-2 line">
-              <a href="/linechart">
-                <small>Monthly income</small>
-                <div style="display: block;" class="mt-3">
-                  <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
-                    [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-                    [chartType]="lineChartType" [plugins]="lineChartPlugins">
-                  </canvas>
-                </div>
-              </a>
+            <div class="card">
+              <div class="card-header">
+                <h5>Monthly income</h5>
+              </div>
+              <div class="card-body">
+                <a href="/linechart">
+                  <div style="display: block;">
+                    <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+                      [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                    </canvas>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4 mt-3">
-      <div class="card">
-        <div class="card-header">
-          <h5>Users from all around the world</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">
-            Some map chart with countries from where our users are.
-            <br>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis molestias autem fugit facere beatae eum
-            quidem
-            aspernatur sed vero dolorem incidunt, exercitationem, hic quas debitis sunt animi aperiam ut quisquam?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ipsum laboriosam enim laborum ea, blanditiis
-            expedita culpa eligendi officiis ad vero sequi esse iste dolorem illum nihil rem amet eaque.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quam beatae nisi, corporis suscipit quas
-            ratione, laborum eligendi temporibus in maxime, sed fugiat et eum labore. Fuga beatae vitae maiores.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-4 mt-3">
       <div class="card">
         <div class="card-header">
@@ -103,6 +95,39 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore modi assumenda maxime reprehenderit dolor
             aperiam velit eius, eum quod voluptas earum cum officiis provident perspiciatis nulla incidunt ea, pariatur
             doloribus?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et repellat quibusdam numquam odio sit beatae
+            debitis unde tenetur nostrum. Veritatis voluptatum fuga minus pariatur accusamus et? Nemo voluptatum cum
+            perferendis.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, sequi error, repellat ex facilis minima
+            optio officiis similique harum nulla iste eos! Non suscipit, incidunt ipsam similique recusandae sequi in!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laudantium, vel perspiciatis incidunt
+            nemo voluptates quasi nobis possimus, cum sunt exercitationem corporis. Repudiandae placeat temporibus at
+            saepe hic blanditiis quis!
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h5>Users from all around the world</h5>
+        </div>
+        <div class="card-body">
+          <div class="btn-group-vertical zoom-buttons">
+            <button class="btn btn-outline-secondary" (click)="zoomIn(zoomNum)">+</button>
+            <button class="btn btn-outline-secondary" (click)="zoomOut(zoomNum)">-</button>
+          </div>
+          <p class="card-text d-flex justify-content-center" style="overflow:hidden; width: 100%; height: 450px;">
+            <a href="/users">
+              <div id="container">
+                <google-chart (pan)="onPan($event)" class=" geo" [title]="geoChart.title" [type]="geoChart.type"
+                  [data]="geoChart.data" [options]="geoChart.options">
+                </google-chart>
+              </div>
+            </a>
           </p>
         </div>
       </div>
@@ -114,21 +139,6 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nam temporibus aperiam quaerat non at
-            in
-            error, exercitationem dolore, eos quidem est laboriosam, necessitatibus delectus ut. Libero fugiat sunt
-            cupiditate.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mt-3">
-      <div class="card">
-        <div class="card-header">
-          <h5>Thrid something</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus error labore fugit aperiam fugiat
             numquam natus assumenda, dicta maiores quam cum odio ipsam repudiandae, quo commodi doloremque quasi
             voluptatum reiciendis?
@@ -137,4 +147,3 @@
       </div>
     </div>
   </div>
-</div>
