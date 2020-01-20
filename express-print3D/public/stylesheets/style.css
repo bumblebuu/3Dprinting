@@ -860,3 +860,21 @@ ul {
 }
 
 /*  ---  FOOTER END ---  */
+
+/*   --- MODAL START ---   */
+
+.modal-img {
+  margin-top: -85px;
+  width: 30%;
+  border-radius: 45%;
+  padding: 15px;
+  background: #1c2b38;
+}
+
+.modal-content {
+  background-color: #1c2b38;
+  color: whitesmoke;
+  border: none;
+}
+
+/*   --- MODAL END ---   */

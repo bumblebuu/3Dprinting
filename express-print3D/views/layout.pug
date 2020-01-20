@@ -146,7 +146,7 @@ html
                 p Are you interested in 3D printing technology
                   br
                   | and new developments?
-                form.form-inline(action='/newsletter' method='post')
+                form.form-inline#thankYouForm
                   input#newsLetterEmail.form-control(name='newsLetterEmail', placeholder='Enter Your Email', type='email')
                   button.btn.btn-default(type='submit')
                     i.fas.fa-pen-nib
@@ -189,16 +189,15 @@ html
                     i.fab.fa-cc-amex
 
     // thank you Modal
-    if (modal)
-      #thanksModal.modal.fade.text-center.py-5(style='top:30px', tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-        .modal-dialog.modal-md(role='document')
-          .modal-content
-            .modal-body
-              img.modal-img(src='https://sunlimetech.com/portfolio/sunlimeuikit/imgs/s.png')
-              h3.pt-5.mb-0.text-secondary Thanks for your love and support!
-              p.pb-3.text-muted
-                small Hope that you enjoy it well! Check also our site
-              a.btn.btn-secondary.text-white.mb-3(role='button', href='https://www.sunlimetech.com', target='_blank') www.sunlimetech.com
+    #thanksModal.modal.fade.text-center.py-5(style='top:30px', tabindex='-1', role='dialog', aria-hidden='true' aria-labelledby="mySmallModalLabel")
+      .modal-dialog.modal-md(role='document')
+        .modal-content
+          .modal-body
+            img.modal-img(src='/img/poly-bird.png')
+            h3.pt-2.mb-0#answer
+            p.pb-3.text-muted
+              small View some interesting videos on youtube in this subject!
+            a.btn.btn-secondary.text-white.mb-3(role='button', href='https://www.youtube.com/results?search_query=3d+printing', target='_blank') 3D PRINTING
 
 
 
@@ -212,3 +211,4 @@ html
     script(src='/scripts/search.js')
     script(src='/scripts/userFetch.js')
     script(src='/scripts/register-alerts.js')
+    script(src='/scripts/newsletter.js')
