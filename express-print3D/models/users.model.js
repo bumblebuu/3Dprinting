@@ -65,7 +65,7 @@ const usersSchema = new Schema({
     ref: 'Baskets',
   },
 }, {
-  versionKey: false, // You should be aware of the outcome after set to false
+  versionKey: false,
 });
 
 const Users = mongoose.model('Users', usersSchema);

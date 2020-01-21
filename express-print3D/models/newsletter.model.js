@@ -13,6 +13,8 @@ const newsletterSchema = new Schema({
     unique: true,
     required: true,
   },
+}, {
+  versionKey: false,
 });
 
 const Newsletters = mongoose.model('Newsletters', newsletterSchema);
