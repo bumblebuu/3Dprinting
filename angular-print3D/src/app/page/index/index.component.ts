@@ -171,13 +171,39 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    let geo = null;
+    let x_img_ele = 0;
+    let y_img_ele = 0;
+
+
+    function start_drag(event: MouseEvent) {
+      geo = this;
+      x_img_ele = event.clientX - document.getElementById('geo').offsetLeft;
+      y_img_ele = event.clientY - document.getElementById('geo').offsetTop;
+
+    }
+
+    function stop_drag() {
+      geo = null;
+    }
+
+    function while_drag(event: MouseEvent) {
+      if (geo !== null) {
+        geo.style.left = (event.clientX - x_img_ele) + 'px';
+        geo.style.top = (event.clientY - y_img_ele) + 'px';
+      }
+    }
+
+    document.getElementById('geo').addEventListener('mousedown', start_drag);
+    document.getElementById('container').addEventListener('mousemove', while_drag);
+    document.getElementById('container').addEventListener('mouseup', stop_drag);
   }
 
-  zoomIn(zoomNum) {
+  zoomIn() {
     this.zoomNum = this.zoomNum + 0.1;
     $(".geo").css("zoom", this.zoomNum + 0.1)
   }
-  zoomOut(zoomNum) {
+  zoomOut() {
     this.zoomNum = this.zoomNum - 0.1;
     $(".geo").css("zoom", this.zoomNum - 0.1)
   }
