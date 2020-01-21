@@ -5,7 +5,7 @@ const router = express.Router();
 
 const Newsletter = require('../models/newsletter.model');
 
-const mail = require('../nodeMailerWithTemp');
+const transporter = require('../nodeMailerWithTemp');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -32,21 +32,40 @@ router.get('/', (req, res, next) => {
 router.post('/', async (req, res, next) => {
   let modal = 'Thank you for subscribing!';
   const emailAddress = req.body.newsLetterEmail;
-  console.log(emailAddress);
+  // console.log(emailAddress);
 
   await Newsletter.findOne({
     emailaddress: emailAddress,
   }, (err, obj) => {
     if (err) next(err);
-    //console.log(obj);
+    // console.log(obj);
     if (obj) {
       modal = 'This email is already subscribed, thank you!';
     } else {
-      //Newsletter.create({emailaddress : emailAddress}, )
+      Newsletter.create( {emailaddress: emailAddress}, (err, data) => {
+        if (err) {
+          return next(err);
+        }
+        // console.log(data);
+      });
 
-      mail.sendSubscribed(emailAddress);
+      const mailOptions = {
+        from: 'beyond.paper.webshop@gmail.com',
+        to: emailAddress,
+        subject: 'Newsletter subscribtion',
+        template: 'subscribed',
+      };
+      
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Email sent: ${info.response}`);
+        }
+      });
     }
   });
+
 
   return res.json(modal);
 });

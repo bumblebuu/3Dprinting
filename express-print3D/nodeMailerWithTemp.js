@@ -21,30 +21,15 @@ const transporter = nodeMailer.createTransport(smtpTransport({
 const handlebarOptions = {
   viewEngine: {
     extName: '.hbs',
-    partialsDir: './templates/subscribed',
-    layoutsDir: './templates/subscribed',
-    defaultLayout: 'newsletter.hbs',
+    partialsDir: './templates/',
+    layoutsDir: './templates/',
+    defaultLayout: 'subscribed.hbs',
   },
-  viewPath: './templates/subscribed',
+  viewPath: './templates/',
   extName: '.hbs',
 };
 
 transporter.use('compile', hbs(handlebarOptions));
 
+module.exports = transporter;
 
-const mailOptions = {
-  from: 'beyond.paper.webshop@gmail.com',
-  // to: 'grosics13@gmail.com',
-  subject: 'Sending Email using Node.js[nodemailer]',
-  text: 'That was easy!',
-  send: true,
-  template: 'newsletter',
-};
-
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(`Email sent: ${info.response}`);
-  }
-});
