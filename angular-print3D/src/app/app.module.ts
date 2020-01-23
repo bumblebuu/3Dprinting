@@ -23,6 +23,7 @@ import { ReviewsComponent } from './page/reviews/reviews.component';
 import { RolePipe } from './pipes/role.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { RoundProgressModule } from 'angular-svg-round-progressbar'
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ReactiveFormsModule,
     ChartsModule,
     GoogleChartsModule.forRoot(),
-    NgbModule
+    NgbModule,
+    RoundProgressModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,10 @@ export class IndexComponent implements OnInit {
   reviews$: BehaviorSubject<any> = this.ds.reviewList;
   orders$: BehaviorSubject<any> = this.ds.orderList;
   pcOrders$: Observable<any> = this.cs.readData('orders');
+  productByQuantity = {};
+  sortedProducts = [];
+  topThreeOrders = [];
+  topThreeProducts = [];
   filamentsOrdered = 0;
   printersOrdered = 0;
   scannersOrdered = 0;
@@ -33,6 +37,16 @@ export class IndexComponent implements OnInit {
   phonecasesOrdered = 0;
   otherOrdered = 0;
   uniquesOrdered = 0;
+
+  public barChartLabels: Label[] = ['★★★★★', '★★★★', '★★★', '★★', '★'];
+  public barChartData: ChartDataSets[] = [{ data: [], label: 'rated' }];
+  public barChartType: ChartType = 'horizontalBar';
+  public barChartPlugins = [];
+  public barChartColors = ['#ffd24d'];
+  public barChartLegend = false;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -82,12 +96,48 @@ export class IndexComponent implements OnInit {
   }
 
   constructor(private ds: DataService, private cs: ChartService) {
-    let userAddress = [];
-    let userNumberByAddress = [];
+    // this.cs.readProducstOrderesByCategory().subscribe(data => console.log(data))
+    this.drawLineChart();
+    this.drawPieChart();
+    this.getTopThree();
+    this.drawBarChart();
+    this.drawGeoChart();
     this.ds.readDocument('products');
-    this.ds.readDocument('users')
-    this.ds.readDocument('reviews')
-    this.ds.readDocument('orders')
+    this.ds.readDocument('users');
+    this.ds.readDocument('reviews');
+    this.ds.readDocument('orders');
+  }
+
+  ngOnInit() {
+    let geo = null;
+    let x_img_ele = 0;
+    let y_img_ele = 0;
+
+
+    function start_drag(event: MouseEvent) {
+      geo = this;
+      x_img_ele = event.clientX - document.getElementById('geo').offsetLeft;
+      y_img_ele = event.clientY - document.getElementById('geo').offsetTop;
+
+    }
+
+    function stop_drag() {
+      geo = null;
+    }
+
+    function while_drag(event: MouseEvent) {
+      if (geo !== null) {
+        geo.style.left = (event.clientX - x_img_ele) + 'px';
+        geo.style.top = (event.clientY - y_img_ele) + 'px';
+      }
+    }
+
+    document.getElementById('geo').addEventListener('mousedown', start_drag);
+    document.getElementById('container').addEventListener('mousemove', while_drag);
+    document.getElementById('container').addEventListener('mouseup', stop_drag);
+  }
+
+  drawLineChart() {
     this.thisYear = new Date().getFullYear();
     this.cs.readData('orders').subscribe(data => {
 
@@ -97,6 +147,9 @@ export class IndexComponent implements OnInit {
         new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[1].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
       })
     })
+  }
+
+  drawPieChart() {
     this.pcOrders$.subscribe(
       data => {
         data.forEach(item => {
@@ -150,8 +203,77 @@ export class IndexComponent implements OnInit {
             })
           })
         })
+
         this.pieChartData.push(this.printersOrdered, this.scannersOrdered, this.filamentsOrdered, this.toolsOrdered, this.healthOrdered, this.electronicsOrdered, this.mechanicsOrdered, this.architectureOrdered, this.legosOrdered, this.insideOrdered, this.outsideOrdered, this.jewelleriesOrdered, this.phonecasesOrdered, this.otherOrdered, this.uniquesOrdered)
       })
+  }
+
+  getTopThree() {
+    let topSeo = '';
+    this.cs.readData('orders').subscribe(
+      data => {
+        data.forEach(item => {
+          item.quantity.forEach(q => {
+            if (this.productByQuantity[Object.keys(q)[0]] === undefined) {
+              this.productByQuantity[Object.keys(q)[0]] = Object.values(q)[0];
+            } else {
+              this.productByQuantity[Object.keys(q)[0]] += Object.values(q)[0]
+            }
+          })
+        })
+        for (let prod in this.productByQuantity) {
+          this.sortedProducts.push([prod, this.productByQuantity[prod]])
+        }
+        this.sortedProducts.sort((a, b) => { return a[1] - b[1] })
+
+        while (this.topThreeOrders.length < 3) {
+          this.topThreeOrders.push(this.sortedProducts.pop())
+        }
+        this.topThreeOrders.forEach(top => {
+          topSeo = top[0].toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').toLowerCase().replace(/&/g, '-and-').replace(/[^a-z0-9\-]/g, '').replace(/-+/g, '-').replace(/^-*/, '').replace(/-*$/, '');
+          this.cs.readData('products', topSeo).subscribe(data => {
+            this.topThreeProducts.push(data)
+          })
+
+        })
+      })
+  }
+  drawBarChart() {
+    let stars = {
+      five: 0,
+      four: 0,
+      three: 0,
+      two: 0,
+      one: 0
+    }
+    this.cs.readData('reviews').subscribe(data => {
+      data.forEach(review => {
+        switch (review.rate) {
+          case 5:
+            stars.five += 1;
+            break;
+          case 4:
+            stars.four += 1;
+            break;
+          case 3:
+            stars.three += 1;
+            break;
+          case 2:
+            stars.two += 1;
+            break;
+          case 1:
+            stars.one += 1;
+            break;
+        }
+      })
+      this.barChartData[0].data.push(stars.five, stars.four, stars.three, stars.two, stars.one)
+      console.log(stars);
+    })
+  }
+
+  drawGeoChart() {
+    let userAddress = [];
+    let userNumberByAddress = [];
     this.cs.readData('users').subscribe(data =>
       data.forEach(user => {
         if (userAddress.indexOf(user.address[0]) === -1) {
@@ -168,35 +290,6 @@ export class IndexComponent implements OnInit {
         }
       }),
     )
-  }
-
-  ngOnInit() {
-    let geo = null;
-    let x_img_ele = 0;
-    let y_img_ele = 0;
-
-
-    function start_drag(event: MouseEvent) {
-      geo = this;
-      x_img_ele = event.clientX - document.getElementById('geo').offsetLeft;
-      y_img_ele = event.clientY - document.getElementById('geo').offsetTop;
-
-    }
-
-    function stop_drag() {
-      geo = null;
-    }
-
-    function while_drag(event: MouseEvent) {
-      if (geo !== null) {
-        geo.style.left = (event.clientX - x_img_ele) + 'px';
-        geo.style.top = (event.clientY - y_img_ele) + 'px';
-      }
-    }
-
-    document.getElementById('geo').addEventListener('mousedown', start_drag);
-    document.getElementById('container').addEventListener('mousemove', while_drag);
-    document.getElementById('container').addEventListener('mouseup', stop_drag);
   }
 
   zoomIn() {

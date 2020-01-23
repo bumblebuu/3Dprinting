@@ -69,6 +69,33 @@ router.get('/orders', (req, res, next) => {
   });
 });
 
+// router.get('/orders/productsbycategory', (req, res, next) => {
+//   Order.aggregate([{
+//       $unwind: '$product',
+//     }, {
+//       $lookup: {
+//         from: 'products',
+//         localField: 'product',
+//         foreignField: '_id',
+//         as: 'productData',
+//       }
+//     }, {
+//       $unwind: '$quantity',
+//     },
+//     {
+//       $group: {
+//         _id: '$quantity',
+//         totalQuantity: {
+//           $sum: '$quantity',
+//         },
+//       },
+//     },
+//   ], (err, prod) => {
+//     if (err) return next(err);
+//     res.json(prod)
+//   })
+// })
+
 router.get('/orders/:id', (req, res, next) => {
   Order.findOne({
     _id: req.params.id,

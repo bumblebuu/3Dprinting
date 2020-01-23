@@ -11,7 +11,13 @@ export class ChartService {
   constructor(private http: HttpClient) { }
 
   readData(collectionName: string, query?: any): Observable<any> {
+    if (query) {
+      return this.http.get(`${this.url}/${collectionName}/${query}`)
+    }
     return this.http.get(`${this.url}/${collectionName}`)
   }
 
+  // readProducstOrderesByCategory(): Observable<any> {
+  //   return this.http.get(`${this.url}/orders/productsbycategory`)
+  // }
 }
