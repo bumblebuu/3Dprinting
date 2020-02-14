@@ -41,7 +41,7 @@ export class UpdateProductComponent implements OnInit {
   }
 
   onUpdate() {
-    const keys = ['name', 'seo', 'brand', 'description', 'img', 'menu', 'category', 'price'];
+    const keys = ['name', 'seo', 'brand', 'shortdescription', 'description', 'img', 'menu', 'category', 'price'];
     let error = false;
     let missing = [];
     keys.forEach((k) => {

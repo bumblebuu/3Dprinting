@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onCreate() {
-    const keys = ['name', 'seo', 'brand', 'description', 'menu', 'category', 'price'];
+    const keys = ['name', 'seo', 'brand', 'shortdescription', 'description', 'menu', 'category', 'price'];
     let error = false;
     let missing = [];
 

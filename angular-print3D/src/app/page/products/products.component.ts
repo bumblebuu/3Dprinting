@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { BehaviorSubject } from 'rxjs';
-
+declare let $: any;
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -22,6 +22,9 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() { }
 
+  onDeleteModal(seo: string) {
+    $(`#${seo}`).modal('show')
+  }
   onDelete(seo: string): void {
     this.ds.updateDocument('products', seo, { isactive: 0 }).subscribe(
       () => this.ds.readActiveProducts('products'),

@@ -23,6 +23,11 @@ const productsSchema = new Schema({
     unique: false,
     required: false,
   },
+  shortdescription: {
+    type: String,
+    unique: false,
+    required: true,
+  },
   description: {
     type: String,
     unique: false,

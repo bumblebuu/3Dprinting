@@ -1,5 +1,6 @@
 const express = require('express');
 const Products = require('../models/products.model');
+const Reviews = require('../models/reviews.model');
 
 const router = express.Router();
 
@@ -10,7 +11,9 @@ const transporter = require('../nodeMailerWithTemp');
 /* GET home page. */
 router.get('/', (req, res, next) => {
   const productCarousel = [];
+  const reviewCarousel = [];
   let productNum = 0;
+  let reviewNum = 0;
   Products.find({
     isactive: true,
   }, (err, products) => {
@@ -21,11 +24,23 @@ router.get('/', (req, res, next) => {
         productCarousel.push(products[productNum]);
       }
     }
-    res.render('index', {
-      title: 'Express',
-      user: req.user,
-      productCarousel,
-    });
+    Reviews.find().populate('user').exec(
+      (err, reviews) => {
+        if (err) next(err);
+        while (reviewCarousel.length < 5) {
+          reviewNum = Math.floor(Math.random() * reviews.length + 1);
+          if (reviewCarousel.indexOf(reviews[reviewNum]) === -1 && reviews[reviewNum] !== undefined) {
+            reviewCarousel.push(reviews[reviewNum]);
+          }
+        }
+        res.render('index', {
+          title: 'Express',
+          user: req.user,
+          productCarousel,
+          reviewCarousel
+        });
+      }
+    )
   });
 });
 
@@ -42,7 +57,9 @@ router.post('/', async (req, res, next) => {
     if (obj) {
       modal = 'This email is already subscribed, thank you!';
     } else {
-      Newsletter.create( {emailaddress: emailAddress}, (err, data) => {
+      Newsletter.create({
+        emailaddress: emailAddress
+      }, (err, data) => {
         if (err) {
           return next(err);
         }
@@ -55,7 +72,7 @@ router.post('/', async (req, res, next) => {
         subject: 'Newsletter subscribtion',
         template: 'subscribed',
       };
-      
+
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           console.log(error);

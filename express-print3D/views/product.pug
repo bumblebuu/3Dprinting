@@ -21,7 +21,7 @@ block content
         p.mt-5=product.brand
         h3=product.name
         ul
-          each description in (product.description).split('.',3)
+          each description in (product.shortdescription).split('.')
             li=description
       .col-4.mt-5
         h3.mt-5 $#{product.price}
