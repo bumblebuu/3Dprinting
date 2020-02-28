@@ -23,7 +23,10 @@ import { ReviewsComponent } from './page/reviews/reviews.component';
 import { RolePipe } from './pipes/role.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleChartsModule } from 'angular-google-charts';
-import { RoundProgressModule } from 'angular-svg-round-progressbar'
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { OrderReportsComponent } from './page/order-reports/order-reports.component';
+import { ProductReportsComponent } from './page/product-reports/product-reports.component';
+import { SumPipe } from './pipes/sum.pipe'
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,9 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar'
     OrderbyPipe,
     ReviewsComponent,
     RolePipe,
+    OrderReportsComponent,
+    ProductReportsComponent,
+    SumPipe,
   ],
   imports: [
     BrowserModule,

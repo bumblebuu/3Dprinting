@@ -11,6 +11,8 @@ import { LinechartComponent } from './page/charts/linechart/linechart.component'
 import { PiechartComponent } from './page/charts/piechart/piechart.component';
 import { UpdateOrderComponent } from './page/update-order/update-order.component';
 import { ReviewsComponent } from './page/reviews/reviews.component';
+import { OrderReportsComponent } from './page/order-reports/order-reports.component';
+import { ProductReportsComponent } from './page/product-reports/product-reports.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: "linechart", component: LinechartComponent },
   { path: "piechart", component: PiechartComponent },
   { path: "reviews", component: ReviewsComponent },
+  { path: "reports/orders", component: OrderReportsComponent },
+  { path: "reports/products", component: ProductReportsComponent },
 ];
 
 @NgModule({

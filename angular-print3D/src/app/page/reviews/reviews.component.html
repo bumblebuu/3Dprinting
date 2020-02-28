@@ -32,7 +32,7 @@
             </td>
           </tr>
         </tbody>
-        <div *ngIf="reviews$.value.length>pageSize">
+        <div *ngIf="reviews$.value.length>pageSize" class="pagination mt-3">
           <ngb-pagination [collectionSize]="reviews$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>

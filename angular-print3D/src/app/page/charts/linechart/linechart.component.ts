@@ -36,8 +36,8 @@ export class LinechartComponent implements OnInit {
 
       this.lineChartData = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2019' }, { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2020' },];
       data.forEach(item => {
-        new Date(item.insdate).getFullYear() === 2019 ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
-        new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[1].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
+        new Date(item.insdate).getFullYear() === 2019 ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += parseInt(item.unitprice) : item;
+        new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[1].data[new Date(item.insdate).getMonth()] += parseInt(item.unitprice) : item;
       })
     })
   }

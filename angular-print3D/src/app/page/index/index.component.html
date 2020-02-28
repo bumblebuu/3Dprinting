@@ -80,11 +80,15 @@
       <div class="card-body">
         <table class="table table-responsive table-borderless">
           <thead>
+            <th>place</th>
+            <!-- <th>img</th> -->
             <th>name</th>
             <th>price</th>
           </thead>
           <tbody>
-            <tr *ngFor='let top of topThreeProducts'>
+            <tr *ngFor='let top of topThreeProducts;let i=index'>
+              <td>{{i+1}}.</td>
+              <!-- <td><img src="{{top.img[0]}}" alt=""></td> -->
               <td>{{top.name}}</td>
               <td>${{top.price}}</td>
             </tr>

@@ -26,3 +26,8 @@
   border-radius: 15px;
   background: -webkit-linear-gradient(rgb(91, 248, 235) 5%, rgb(47, 148, 139) 53%, rgb(5, 76, 88) 93%);
 }
+
+.pagination {
+  position: relative;
+  left: 15vw;
+}

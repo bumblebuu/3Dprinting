@@ -47,7 +47,7 @@
             </td>
           </tr>
         </tbody>
-        <div *ngIf="users$.value.length>pageSize">
+        <div *ngIf="users$.value.length>pageSize" class="pagination mt-3">
           <ngb-pagination [collectionSize]="users$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>

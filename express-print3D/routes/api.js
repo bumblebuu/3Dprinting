@@ -123,6 +123,59 @@ router.delete('/orders/delete/:id', (req, res, next) => {
   });
 });
 
+router.get('/reports/orders', (req, res, next) => {
+  Order.find().populate('user product').sort('-insdate').exec((err, orders) => {
+    if (err) return next(err)
+    res.json(orders)
+  })
+})
+router.get('/reports/products', (req, res, next) => {
+  Order.find({
+    status: 'delivered'
+  }).populate('user product').sort('-insdate').exec((err, orders) => {
+    if (err) return next(err)
+    res.json(orders)
+  })
+})
+
+router.get('/reports/orders/insdate', (req, res, next) => {
+  Order.distinct('insdate', (err, dates) => {
+    if (err) return next(err)
+    res.json(dates)
+  })
+})
+
+router.get('/reports/products/insdate', (req, res, next) => {
+  Order.find({
+    status: 'delivered'
+  }).distinct('insdate', (err, dates) => {
+    if (err) return next(err)
+    res.json(dates)
+  })
+})
+router.get('/reports/orders/status', (req, res, next) => {
+  Order.distinct('status', (err, status) => {
+    if (err) return next(err)
+    res.json(status)
+  })
+})
+
+router.get('/reports/products/products', (req, res, next) => {
+  Order.find({
+    status: 'delivered'
+  }).distinct('product', (err, ids) => {
+    if (err) return next(err)
+    Product.find({
+      '_id': {
+        $in: ids
+      }
+    }, (err, products) => {
+      if (err) return next(err)
+      res.json(products)
+    })
+  })
+})
+
 
 router.get('/reviews', (req, res, next) => {
   Review.find({}).populate('user product').sort('-insdate').exec((err, reviews) => {

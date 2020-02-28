@@ -63,7 +63,7 @@ router.post('/', (req, res, next) => {
         product: productArray,
         quantity: totalquantity,
         unitprice: totalPrice,
-        status: 'Payed',
+        status: 'payed',
       });
       res.redirect('/products');
     });

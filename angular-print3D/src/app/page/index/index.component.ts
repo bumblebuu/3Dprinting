@@ -39,13 +39,25 @@ export class IndexComponent implements OnInit {
   uniquesOrdered = 0;
 
   public barChartLabels: Label[] = ['★★★★★', '★★★★', '★★★', '★★', '★'];
-  public barChartData: ChartDataSets[] = [{ data: [], label: 'rated' }];
+  public barChartData: ChartDataSets[] = [{ borderSkipped: 'top', data: [], label: 'rated' }];
   public barChartType: ChartType = 'horizontalBar';
   public barChartPlugins = [];
   public barChartColors = ['#ffd24d'];
   public barChartLegend = false;
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        }
+      }]
+    }
   };
 
   public pieChartOptions: ChartOptions = {
@@ -143,8 +155,8 @@ export class IndexComponent implements OnInit {
 
       this.lineChartData = [{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2019' }, { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], label: '2020' },];
       data.forEach(item => {
-        new Date(item.insdate).getFullYear() === 2019 ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
-        new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[1].data[new Date(item.insdate).getMonth()] += item.unitprice : item;
+        new Date(item.insdate).getFullYear() === 2019 ? this.lineChartData[0].data[new Date(item.insdate).getMonth()] += parseInt(item.unitprice) : item;
+        new Date(item.insdate).getFullYear() === this.thisYear ? this.lineChartData[1].data[new Date(item.insdate).getMonth()] += parseInt(item.unitprice) : item;
       })
     })
   }
