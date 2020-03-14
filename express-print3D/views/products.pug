@@ -3,7 +3,7 @@ extends layout
 block content
   .container-fluid.mt-5.products-page
     .row.ml-5.mr-5
-      .col-12.col-md-6.col-lg-2
+      .col-12.col-md-6.col-lg-2.pb-5
         .filter-block.sticky-top
           h3 Filtering
           form(role='form')
@@ -52,7 +52,7 @@ block content
                     else
                       small.text-muted Out of stock
                   a.btn.btn-info.col-10.btn-show(href=`product/${product.seo}`) Show more
-        .row
+        .row.pb-5
           if (pages > 0)
             ul.pagination.text-center
               if (current == 1)

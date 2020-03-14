@@ -217,6 +217,7 @@ nav {
   background-color: #212224;
   height: 400px;
   display: flex;
+  z-index: 2;
 }
 
 nav {
@@ -356,6 +357,7 @@ li .without-arrow>a {
   top: 80px;
   border-radius: 5px;
   scroll-behavior: auto;
+  z-index: 1;
 }
 
 #user-pic-div {

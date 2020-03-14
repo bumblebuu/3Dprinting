@@ -177,6 +177,7 @@ router.get('/:page', async (req, res, next) => {
             brands,
             categories,
             subCategories,
+            search,
             categoriesArr: [],
             brandsArr: [],
             subCategoriesArr: [],
@@ -207,18 +208,6 @@ router.get('/product/:seo', (req, res, next) => {
       });
     });
   }
-
-  // if (typeof req.params.seo === 'string') {
-  //   Product.findOne({
-  //     seo: req.params.seo,
-  //   }).exec((err, product) => {
-  //     if (err) next(err);
-  //     res.render('product', {
-  //       product,
-  //       user: req.user,
-  //     });
-  //   });
-  // }
 });
 
 router.post('/reviews', (req, res, next) => {
