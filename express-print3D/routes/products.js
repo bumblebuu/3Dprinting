@@ -101,30 +101,8 @@ router.get('/:page', async (req, res, next) => {
     }
 
     Product.find({
-      isactive: true,
-      $or: [{
-        category: {
-          $in: categoriesArr,
-        },
-      },
-      {
-        subcategory: {
-          $in: subCategoriesArr,
-        },
-      },
-      {
-        brand: {
-          $in: brandsArr,
-        },
-      },
-      ],
-    })
-      .skip((perPage * page) - perPage)
-      .limit(perPage)
-      .exec((err, products) => {
-        Product.countDocuments({
-          isactive: true,
-          $or: [{
+        isactive: true,
+        $or: [{
             category: {
               $in: categoriesArr,
             },
@@ -139,6 +117,28 @@ router.get('/:page', async (req, res, next) => {
               $in: brandsArr,
             },
           },
+        ],
+      })
+      .skip((perPage * page) - perPage)
+      .limit(perPage)
+      .exec((err, products) => {
+        Product.countDocuments({
+          isactive: true,
+          $or: [{
+              category: {
+                $in: categoriesArr,
+              },
+            },
+            {
+              subcategory: {
+                $in: subCategoriesArr,
+              },
+            },
+            {
+              brand: {
+                $in: brandsArr,
+              },
+            },
           ],
         }).exec((err, count) => {
           if (err) return next(err);
@@ -161,8 +161,8 @@ router.get('/:page', async (req, res, next) => {
       });
   } else {
     Product.find({
-      isactive: true,
-    })
+        isactive: true,
+      })
       .skip((perPage * page) - perPage)
       .limit(perPage)
       .exec((err, products) => {
@@ -207,6 +207,18 @@ router.get('/product/:seo', (req, res, next) => {
       });
     });
   }
+
+  // if (typeof req.params.seo === 'string') {
+  //   Product.findOne({
+  //     seo: req.params.seo,
+  //   }).exec((err, product) => {
+  //     if (err) next(err);
+  //     res.render('product', {
+  //       product,
+  //       user: req.user,
+  //     });
+  //   });
+  // }
 });
 
 router.post('/reviews', (req, res, next) => {

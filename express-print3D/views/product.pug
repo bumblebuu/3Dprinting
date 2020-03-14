@@ -66,6 +66,7 @@ block content
       .col-12
         .product-background.mt-3.mb-3
           h3.mb-5 Product Reviews
+
           if reviews
             each review,index in reviews
               .row
@@ -102,6 +103,7 @@ block content
                 .col-1
                   small.text-muted #{ review.rate }&starf;
               hr
+
           if user
             .col-12.text-center
               button.btn.btn-info(href='#', onClick='showReview()') Leave a Review

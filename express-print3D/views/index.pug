@@ -190,46 +190,46 @@ block content
         #carouselExampleControls.carousel.slide(data-ride='carousel')
           .carousel-inner
             .carousel-item.active
-              img.review-pic.mt-3( src=`/img/users/${reviewCarousel[0].user.pictureurl}`, alt="user picture")
-              .rating.mt-3
-                input(type='radio',value='5', name='rate0', checked=(reviewCarousel[0].rate == 5))
-                label(for='rating-5',title='Rocks!')
-                input(type='radio', value='4', name='rate0', checked=(reviewCarousel[0].rate == 4))
-                label(title='Pretty good', for='rating-4')
-                input(type='radio', value='3', name='rate0', checked=(reviewCarousel[0].rate == 3))
-                label(title='Meh', for='rating-3')
-                input(type='radio', value='2', name='rate0', checked=(reviewCarousel[0].rate == 2))
-                label(title='Kinda bad',for='rating-2')
-                input(type='radio', value='1', name='rate0', checked=(reviewCarousel[0].rate == 1))
-                label(title='Sucks big time', for='rating-1')
-              h3
-                div “#{reviewCarousel[0].text}”
-              h5 #{reviewCarousel[0].user.firstname} #{reviewCarousel[0].user.lastname}
-            each review,index in reviewCarousel
-              if review !== reviewCarousel[0]
-                if review !== undefined
-                  .carousel-item
-                    img.review-pic.mt-3(src=`/img/users/${review.user.pictureurl}`, alt="user picture")
-                    .rating.mt-3
-                      input(type='radio',value='5', name=`rate${index}`, checked=(review.rate == 5))
-                      label(for='rating-5',title='Rocks!')
-                      input(type='radio', value='4', name=`rate${index}`, checked=(review.rate == 4))
-                      label(title='Pretty good', for='rating-4')
-                      input(type='radio', value='3', name=`rate${index}`, checked=(review.rate == 3))
-                      label(title='Meh', for='rating-3')
-                      input(type='radio', value='2', name=`rate${index}`, checked=(review.rate == 2))
-                      label(title='Kinda bad',for='rating-2')
-                      input(type='radio', value='1', name=`rate${index}`, checked=(review.rate == 1))
-                      label(title='Sucks big time', for='rating-1')
-                    h3
-                      div “#{review.text}”
-                    h5 #{review.user.firstname} #{review.user.lastname}            
-          a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
-            span.carousel-control-prev-icon(aria-hidden='true')
-            span.sr-only Previous
-          a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
-            span.carousel-control-next-icon(aria-hidden='true')
-            span.sr-only Next
+  //-             img.review-pic.mt-3( src=`/img/users/${reviewCarousel[0].user.pictureurl}`, alt="user picture")
+  //-             .rating.mt-3
+  //-               input(type='radio',value='5', name='rate0', checked=(reviewCarousel[0].rate == 5))
+  //-               label(for='rating-5',title='Rocks!')
+  //-               input(type='radio', value='4', name='rate0', checked=(reviewCarousel[0].rate == 4))
+  //-               label(title='Pretty good', for='rating-4')
+  //-               input(type='radio', value='3', name='rate0', checked=(reviewCarousel[0].rate == 3))
+  //-               label(title='Meh', for='rating-3')
+  //-               input(type='radio', value='2', name='rate0', checked=(reviewCarousel[0].rate == 2))
+  //-               label(title='Kinda bad',for='rating-2')
+  //-               input(type='radio', value='1', name='rate0', checked=(reviewCarousel[0].rate == 1))
+  //-               label(title='Sucks big time', for='rating-1')
+  //-             h3
+  //-               div “#{reviewCarousel[0].text}”
+  //-             h5 #{reviewCarousel[0].user.firstname} #{reviewCarousel[0].user.lastname}
+  //-           each review,index in reviewCarousel
+  //-             if review !== reviewCarousel[0]
+  //-               if review !== undefined
+  //-                 .carousel-item
+  //-                   img.review-pic.mt-3(src=`/img/users/${review.user.pictureurl}`, alt="user picture")
+  //-                   .rating.mt-3
+  //-                     input(type='radio',value='5', name=`rate${index}`, checked=(review.rate == 5))
+  //-                     label(for='rating-5',title='Rocks!')
+  //-                     input(type='radio', value='4', name=`rate${index}`, checked=(review.rate == 4))
+  //-                     label(title='Pretty good', for='rating-4')
+  //-                     input(type='radio', value='3', name=`rate${index}`, checked=(review.rate == 3))
+  //-                     label(title='Meh', for='rating-3')
+  //-                     input(type='radio', value='2', name=`rate${index}`, checked=(review.rate == 2))
+  //-                     label(title='Kinda bad',for='rating-2')
+  //-                     input(type='radio', value='1', name=`rate${index}`, checked=(review.rate == 1))
+  //-                     label(title='Sucks big time', for='rating-1')
+  //-                   h3
+  //-                     div “#{review.text}”
+  //-                   h5 #{review.user.firstname} #{review.user.lastname}            
+  //-         a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+  //-           span.carousel-control-prev-icon(aria-hidden='true')
+  //-           span.sr-only Previous
+  //-         a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+  //-           span.carousel-control-next-icon(aria-hidden='true')
+  //-           span.sr-only Next
 
     //- #carouselExampleIndicators.carousel.slide.mb-5(data-ride='carousel')
     //-   .carousel-inner
