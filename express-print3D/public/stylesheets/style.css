@@ -214,14 +214,14 @@ nav {
 }
 
 .header {
-  background-color: #212224;
+  background-color: #222;
   height: 400px;
   display: flex;
   z-index: 2;
 }
 
 nav {
-  background-color: #212224;
+  background-color: #222;
   height: 80px;
 }
 
@@ -263,7 +263,7 @@ nav {
 .hole-2 {
   height: 100%;
   width: 8%;
-  background-color: #212224;
+  background-color: #222;
   margin-left: 28%;
 }
 
@@ -612,12 +612,12 @@ li .without-arrow>a {
 
 .video-container {
   margin: 0;
-  height: 500px;
+  height: 60vh;
   width: auto;
 }
 
 #myVideo {
-  height: 400px;
+  width: 80%;
 }
 
 .stop-scrolling {
@@ -750,9 +750,10 @@ ul {
 }
 
 .sf_title {
-  color: #33d286;
+  color: rgb(47, 148, 139);
   text-transform: uppercase;
   font-size: 17px;
+  font-weight: 550;
   margin-top: 0px;
   margin-bottom: 15px;
 }
@@ -818,10 +819,9 @@ ul {
   transition: .5s;
 }
 
-.newsletter_form button:hover,
 .newsletter_form button:hover {
   background: transparent;
-  color: #33d286;
+  color: rgb(47, 148, 139);
   opacity: .9;
 }
 
@@ -850,7 +850,7 @@ ul {
 }
 
 .form-control:focus {
-  border-color: #33d286;
+  border-color: rgb(47, 148, 139);
 }
 
 .single_ftr li {
@@ -863,7 +863,7 @@ ul {
 }
 
 .single_ftr a:hover {
-  color: #33d286;
+  color: rgb(47, 148, 139);
 }
 
 .ftr_social_icon li {
@@ -887,8 +887,8 @@ ul {
 }
 
 .ftr_social_icon ul li a:hover {
-  background: #33d286;
-  border-color: #33d286;
+  background: rgb(47, 148, 139);
+  border-color: rgb(47, 148, 139);
   color: #fff;
 }
 
