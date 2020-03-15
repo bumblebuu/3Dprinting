@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity='sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin='anonymous')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    .login.container-fluid
+      .container.login-container
+
+        if show
+          .alert.alert-danger.col-4.offset-4.alert-dismissible.fade.show(role='alert')
+            |  This email is not registered!
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+              span(aria-hidden='true') ×
+
+        .d-flex.justify-content-center
+          .card.login-card
+            .card-header
+              h3 Forgotten password
+            .card-body
+              form(method='POST' action='/login/forgot' role='form')
+                input#email.form-control(type='email', name='email', placeholder='Enter your email address')
+                input.btn.float-left.login_btn.mt-3(type='submit', value='Send email')
+            .card-footer
+              .d-flex.links
+                | You will receive an email with a new password, which you can change after logging in.
+              .d-flex.justify-content-center.links.mt-3
+                | Don't have an account?
+                a(href='/register') Register
+                
+
+      script(src='/jquery/dist/jquery.min.js')
+      script(src='/bootstrap/dist/js/bootstrap.min.js')
