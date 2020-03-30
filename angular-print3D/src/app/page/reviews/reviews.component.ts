@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
+import { Component, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { DataService } from "src/app/services/data.service";
+declare let $: any;
 
 @Component({
-  selector: 'app-reviews',
-  templateUrl: './reviews.component.html',
-  styleUrls: ['./reviews.component.css']
+  selector: "app-reviews",
+  templateUrl: "./reviews.component.html",
+  styleUrls: ["./reviews.component.css"]
 })
 export class ReviewsComponent implements OnInit {
   page = 1;
@@ -16,14 +17,17 @@ export class ReviewsComponent implements OnInit {
   reviews$: BehaviorSubject<any> = this.ds.reviewList;
 
   constructor(private ds: DataService) {
-    this.ds.readDocument('reviews')
+    this.ds.readDocument("reviews");
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onDeleteModal(id: string) {
+    $(`#${id}`).modal("show");
   }
 
   onDelete(id: string): void {
-    this.ds.deleteDocument('reviews', id)
+    this.ds.deleteDocument("reviews", id);
   }
 
   setOrderBy(key: string): void {

@@ -59,7 +59,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('D:/Projects/3Dprinting/express-print3D/public/img/users'));
+// app.use(express.static('D:/Projects/3Dprinting/express-print3D/public/img/users'));
 
 app.use(async (req, res, next) => {
   const user = await userModul.checkLogin(req);
@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.error(err)
   // render the error page
   res.status(err.status || 500);
   res.render('error');

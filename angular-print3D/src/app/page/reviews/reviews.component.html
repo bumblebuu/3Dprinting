@@ -26,9 +26,39 @@
             <td>{{review.user.firstname}} {{review.user.lastname}}</td>
             <td>{{review.product.name}}</td>
             <td>{{review.text}}</td>
-            <td>{{review.rate}}</td>
+            <td>{{review.rate}} <span class="fa fa-star-o fa-fw"></span></td>
             <td>
-              <button class='btn btn-danger' (click)='onDelete(review._id)'>x</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" (click)="onDeleteModal(review._id)">x
+              </button>
+              <div class="modal fade" [id]="review._id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Delete {{review.user.firstname}}
+                        {{review.user.lastname}}'s review</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      This action will permanently delete <b>{{review.user.firstname}} {{review.user.lastname}}</b>'s
+                      review,
+                      who wrote "<i>{{review.text}}</i>" and gave <b>{{review.rate}} <span
+                          class="fa fa-star-o fa-fw"></span>
+                      </b> to <i>{{review.product.name}}</i>.
+                      <br>
+                      Are you sure, you want to do this?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <button type="button" (click)="onDelete(review._id)" data-dismiss="modal"
+                        class="btn btn-danger close">Yes, I'm
+                        sure</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>

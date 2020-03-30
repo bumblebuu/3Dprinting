@@ -48,12 +48,11 @@
           <td>
             <div class="btn-group">
               <a routerLink="/product/update/{{product.seo}}" class="btn btn-info">Edit</a>
-              <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#'+product.seo"
+              <button type="button" class="btn btn-danger" data-toggle="modal"
                 (click)="onDeleteModal(product.seo)">
                 Delete
               </button>
-              <div class="modal fade" [id]="product.seo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                hidden="true">
+              <div class="modal fade" [id]="product.seo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -64,6 +63,7 @@
                     </div>
                     <div class="modal-body">
                       This action sets the products status to inactive, so it won't appear on the site.
+                      <br>
                       Are you sure, you want to do this?
                     </div>
                     <div class="modal-footer">
@@ -80,8 +80,8 @@
         </tr>
       </tbody>
       <div *ngIf="products$.value.length > pageSize" class="pagination mt-3">
-        <ngb-pagination [collectionSize]="products$.value.length"
-          [pageSize]="pageSize" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+        <ngb-pagination [collectionSize]="products$.value.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="5"
+          [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
         </ngb-pagination>
       </div>
     </table>

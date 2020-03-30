@@ -38,7 +38,33 @@
             <td>
               <div class="btn-group">
                 <a routerLink="/order/update/{{order._id}}" class="btn btn-info">Edit</a>
-                <button (click)="onDelete(order._id)" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" (click)="onDeleteModal(order._id)">Delete
+                </button>
+                <div class="modal fade" [id]="order._id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete {{order.user.firstname}}
+                          {{order.user.lastname}}'s order</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        This action will set the order's status to cancelled.
+                        <br>
+                        Are you sure, you want to do this?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" (click)="onDelete(order._id)" data-dismiss="modal"
+                          class="btn btn-danger close">Yes, I'm
+                          sure</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
           </tr>

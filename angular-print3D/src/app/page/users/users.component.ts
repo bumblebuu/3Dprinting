@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+declare let $: any;
 
 @Component({
   selector: 'app-users',
@@ -34,6 +35,10 @@ export class UsersComponent implements OnInit {
       this.orderDirection = 1;
     }
     this.orderKey = key;
+  }
+  
+  onDeleteModal(_id: string) {
+    $(`#${_id}`).modal('show')
   }
 
   onDelete(_id: string): any {

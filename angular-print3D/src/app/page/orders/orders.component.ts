@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { BehaviorSubject } from 'rxjs';
+declare let $: any;
 
 @Component({
   selector: 'app-orders',
@@ -22,8 +23,14 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDeleteModal(id: string) {
+    $(`#${id}`).modal("show");
+  }
+
   onDelete(id: string): void {
-    this.ds.deleteDocument('orders', id)
+    this.ds.updateDocument('orders', id, {status:'cancelled'}).subscribe(
+      () => this.ds.readDocument('orders'),
+    )
   }
 
   setOrderBy(key: string): void {
