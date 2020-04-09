@@ -14,6 +14,8 @@ router.get('/', (req, res, next) => {
     res.render('orders', {
       orders,
       user: req.user,
+      basket: req.basket,
+      notifications:req.notifications,
     });
   });
 });

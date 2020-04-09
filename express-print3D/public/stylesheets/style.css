@@ -393,6 +393,33 @@ li .without-arrow>a {
   left: 89%;
 }
 
+.dropdown-notifications {
+  position: absolute;
+  left: 113%;
+  top: -33px;
+}
+
+.dropdown-notifications a,
+.dropdown-menu {
+  background-color: #212224;
+  color: #60caca;
+  border-radius: 3px;
+
+}
+
+.notificationNum {
+  position: absolute;
+  top: 26px;
+  left: 80%;
+}
+
+.basketNum {
+  position: absolute;
+  top: 40px;
+  left: 92%;
+}
+
+
 .dropdown-user {
   width: 80px;
   position: absolute;
@@ -408,6 +435,18 @@ li .without-arrow>a {
 
 .dropdown-user a:hover {
   color: #f1f1f1;
+}
+
+.dropdown-notifications a:hover {
+  color: #f1f1f1;
+  background-color: #212224;
+
+}
+
+a.nav-link,
+span.fa-bell {
+  color: #60caca;
+  background-color: #212224;
 }
 
 .user-img-div {

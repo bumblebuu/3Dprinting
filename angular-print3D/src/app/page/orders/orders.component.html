@@ -58,7 +58,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="button" (click)="onDelete(order._id)" data-dismiss="modal"
+                        <button type="button" (click)="onDelete(order._id, order.user._id)" data-dismiss="modal"
                           class="btn btn-danger close">Yes, I'm
                           sure</button>
                       </div>

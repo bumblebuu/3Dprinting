@@ -18,6 +18,8 @@ const Order = require('../models/orders.model');
 router.get('/', (req, res, next) => {
   res.render('user-form', {
     title: 'User account',
+      notifications:req.notifications,
+      basket: req.basket,
     user: req.user,
   });
 });
@@ -103,9 +105,9 @@ router.post('/upload', (req, res, next) => {
     // The file name of the uploaded file
     const fileName = req.user.username + file.upload.name;
     console.log(fileName);
-    if (!fileName.endsWith('.jpg')
-      && !fileName.endsWith('.jpeg')
-      && !fileName.endsWith('.png')) {
+    if (!fileName.endsWith('.jpg') &&
+      !fileName.endsWith('.jpeg') &&
+      !fileName.endsWith('.png')) {
       console.log('Nope, just jpg and png');
       return res.redirect('/user');
     }

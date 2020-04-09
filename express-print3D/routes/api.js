@@ -7,6 +7,7 @@ const Product = require('../models/products.model');
 const Order = require('../models/orders.model');
 const Review = require('../models/reviews.model');
 const User = require('../models/users.model');
+const Notification = require('../models/notification.model');
 
 // create product
 router.post('/products/add', (req, res) => {
@@ -217,5 +218,23 @@ router.put('/users/update/:id', (req, res, next) => {
     res.json(user);
   });
 });
+
+router.get('/notifications', (req, res, next) => {
+  Notification.find({
+    role: {
+      $ne: 'admin',
+    },
+  }).sort('-insdate').exec((err, notifications) => {
+    if (err) next(err);
+    res.json(notifications);
+  })
+});
+
+router.post('/notifications/add', (req, res, next) => {
+  Notification.create(req.body, (err, notification) => {
+    if (err) next(err);
+    res.json(notification);
+  })
+})
 
 module.exports = router;

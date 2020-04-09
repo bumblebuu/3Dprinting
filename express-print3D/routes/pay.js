@@ -1,11 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const stripe = require('stripe')('sk_test_l8DS0CpgFuwkbnQtTTXIgQPg00N76qw7yn');
 
 const router = express.Router();
 const Basket = require('../models/basket.model');
 const Order = require('../models/orders.model');
-
+const Notification = require('../models/notification.model');
 
 router.get('/checkout', (req, res, next) => {
   let totalPrice = 0;
@@ -19,6 +18,7 @@ router.get('/checkout', (req, res, next) => {
     res.render('checkout', {
       basket: found,
       total: totalPrice,
+      basket: req.basket,
       user: req.user,
     });
   });
@@ -27,11 +27,13 @@ router.get('/checkout', (req, res, next) => {
 router.post('/', (req, res, next) => {
   let totalPrice = 0;
   const totalquantity = [];
+  let productName = [];
   Basket.find({
     user: req.user._id,
   }).populate('product').exec((err, found) => {
     if (err) return next(err);
     found.forEach((element) => {
+      productName.push(element.product.name);
       totalPrice += element.price * element.quantity;
       totalquantity.push({
         [element.product.name]: element.quantity,
@@ -65,6 +67,12 @@ router.post('/', (req, res, next) => {
         unitprice: totalPrice,
         status: 'payed',
       });
+      let products = productName.join();
+      Notification.create({
+        notification: `${req.user.username} ordered ${products}`,
+        role: req.user.role,
+        subject: 'orders',
+      })
       res.redirect('/products');
     });
   });

@@ -40,8 +40,11 @@ router.get('/', (req, res, next) => {
             reviewCarousel.push(reviews[reviewNum]);
           }
         }
+        console.log('notifications', req.notifications);
         res.render('index', {
           title: 'Express',
+          notifications: req.notifications,
+          basket: req.basket,
           user: req.user,
           productCarousel,
           reviewCarousel

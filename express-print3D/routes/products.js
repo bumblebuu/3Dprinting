@@ -6,6 +6,7 @@ const url = require('url');
 // Product model
 const Product = require('../models/products.model');
 const Review = require('../models/reviews.model');
+const Notification = require('../models/notification.model');
 
 // Categories and brands
 let brands;
@@ -155,6 +156,8 @@ router.get('/:page', async (req, res, next) => {
             search,
             perPage,
             pages: Math.ceil(count / perPage),
+            notifications: req.notifications,
+            basket: req.basket,
             user: req.user,
           });
         });
@@ -183,6 +186,8 @@ router.get('/:page', async (req, res, next) => {
             subCategoriesArr: [],
             perPage,
             pages: Math.ceil(count / perPage),
+            basket: req.basket,
+            notifications: req.notifications,
             user: req.user,
           });
         });
@@ -203,6 +208,8 @@ router.get('/product/:seo', (req, res, next) => {
         res.render('product', {
           product,
           reviews,
+          notifications: req.notifications,
+          basket: req.basket,
           user: req.user,
         });
       });
@@ -222,6 +229,11 @@ router.post('/reviews', (req, res, next) => {
     }, (err, result) => {
       if (err) return next(err);
     });
+    Notification.create({
+      notification: `${req.user.username} wrote "${req.body.text}"`,
+      role: req.user.role,
+      subject: 'reviews',
+    })
     res.redirect(`/products/product/${req.body.seo}`);
   }
 });

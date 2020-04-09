@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row mb-3">
+    <h3>Notifications</h3>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let notification of notifications$|async|slice: (page - 1) * pageSize: (page - 1) * pageSize + pageSize">
+        <div class="row">
+          <div class="col-8">
+            <a class="text-dark" href="{{notification.subject}}">
+              <h6>{{notification.notification}}</h6>
+            </a>
+          </div>
+          <div class="col-4 text-right">
+            <small>{{notification.insdate | date: 'MMM dd, HH:mm'}}</small>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div *ngIf="notifications$.value.length>pageSize" class="pagination mt-3">
+        <ngb-pagination [collectionSize]="notifications$.value.length" [pageSize]="pageSize" [(page)]="page"
+          [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

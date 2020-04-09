@@ -17,9 +17,39 @@ html
           .dropdown-container.dropdown-user
             a.nav-link(href='http://localhost:4200') Admin
             a.nav-link(href='/logout') Logout
+        -function dateFormatting(dateString) {
+          -const date = new Date(dateString);
+          -const d = date.getDate();
+          -const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          -const m = monthNames[date.getMonth()];
+          -const y = date.getFullYear();
+          -const h= date.getHours();
+          - const min=date.getMinutes();
+          -const t = date.getTime();
+          -const sec = date.getSeconds();
+          -return `${m} ${d} ${h}:${min}`;
+        -}
         if user.role == 'user'
+          .col-8.mt-3.d-flex.justify-content-end
+            ul.dropdown-notifications.nav
+              li.nav-item.dropdown
+                a.nav-link(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false') 
+                  span.fa.fa-bell.fa-2x(aria-hidden='true')
+                  if notifications.length>0
+                    small.notificationNum.text-light=notifications.length
+                .dropdown-menu.dropdown-menu-right
+                  if notifications
+                    each notification in notifications
+                      a.dropdown-item(href=`${notification.subject}`)=notification.notification
+                      small.ml-4 #{dateFormatting(notification.insdate)}
+                      .dropdown-divider
+                    .text-center
+                      a.text-center(href='/notifications') Show all notifications
+
           a(href='/basket')
             img.cart-img(src='/img/shopping-cart (3).png' alt='cart')
+            if basket.length>0
+              small.basketNum.text-light=basket.length
           a.dropdown-btn(href='#')
             #user-pic-div
               img.user-pic(src=`/img/users/${user.pictureurl}` alt='user picture')

@@ -7,8 +7,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const UserModul = require('./moduls/user.modul');
+const BasketModul = require('./moduls/basket.modul');
+const NotificationModul = require('./moduls/notification.modul');
 
 const userModul = new UserModul();
+const basketModul = new BasketModul();
+const notificationModul = new NotificationModul();
 
 const router = express.Router();
 const PORT = 3000;
@@ -63,8 +67,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(async (req, res, next) => {
   const user = await userModul.checkLogin(req);
+  let notifications = await notificationModul.checkNotifications(user);
+  notifications.reverse();
   if (user) {
     req.user = user;
+    req.basket = await basketModul.checkBasket(req.user._id) || 0;
+    req.notifications = notifications;
   }
   next();
 });

@@ -4,6 +4,7 @@ const router = express.Router();
 const sha1 = require('sha1');
 
 const User = require('../models/users.model');
+const Notification = require('../models/notification.model');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -14,12 +15,12 @@ router.get('/', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   let picUrl = 'default-man.png';
-  if (req.body.userName
-    && req.body.password
-    && req.body.passwordAgain
-    && req.body.firstName
-    && req.body.lastName
-    && req.body.email) {
+  if (req.body.userName &&
+    req.body.password &&
+    req.body.passwordAgain &&
+    req.body.firstName &&
+    req.body.lastName &&
+    req.body.email) {
 
     // Check sex
     if (req.body.gender == 'female') {
@@ -65,6 +66,11 @@ router.post('/', async (req, res, next) => {
       if (err) {
         return next(err);
       }
+      Notification.create({
+        notification: `New user: ${userData.username}`,
+        role: 'user',
+        subject: 'users',
+      })
       return res.redirect('/login');
     });
   } else {
