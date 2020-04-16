@@ -12,10 +12,12 @@ router.get('/', (req, res, next) => {
   }).populate('product').sort('-insdate').exec((err, orders) => {
     if (err) next(err);
     res.render('orders', {
+      title: 'Orders',
       orders,
       user: req.user,
       basket: req.basket,
-      notifications:req.notifications,
+          notificationNum: req.notificationNum,
+          notifications: req.notifications,
     });
   });
 });

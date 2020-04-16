@@ -229,11 +229,32 @@ router.get('/notifications', (req, res, next) => {
     res.json(notifications);
   })
 });
+router.get('/notifications/new', (req, res, next) => {
+  Notification.find({
+    role: {
+      $ne: 'admin',
+    },
+    new: true,
+  }).sort('-insdate').exec((err, notifications) => {
+    if (err) next(err);
+    res.json(notifications);
+  })
+});
 
 router.post('/notifications/add', (req, res, next) => {
   Notification.create(req.body, (err, notification) => {
     if (err) next(err);
     res.json(notification);
+  })
+})
+router.put('/notifications/update/opened', (req, res, next) => {
+  Notification.updateMany({
+    role: {
+      $ne: 'admin'
+    }
+  }, req.body, (err, notifications) => {
+    if (err) next(err);
+    res.json(notifications);
   })
 })
 

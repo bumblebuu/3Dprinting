@@ -19,6 +19,7 @@ router.get('/', (req, res, next) => {
   res.render('user-form', {
     title: 'User account',
       notifications:req.notifications,
+      notificationNum: req.notificationNum,
       basket: req.basket,
     user: req.user,
   });

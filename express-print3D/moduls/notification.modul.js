@@ -1,13 +1,20 @@
 const Notification = require('../models/notification.model');
 module.exports = class NotificationModul {
   async checkNotifications(user) {
-    let notifications = Notification.find({
-      role: 'admin',
+    let result = []
+    Notification.find({
       to: user
     }, (err, notifications) => {
       if (err) return next(err);
-      return notifications;
+      result.push(notifications);
     })
-    return notifications;
+    Notification.find({
+      to: user,
+      new: true
+    }, (err, notificationNum) => {
+      if (err) return next(err);
+      result.push(notificationNum.length);
+    })
+    return result;
   }
 }

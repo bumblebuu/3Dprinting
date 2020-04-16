@@ -9,6 +9,7 @@ const favicon = require('serve-favicon');
 const UserModul = require('./moduls/user.modul');
 const BasketModul = require('./moduls/basket.modul');
 const NotificationModul = require('./moduls/notification.modul');
+const Notification = require('./models/notification.model');
 
 const userModul = new UserModul();
 const basketModul = new BasketModul();
@@ -67,15 +68,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(async (req, res, next) => {
   const user = await userModul.checkLogin(req);
-  let notifications = await notificationModul.checkNotifications(user);
-  notifications.reverse();
   if (user) {
+    let notifications = await notificationModul.checkNotifications(user) || [];
+    if (notifications[0]) {
+      notifications[0].reverse();
+    }
     req.user = user;
     req.basket = await basketModul.checkBasket(req.user._id) || 0;
-    req.notifications = notifications;
+    req.notifications = notifications[0] || [];
+    req.notificationNum = notifications[1] || 0;
   }
   next();
 });
+
+
+app.use('/notifications/update/:user', (req, res, next) => {
+  console.log('put');
+  Notification.updateMany({
+    to: req.params.user
+  }, {
+    new: false
+  }, (err, notifications) => {
+    if (err) next(err);
+    res.send(notifications)
+  })
+})
 
 app.use('/logout', (req, res, next) => {
   res.clearCookie('uuid');

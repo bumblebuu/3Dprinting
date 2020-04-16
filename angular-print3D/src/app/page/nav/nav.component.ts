@@ -8,9 +8,11 @@ import { BehaviorSubject } from "rxjs";
   styleUrls: ["./nav.component.css"],
 })
 export class NavComponent implements OnInit {
-  notifications$: BehaviorSubject<any> = this.ds.notificationList;
+  notificationList$: BehaviorSubject<any> = this.ds.notificationList;
+  notifications$: BehaviorSubject<any> = this.ds.notifications;
   constructor(private ds: DataService) {
     this.ds.readDocument("notifications");
+    this.ds.readDocument("notifications", "new");
   }
 
   ngOnInit() {
@@ -52,5 +54,12 @@ export class NavComponent implements OnInit {
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+  }
+
+  openedNotifications() {
+    console.log("opened");
+    this.ds
+      .updateDocument("notifications", "opened", { new: false })
+      .subscribe(() => this.ds.readDocument("notifications", "new"));
   }
 }

@@ -33,14 +33,15 @@ html
           .col-8.mt-3.d-flex.justify-content-end
             ul.dropdown-notifications.nav
               li.nav-item.dropdown
-                a.nav-link(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false') 
+                a.nav-link(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false', onclick=`openedNotifications('${user._id}')`) 
                   span.fa.fa-bell.fa-2x(aria-hidden='true')
-                  if notifications.length>0
-                    small.notificationNum.text-light=notifications.length
+                  if notifications
+                    if notificationNum>0
+                      small.notificationNum.badge.badge-danger=notificationNum
                 .dropdown-menu.dropdown-menu-right
                   if notifications
                     each notification in notifications
-                      a.dropdown-item(href=`${notification.subject}`)=notification.notification
+                      a.dropdown-item(href=`/${notification.subject}`)=notification.notification
                       small.ml-4 #{dateFormatting(notification.insdate)}
                       .dropdown-divider
                     .text-center

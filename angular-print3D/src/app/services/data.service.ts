@@ -14,6 +14,7 @@ export class DataService {
   userList: BehaviorSubject<any> = new BehaviorSubject([]);
   user: BehaviorSubject<any> = new BehaviorSubject([]);
   notificationList: BehaviorSubject<any> = new BehaviorSubject([]);
+  notifications: BehaviorSubject<any> = new BehaviorSubject([]);
 
   apiURL: string = "http://localhost:3000/api";
 
@@ -34,6 +35,8 @@ export class DataService {
             this.order.next(data);
           } else if (collectionName == "users") {
             this.user.next(data);
+          } else if (collectionName == "notifications") {
+            this.notifications.next(data);
           }
         });
     }

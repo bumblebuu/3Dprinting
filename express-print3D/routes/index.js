@@ -44,6 +44,7 @@ router.get('/', (req, res, next) => {
         res.render('index', {
           title: 'Express',
           notifications: req.notifications,
+          notificationNum: req.notificationNum,
           basket: req.basket,
           user: req.user,
           productCarousel,

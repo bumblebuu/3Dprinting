@@ -14,7 +14,9 @@ router.get('/', (req, res, next) => {
       totalPrice += element.price * element.quantity;
     });
     res.render('basket', {
-      notifications:req.notifications,
+      title: 'Basket',
+      notifications: req.notifications,
+      notificationNum: req.notificationNum,
       basket: req.basket,
       user: req.user,
       basket,

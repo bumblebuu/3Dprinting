@@ -157,6 +157,7 @@ router.get('/:page', async (req, res, next) => {
             perPage,
             pages: Math.ceil(count / perPage),
             notifications: req.notifications,
+          notificationNum: req.notificationNum,
             basket: req.basket,
             user: req.user,
           });
@@ -188,6 +189,7 @@ router.get('/:page', async (req, res, next) => {
             pages: Math.ceil(count / perPage),
             basket: req.basket,
             notifications: req.notifications,
+          notificationNum: req.notificationNum,
             user: req.user,
           });
         });
@@ -206,9 +208,11 @@ router.get('/product/:seo', (req, res, next) => {
       }).populate('user').sort('-insdate').exec((err, reviews) => {
         if (err) next(err);
         res.render('product', {
+          title: product.name,
           product,
           reviews,
           notifications: req.notifications,
+          notificationNum: req.notificationNum,
           basket: req.basket,
           user: req.user,
         });

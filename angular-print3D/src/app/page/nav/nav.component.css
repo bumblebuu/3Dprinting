@@ -2,64 +2,64 @@
 
 /*-------------------------------- END ----*/
 
-    #sidebar-container {
-        min-height: 100vh;
-        background-color: #111;
-        padding: 0;
-        /* flex: unset; */
-    }
-    
-    .sidebar-expanded {
-        width: 230px;
-    }
-    
-    .sidebar-collapsed {
-        /*width: 60px;*/
-        width: 100px;
-    }
+#sidebar-container {
+  min-height: 100vh;
+  background-color: #111;
+  padding: 0;
+  /* flex: unset; */
+}
 
-    /* ----------| Menu item*/    
-    #sidebar-container .list-group a {
-        height: 50px;
-        color: white;
-    }
+.sidebar-expanded {
+  width: 230px;
+}
 
-    /* ----------| Submenu item*/    
-    #sidebar-container .list-group li.list-group-item {
-        background-color: #111;
-    }
-    
-    #sidebar-container .list-group .sidebar-submenu a {
-        height: 45px;
-        padding-left: 30px;
-    }
-    
-    .sidebar-submenu {
-        font-size: 0.9rem;
-    }
+.sidebar-collapsed {
+  /*width: 60px;*/
+  width: 100px;
+}
 
-    /* ----------| Separators */    
-    .sidebar-separator-title {
-        background-color: #111;
-        height: 35px;
-    }
-    
-    .sidebar-separator {
-        background-color: #111;
-        height: 25px;
-    }
-    
-    .logo-separator {
-        background-color: #111;
-        height: 60px;
-    }
-    
-    a.bg-dark {
-        background-color: #111 !important;
-    }
+/* ----------| Menu item*/
+#sidebar-container .list-group a {
+  height: 50px;
+  color: white;
+}
+
+/* ----------| Submenu item*/
+#sidebar-container .list-group li.list-group-item {
+  background-color: #111;
+}
+
+#sidebar-container .list-group .sidebar-submenu a {
+  height: 45px;
+  padding-left: 30px;
+}
+
+.sidebar-submenu {
+  font-size: 0.9rem;
+}
+
+/* ----------| Separators */
+.sidebar-separator-title {
+  background-color: #111;
+  height: 35px;
+}
+
+.sidebar-separator {
+  background-color: #111;
+  height: 25px;
+}
+
+.logo-separator {
+  background-color: #111;
+  height: 60px;
+}
+
+a.bg-dark {
+  background-color: #111 !important;
+}
 
 
-    .sidenav {
+.sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -98,7 +98,18 @@
   padding: 16px;
 }
 
+.badge {
+  position: relative;
+  left: -12%;
+  top: 5px;
+}
+
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
 }
