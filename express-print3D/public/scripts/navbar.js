@@ -38,18 +38,19 @@ for (i = 0; i < dropdown.length; i++) {
 }
 
 function openedNotifications(user) {
-  console.log('opened');
-  fetch(`http://localhost:3000/notifications/update/${user}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        to: user,
-        new: false,
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    })
-    .then(response => response.json())
-    .then(json => console.log(json));
-  $('.notificationNum').text(0); 
+  if ($('.notificationNum').text() > 0) {
+    fetch(`http://localhost:3000/notifications/update/${user}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          to: user,
+          new: false,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      })
+      .then(response => response.json())
+      .then(json => console.log(json));
+    $('.notificationNum').text('');
+  }
 }

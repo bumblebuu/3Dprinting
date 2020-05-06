@@ -75,8 +75,10 @@ router.post('/', (req, res, next) => {
         notification: `${req.user.username} ordered ${products}`,
         role: req.user.role,
         subject: 'orders',
-      })
-      res.redirect('/products');
+      }, (err, notification) => {
+        if (err) sendStatus(404);
+        res.redirect('/products');
+      });
     });
   });
 });

@@ -400,7 +400,7 @@ li .without-arrow>a {
 }
 
 .dropdown-notifications a,
-.dropdown-menu {
+.notifications-drop {
   background-color: #212224;
   color: #60caca;
   border-radius: 3px;
@@ -508,7 +508,13 @@ span.fa-bell {
 .user-form input {
   font-family: 'Roboto', sans-serif;
 }
-
+@media screen and (max-width: 450px) {
+  .quantity {
+    width: 20px !important;
+    background-color: #fff !important;
+    text-align: center;
+  }
+}
 .quantity {
   width: 60px;
   background-color: #fff !important;

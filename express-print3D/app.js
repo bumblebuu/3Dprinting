@@ -27,13 +27,17 @@ const ordersRouter = require('./routes/orders');
 const apiRoutes = require('./routes/api');
 const uploadRouter = require('./routes/upload');
 const payRouter = require('./routes/pay');
+const notificationRouter = require('./routes/notifications');
 
 const app = express();
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, DELETE, OPTIONS, POST, PUT');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, HEAD, DELETE, OPTIONS, POST, PUT'
+  );
   res.setHeader('Access-Control-Allow-Headers', '*');
   next();
 });
@@ -59,9 +63,11 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false,
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static('D:/Projects/3Dprinting/express-print3D/public/img/users'));
@@ -69,30 +75,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(async (req, res, next) => {
   const user = await userModul.checkLogin(req);
   if (user) {
-    let notifications = await notificationModul.checkNotifications(user) || [];
-    if (notifications[0]) {
-      notifications[0].reverse();
+    let notifications =
+      (await notificationModul.checkNotifications(user)) || [];
+    if (await notifications[0]) {
+      req.notifications = notifications[0].reverse().splice(0, 5) || [];
+      req.notificationNum = notifications[1] || 0;
     }
     req.user = user;
-    req.basket = await basketModul.checkBasket(req.user._id) || 0;
-    req.notifications = notifications[0] || [];
-    req.notificationNum = notifications[1] || 0;
+    req.basket = (await basketModul.checkBasket(req.user._id)) || 0;
   }
   next();
 });
 
 
 app.use('/notifications/update/:user', (req, res, next) => {
-  console.log('put');
   Notification.updateMany({
-    to: req.params.user
-  }, {
-    new: false
-  }, (err, notifications) => {
-    if (err) next(err);
-    res.send(notifications)
-  })
-})
+      to: req.params.user,
+    }, {
+      new: false,
+    },
+    (err, notifications) => {
+      if (err) next(err);
+      res.send(notifications);
+    }
+  );
+});
 
 app.use('/logout', (req, res, next) => {
   res.clearCookie('uuid');
@@ -110,6 +117,7 @@ app.use('/basket', basketRouter);
 app.use('/orders', ordersRouter);
 app.use('/upload', uploadRouter);
 app.use('/pay', payRouter);
+app.use('/notifications', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -121,7 +129,7 @@ app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  console.error(err)
+  console.error(err);
   // render the error page
   res.status(err.status || 500);
   res.render('error');

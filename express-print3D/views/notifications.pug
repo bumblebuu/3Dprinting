@@ -1,0 +1,34 @@
+extends layout
+block content
+  .container
+    .row
+      h1.mt-3 Notifications
+    .row
+      .col-md-10.offset-md-1.mt-3
+        if allNotifications
+          if allNotifications.length>0
+            -function dateFormatting(dateString) {
+              -const date = new Date(dateString);
+              -const d = date.getDate();
+              -const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+              -const m = monthNames[date.getMonth()];
+              -const y = date.getFullYear();
+              -const h= date.getHours();
+              - const min=date.getMinutes();
+              -const t = date.getTime();
+              -const sec = date.getSeconds();
+              -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
+            -}
+            each notification in allNotifications
+              ul
+                li
+                  .row
+                    .col-md-9
+                      a(href=notification.subject)
+                        h6=notification.notification
+                    .col-md-3
+                      small=dateFormatting(notification.insdate)
+                  hr
+        else
+          a.text-center(href='/products', style='text-decoration: inherit;')
+            h6 You don't have any notifications. Start shopping!         

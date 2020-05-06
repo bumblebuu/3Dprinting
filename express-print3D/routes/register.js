@@ -70,8 +70,10 @@ router.post('/', async (req, res, next) => {
         notification: `New user: ${userData.username}`,
         role: 'user',
         subject: 'users',
+      }, (err, notification) => {
+        if (err) sendStatus(404);
+        return res.redirect('/login');
       })
-      return res.redirect('/login');
     });
   } else {
     res.render('register', {

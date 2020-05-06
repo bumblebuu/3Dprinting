@@ -143,11 +143,12 @@
   opacity: 1;
 }
 
+/* 
 iframe{
 position: relative;
 left:80px;
 bottom:100px;
-}
+} */
 
 .img-top {
   max-height: 100%;

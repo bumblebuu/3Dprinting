@@ -6,9 +6,9 @@ block content
     include ../public/js/productinfo.js
   .container.product-page
     .row
-      .col-4.mt-5
+      .col-md-4.mt-md-5
         each img,index in product.img
-          .mySlides.mt-5.text-center
+          .mySlides.mt-md-5.text-center
             .numbertext=index+1
             img.text-center.img-top(src=img)
           a.prev(onclick='plusSlides(-1)') &#x276E;
@@ -17,27 +17,27 @@ block content
           each img,index in product.img
             .column
               img.demo.cursor(src=img, onclick=`currentSlide(${index+1})`)
-      .col-4.mt-5
-        p.mt-5=product.brand
+      .col-md-4.mt-md-5.text-center.text-md-left
+        p.mt-3.mt-md-5=product.brand
         h3=product.name
         ul
           each description in (product.shortdescription).split('.')
             li=description
-      .col-4.mt-5
-        h3.mt-5 $#{product.price}
+      .col-md-4.mt-md-5.mt-3.text-center.text-md-left
+        h3.mt-md-5 $#{product.price}
         small Price shown includes 27% VAT. 
         u Excludes delivery costs
         p.text-success Dispatch in 6-8 days
         if user
           form(action=`/basket/${product._id}`, method="post")
-            .form-group
-              label Quantity :
+            .form-group.d-flex.flex-column.align-items-center.align-items-md-start
+              label.text-dark Quantity :
               input.form-control(type='number', name='quantity', value=1 , min=1, style="width:100px") 
               input.none.form-control(type='number', name='price', value=product.price) 
               button.btn.btn-primary Add to basket
       hr
     .row
-      .col-3.mt-5.ml-3
+      .col-md-5.mt-5.ml-3
         table.table.table-borderless
           tbody
             tr
@@ -52,15 +52,21 @@ block content
                 td #{product.menu}/ #{product.category}/ #{product.subcategory}
               else
                 td #{product.menu}/ #{product.category}
+    if product.video
+      .row          
+        .col-md-5.mt-md-5.ml-3.text-center.text-md-left
+          h3 Description
+          each detail in product.description.split('.')
+            h6.description=detail
+        .col-md-6.mt-3.mb-5.embed-responsive.embed-responsive-16by9
+          iframe.embed-responsive-item( src=product.video, frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
+    else
+      .row          
+        .col-10.ml-3.text-justify.text-md-left
+          h3 Description
+          each detail in product.description.split('.')
+            h6.description=detail+'.'
 
-    .row          
-      .col-5.mt-5.ml-3
-        h3 Description
-        each detail in product.description.split('.')
-          h6.description=detail
-      if product.video        
-        .col-5.mb-5
-          iframe(width='600', height='400', src=product.video, frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen='')
     hr
     .row
       .col-12
@@ -70,10 +76,7 @@ block content
           if reviews
             each review,index in reviews
               .row
-                .col-7
-                  input.form-control.edit(data-id=index, disabled, name='text', value=review.text)
-                  button.mt-2.btn.btn-outline-success.hidden.hide(data-id=index, onclick=`updateReview('${user._id}','${review._id}')`) Change
-                .col-2.text-right
+                .col-md-9.text-right
                   -function dateFormatting(dateString) {
                     -const date = new Date(dateString);
                     -const d = date.getDate();
@@ -87,9 +90,12 @@ block content
                     -return `${d} ${m} ${y} ${h}:${min}:${sec}`;
                   -}
                   small.text-muted=dateFormatting(review.insdate)
+                .col-7
+                  input.form-control.edit(data-id=index, disabled, name='text', value=review.text)
+                  button.mt-2.btn.btn-outline-success.hidden.hide(data-id=index, onclick=`updateReview('${user._id}','${review._id}')`) Change
                 if user
                   if user.firstname==review.user.firstname && user.lastname==review.user.lastname
-                    .col-2
+                    .col-4.col-md-2.text-right
                       .dropdown
                         button#dropdownMenuButton.btn.btn-outline-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                         .dropdown-menu(aria-labelledby='dropdownMenuButton')
@@ -97,17 +103,17 @@ block content
                             i.fa.fa-trash(aria-hidden='true')
                           button.btn.btn-outline-secondary.dropdown-item(data-id=index, onclick=`toggleDisabled(event)`) &#9998;
               .row
-                .col-3
+                .col-6.col-md-3.ml-2
                   if review.user
                     small.text-muted Posted by: #{ review.user.firstname } #{review.user.lastname}
-                .col-1
+                .col-2.col-md-1
                   small.text-muted #{ review.rate }&starf;
               hr
 
           if user
             .col-12.text-center
               button.btn.btn-info(href='#', onClick='showReview()') Leave a Review
-          #review.col-6.offset-3.mt-5.mb-5.none
+          #review.col-md-6.offset-md-3.mt-5.mb-5.none
             form.form(action='/products/reviews' method='post')
               .card
                 h5.card-header Rate This Product
